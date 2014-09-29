@@ -24,7 +24,7 @@
 % We setup the parameters to our title header before 'making' it. Note
 % that your proposals should have actual titles, not the generic one
 % we have here.
-\title{CIS400/401 Project Proposal Specification [Put your project title here]}
+\title{Programming Language Support for Probabilistic Associative Memory}
 \subtitle{Dept. of CIS - Senior Design 2014-2015\thanks{Advisor: Insup Lee (lee@cis.upenn.edu).}~\thanks{ Do not list your advisors amongst the authors as that may cause Google Scholar to add this work to their list of publications. Your advisor must also sign a hard-copy of your proposal.}}
 \numberofauthors{2}
 \author{
@@ -35,17 +35,27 @@
 % Next we write out our abstract -- generally a two paragraph maximum,
 % executive summary of the motivation and contributions of the work.
 \begin{abstract}
-  \textit{The purpose of this document is three-fold. First, it
-    describes the requirements of the project proposal. Second, it
-    presents this information in a style your proposal should
-    mimic. Third, by viewing the *.tex `code behind', some basic
-    \LaTeX{} technique can be learned. Do not feel compelled to
-    completely follow our style -- but do use it as a guide.}
+    Our goal is to create a library (OPaml) that provides an interface and implementation 
+    for programming with a probablistic associative memory. 
+    
+    An associative memory allows queries by content rather than by address or location.
+    In addition, as with standard memory, associative memory remembers every value stored.
 
-  \textit{Like this `report', your proposal is expected to have an
-    abstract. An abstract is a two-paragraph maximum executive summary
-    of your work. It should briefly outline your problem statement and
-    its (expected) contributions.}
+    On the other hand, probabilistic associative memory returns a value based on a probability model 
+    for a given memory query. This allows it to use less space than regular
+    associative memories, making it useful for applications that prioritize low memory footprints over 
+    fidelity. 
+%  \textit{The purpose of this document is three-fold. First, it
+%    describes the requirements of the project proposal. Second, it
+%    presents this information in a style your proposal should
+%    mimic. Third, by viewing the *.tex `code behind', some basic
+%    \LaTeX{} technique can be learned. Do not feel compelled to
+%    completely follow our style -- but do use it as a guide.}%
+    
+  %\textit{Like this `report', your proposal is expected to have an
+  %  abstract. An abstract is a two-paragraph maximum executive summary
+  %  of your work. It should briefly outline your problem statement and
+  %  its (expected) contributions.}
 \end{abstract}
 
 % Then we proceed into the body of the report itself. The effect of
@@ -57,22 +67,32 @@
 % changes.
 \section{Introduction}
 \label{sec:intro}
-You should begin by introducing your topic. You should define core
-terminology specific to the field, introduce the problem statement,
-and make clear the benefits (motivate!) of resolving that problem
-statement. If there are many preliminaries (\textit{e.g.,}
-definitions, conceptual explanations) you need to handle before
-jumping into your topic, it may be worthwhile to create an explicit
-``Background'' section.
 
-Let us suppose you are attempting to build a constant time integer
-factorization algorithm. You would want to briefly explain that
-factorization is the process of breaking an integer into its prime
-multipliers. Give a simple example. Your problem statement would
-conclude that factorization is an unneccesarily complex
-process. Finally, you would state that via your proposed system,
-factorization will be easy and the consequences that will
-have. Namely, the RSA-encryption algorithm will be broken.
+The standard way to access a stored value in memory is by address. 
+This involves finding the physical position of that address in memory
+and returning the stored value. Associative memory allows
+searching for a values based on the stored content. An analagous structure
+in programming languages is the \textbf{hashtable}, which returns an output value
+based on an input key. 
+
+Associative memories are useful for when one needs to query memory based 
+on some input data or tag. [Elaborate with router example]. 
+%You should begin by introducing your topic. You should define core
+%terminology specific to the field, introduce the problem statement,
+%and make clear the benefits (motivate!) of resolving that problem
+%statement. If there are many preliminaries (\textit{e.g.,}
+%definitions, conceptual explanations) you need to handle before
+%jumping into your topic, it may be worthwhile to create an explicit
+%``Background'' section.
+%
+%Let us suppose you are attempting to build a constant time integer
+%factorization algorithm. You would want to briefly explain that
+%factorization is the process of breaking an integer into its prime
+%multipliers. Give a simple example. Your problem statement would
+%conclude that factorization is an unneccesarily complex
+%process. Finally, you would state that via your proposed system,
+%factorization will be easy and the consequences that will
+%have. Namely, the RSA-encryption algorithm will be broken.
 
 % The header of this document might have been a little intimidatating
 % to beginners. Notice once you are in the body of the document,
