@@ -25,10 +25,21 @@
 % that your proposals should have actual titles, not the generic one
 % we have here.
 \title{Programming Language Support for Probabilistic Associative Memory}
-\subtitle{Dept. of CIS - Senior Design 2014-2015\thanks{Advisor: Insup Lee (lee@cis.upenn.edu).}~\thanks{ Do not list your advisors amongst the authors as that may cause Google Scholar to add this work to their list of publications. Your advisor must also sign a hard-copy of your proposal.}}
-\numberofauthors{2}
+\subtitle{Dept. of CIS - Senior Design 2014-2015\thanks{Advisor: Steve A. Zdancewic (stevez@cis.upenn.edu).}}
+%\thanks{ Do not list your advisors amongst the authors as that may cause Google Scholar to add this work to their list of publications. Your advisor must also sign a hard-copy of your proposal.}}
+%\thanks{ }}
+\numberofauthors{3}
 \author{
-\alignauthor Radoslav Ivanov \\ \email{rivanov@seas.upenn.edu} \\ Univ. of Pennsylvania \\ Philadelphia, PA}
+    Fan Yin \\ \email{fanyin@seas.upenn.edu}
+    \and Haolin Lu \\ \email{haolinlu@seas.upenn.edu}
+    \and Yukuan Zhang\\ \email{yukuan@seas.upenn.edu}
+}
+%\author{
+%\alignauthor Radoslav Ivanov \\ \email{rivanov@seas.upenn.edu} \\ Univ. of Pennsylvania \\ Philadelphia, PA 
+%
+%\and Radoslav Ivanov \\ \email{rivanov@seas.upenn.edu} \\ Univ. of Pennsylvania \\ Philadelphia, PA 
+%
+%}
 \date{}
 \maketitle
 
@@ -76,7 +87,11 @@ in programming languages is the hashtable, which returns an output value
 based on an input key. 
 
 Associative memories are useful for when one needs to query memory based 
-on some input data or tag. \textbf{Elaborate with router example}.
+on some input data or tag. For instance, router firmware will often employ associative 
+memories to store tables of IP addresses, which serve as the "next hop" for incoming 
+packets. Since routers looking for the "next hop" have a specific, standard query 
+format -- e.g. an IP address of the form www.xxx.yyy.zzz -- it makes sense to store the 
+routing tables based around this input string.
 
 With proabilistic memories, for a given query, we return the most "likely" candidate 
 based on some specified probability model of the values stored in memory. 
