@@ -177,13 +177,13 @@ TODO
 \section{Project Proposal}
 \label{sec:project_proposal}
 We will be using the OCaml language to implement the aforementioned probabilistic 
-associative memory. OCaml is a functional language with a strong and versatile type 
-system, which will be useful in implementing typed, structured data in our library. 
+associative memory. OCaml is a functional language with a strong type and versatile
+system. This will be useful in implementing typed, structured data in our library. 
 Based on the specific probability distribution and model in use, our library would return 
-a different memory value. As such, our library will have "plug and play" support for 
+a different memory value for each query. As such, our library will have "plug and play" support for 
 different probability paradigms. After we have finished creating our library, we will 
-write a programs with the library to demonstrate the benefits of using probabilistic 
-associative memory. 
+write applications with the library to demonstrate the benefits of using our implementation
+of probabilistic associative memory.
 
 %Now is the time to introduce your proposed project in all of its
 %glory. Admittedly, this is not the easiest since you probably have not
@@ -194,10 +194,10 @@ associative memory.
 \subsection{Anticipated Approach}
 \label{subsec:approach}
 Our first step is to create a programming language interface for probabilistic
-associative memories. This involves defining a type system as well as a syntax
-for programming with an underlying memory. A major component of this syntax will be 
-the way to store into a memory, and the different types of queries we can make
-to the memory.
+associative memories. This involves implementing a domain specific language: 
+defining a type system as well as a syntax for programming with an underlying memory.
+A major component of this syntax will be the way to store into a memory, 
+and the different types of queries we can make to the memory.
 
 Next, we will implement various types of probablistic associative memories.
 One implementation would focus on accuracy, and keep track of every value that
@@ -208,9 +208,10 @@ a type of memory to work specifically with structured data, allowing similarity
 queries on data types such as lists or trees.
 
 By creating this interface, users of this programming language will be able to
-choose the type of memory that most suits the needs of their particular
+choose the type of memory and probabilistic model that most suits the needs of their particular
 application. 
 
+\textbf{Need block-flow diagram}
 %Having summarized \textit{what} you are going to do, its time to
 %describe \textit{how} you plan to do it. Our factorization example
 %does not work so well here (it is likely impossible to realize) -- so
@@ -230,13 +231,28 @@ application.
 
 \subsection{Technical Challenges}
 \label{subsec:tech_challenges}
-The foremost technical challenge in our project deals with the logistics of incorporating
+The foremost technical challenges in our project deal with the logistics of incorporating
 a probabilistic model into our memory mechanism, the mathematics involved in said models,
-and the programming interface exposed to the end user. \textbf{[elaborate]}
+and the programming interface exposed to the end user.
 
-Another challenge involves testing our library and iterating. We must have some  
-baseline "fidelity" or "accuracy" per query, and we must make sure that our probabilistic
-queries actually process our sample space accurately and return the "smartest" value.
+Regarding the interface that the end user (programmer) sees, she should be unaware of 
+the inner workings of each probabilistic model, but expect reasonable and intuitive return values
+to each query into the probabilistic memory. For instance, if she is prioritizing accuracy 
+in her use of the library, she would expect a return value that was previously inserted and that 
+returns the highest probability for the given query.
+
+We also need to give the programmer enough power and flexibility with our library for 
+whatever probabilistic applications she will be using it for. This would involve enabling 
+her to create combinations of queries and queries of different types.
+
+Regarding mathematics, we will need to pursue further research regarding mathematical 
+and probabilistic methods that we expect to implement in our library. After said implementation,
+we should make sure to verify that said mathematical or probabilistic models behave as expected. 
+For instance, if the previous values inserted into memory were "2, 2, 2, 4, 4, 6", and we queried "x > 2", 
+then the return value should be "4", since "4" is the most frequent value that satisfies the query.
+Of course, in our actual implementation, we will have more complicated mechanisms than the one above.
+Thus, another challenge involves testing, through confusion matrices or other machine-learning techniques,
+that our return values achieve a certain standard of accuracy or fidelity.
 
 %In this subsection note where you anticipate having \underline{novel}
 %difficulty. Maybe you have never setup a MySQL database or even used
