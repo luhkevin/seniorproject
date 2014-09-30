@@ -18,6 +18,7 @@
 % styles and formattings that aren't part of the 'standard library'
 \usepackage{mdwlist}
 \usepackage{url}
+\usepackage{float}
 
 \begin{document} 
 
@@ -174,6 +175,7 @@ TODO
 %Field Sieve. Note the humongous time and memory bounds of these
 %algorithms. But wait! You are going to propose a better way $\ldots$
 
+
 \section{Project Proposal}
 \label{sec:project_proposal}
 We will be using the OCaml language to implement the aforementioned probabilistic 
@@ -193,6 +195,7 @@ of probabilistic associative memory.
 
 \subsection{Anticipated Approach}
 \label{subsec:approach}
+
 Our first step is to create a programming language interface for probabilistic
 associative memories. This involves implementing a domain specific language: 
 defining a type system as well as a syntax for programming with an underlying memory.
@@ -211,7 +214,15 @@ By creating this interface, users of this programming language will be able to
 choose the type of memory and probabilistic model that most suits the needs of their particular
 application. 
 
-\textbf{Need block-flow diagram}
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[width=0.90\linewidth]{block}
+	\end{center}
+	\vspace{-12pt}
+	\caption{Example Figure/Graph}
+	\label{fig:block}
+\end{figure}
+
 %Having summarized \textit{what} you are going to do, its time to
 %describe \textit{how} you plan to do it. Our factorization example
 %does not work so well here (it is likely impossible to realize) -- so
@@ -273,10 +284,10 @@ this, we will write the same (or a similar) applications using a standard, non-p
 and compare and constrast the two methods with various benchmarks and other metrics.
 
 Regarding benchmarks, we will attempt to show how the probabilistic approach leads to 
-a lower memory footprint. Regarding other metrics, we will show how using our 
-probabilistic library can yield fewer lines of code and has more logical fluidity 
-for programs that require statistical and probabilistic methods and 
-than a vanilla implementation of the same program in OCaml. 
+a lower memory footprint, but still return values similar to an expected baseline. 
+Regarding other metrics, we will show how using our probabilistic library can yield 
+fewer lines of code and has more logical fluidity for programs that require statistical 
+and probabilistic methods and than a vanilla implementation of the same program in OCaml. 
 
 %Suppose you have implemented your approach and it is functioning. Now
 %how are you going to convince readers your approach is better than
