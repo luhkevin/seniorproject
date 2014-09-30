@@ -101,6 +101,15 @@ based on a probability also saves memory because not every value has to be store
 memory mechanism can extrapolate or interpolate a response to a query based on values 
 previously inserted into memory. 
 
+We also strive to add support for structured data in our probabilistic associative memory.
+In a standard associative memory scheme, a similarity query is done by comparing input bits
+to the values stored in memory. However, this does not allow for good similarity comparisons
+between trees or lists, as the memory is not aware of the underlying structure. As a result,
+many applications on structured data will first flatten the structure, do the calculations
+it needs, then reconstruct the original structure of that data. With a built-in type system
+that supports structured data, the user will be able to directly manipulate the data in memory 
+while keeping the structure intact.
+
 - Types and Structured Data -- more easily determine similarity queries. Data structure aware of structured data that it's holding.
 
 %You should begin by introducing your topic. You should define core
