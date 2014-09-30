@@ -191,13 +191,21 @@ associative memory.
 \label{subsec:approach}
 Our first step is to create a programming language interface for probabilistic
 associative memories. This involves defining a type system as well as a syntax
-for programming with an underlying memory.
+for programming with an underlying memory. A major component of this syntax will be 
+the way to store into a memory, and the different types of queries we can make
+to the memory.
+
 Next, we will implement various types of probablistic associative memories.
 One implementation would focus on accuracy, and keep track of every value that
 was stored in it. Another implementation will try to conserve memory space,
-and compress the stored values. We will work on different compression methods,
+and compress the stored values. We will work on several different compression methods,
 including neural networks and network flow equilibrium. Finally we will create
-a type of memory to work with structured data.
+a type of memory to work specifically with structured data, allowing similarity
+queries on data types such as lists or trees.
+
+By creating this interface, users of this programming language will be able to
+choose the type of memory that most suits the needs of their particular
+application. 
 
 %Having summarized \textit{what} you are going to do, its time to
 %describe \textit{how} you plan to do it. Our factorization example
