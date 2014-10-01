@@ -82,12 +82,12 @@
 
 The standard way to access a stored value in memory is by address. 
 This involves finding the physical position of that address in memory
-and returning the stored value. Associative memory allows
+and returning the stored value. Meanwhile, associative memory allows
 searching for a values based on the stored content. An analagous structure
 in programming languages is the hashtable, which returns an output value
 based on an input key. 
 
-Associative memories are useful for when one needs to query memory based 
+Standard, non-probabilistic associative memories are useful for when one needs to query memory based 
 on some input data or tag. For instance, router firmware will often employ associative 
 memories to store tables of IP addresses, which serve as the "next hop" for incoming 
 packets. Since routers looking for the "next hop" have a specific, standard query 
@@ -321,6 +321,22 @@ a lower memory footprint, but still return values similar to an expected baselin
 Regarding other metrics, we will show how using our probabilistic library can yield 
 fewer lines of code and has more logical fluidity for programs that require statistical 
 and probabilistic methods and than a vanilla implementation of the same program in OCaml. 
+
+For instance, we might begin by programming a simple dice-rolling application where the programmer wishes
+to simulate an unfair six-sided dice, i.e. where the probability of rolling a number from 1 to 6 is not $\frac{1}{6}$
+The function of this application is twofold: By running the simulation through multiple trials, we can demonstrate 
+that our probability model works correctly; that is, that it ``learns" and ``predicts" the correct values, over multiple trials,
+based on what's currently stored in memory.
+
+In addition, we can demonstrate the logical fluidity of using our proabilistic library.
+With a standard programming model, this loaded dice simulation might require many lines of casework and probability space scaling
+that ends up being unintuitive and not logicially fluid. For example, say we wanted to assign ''1" to show up with probability $\frac{1}{3}$
+and the other numbers with probability $\frac{2}{15}$. With a standard programming model, we would have to run the simulation on a space from
+1 to 15, instead of 1 to 6, and essentially map $\{1\} \rightarrow \{1, 2, 3, 4, 5\}, \{2\} \rightarrow \{6, 7\}$, etc...
+
+With our library, the programmer would be able to accomplish this much more intuitively. Our
+anticipated user interface would provide an abstraction such that the programmer would simply
+provide the probability distribution that she desires; in this case, it would that of the loaded dice.
 
 %Suppose you have implemented your approach and it is functioning. Now
 %how are you going to convince readers your approach is better than
