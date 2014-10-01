@@ -134,6 +134,13 @@ while keeping the structure intact.
 
 \section{Related Work}
 \label{sec:related_work}
+
+With regards to existing related work, we are not looking to
+advance associative memory theory. Rather, we are seeking to research existing
+models for associative memory, provide a common probabilistic query interface, and create 
+implementations that fit this interface. With that being said, there are many works that 
+address different forms of associative memory. 
+
 One of the seminal works concerning associative memories is ``Non-holographic
 Associative Memory``. This paper describes a model for a probabilistic associative memory
 that maps a set of elements in space A to space C through space B, which serves as a representation 
@@ -147,7 +154,13 @@ is the size of the space of A. This model uses $\frac{1}{ln(2)} ~ 1.44$ times as
 but it has associative capabilities. If we were to implement associative memory with regular memory, we would
 end up using at least twice the space, instead of around $1.44$ times as much.
 
-With respect to additional implementations of our interface, we 
+With respect to additional implementations of our interface, we plan to look into 
+Hopfield networks. These neural networks may be used as content-addressable memory by
+storing memories on a constant number of nodes and connections, with a similar loss of 
+fidelity as the Willshaw paper's model. Work by Palm (2012) details certain improvements
+upon the initial Hopfield model, and emphasizes sparse patterns to improve the efficiency
+of these neural associative memories. 
+
 %Perhaps the most important section of your proposal is \textit{related
 %  work}. Here you demonstrate that you have read and understand what
 %others in the field have done. This ensures you (1) know the
