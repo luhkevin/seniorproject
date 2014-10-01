@@ -135,18 +135,23 @@ while keeping the structure intact.
 \section{Related Work}
 \label{sec:related_work}
 One of the seminal works concerning associative memories is ``Non-holographic
-Associative Memory``. This paper describes a model for a probabilistic associative memory
-that maps a set of elements in space A to space C through space B, which serves as a representation 
-for values in A. We can think of space C as the information stored in our memory. 
+Associative Memory". This paper describes a model for a probabilistic associative memory
+that creates a mapping between elements of space A and space B, by storing information
+in space C. We can think of space C as a memory, and queries to the memory will be elements
+of space B, with the result being the corresponding element in space A.
 
-In this model, we have a mapping created from a tuple $(a, b)$ to $c$ to ``insert`` a memory value. 
-To fulfill a memory query $b$, we have another mapping from $(b, c)$ to $a$ that returns a value $a$.
-Given an element in B, we ``try`` all the values in C to find the most probabilistic value of A. 
+In this model, to ``insert" a relation $(a, b)$, we let $a$ make an ``impression" on C through $b$.
+To fulfill a memory query $b$, we do a reverse mapping of all the values in C through $b$
+back onto A, to find the most probabilistic value of A.
 This model ensures that the chance of a false positive is less than or equal to $\frac{1}{N}$, where $N$
-is the size of the space of A. This model uses $\frac{1}{ln(2)} ~ 1.44$ times as much memory as regular random access memory,
-but it has associative capabilities. If we were to implement associative memory with regular memory, we would
-end up using at least twice the space, instead of around $1.44$ times as much.
+is the size of the space of A. With that constraint, this model requires $\frac{1}{ln(2)} \approx 1.44$
+times as much memory as regular random access memory, but it has associative capabilities. 
+If we were to implement associative memory with random access memory, we would need at least twice the space,
+since each part of the association needs to be recorded in memory.
 
+This paper was the first to present a model for emulating an associative memory
+probabilistically, and much of the following research on memory compression methods
+for probabilistic associative memory were based on this work.
 
 %Perhaps the most important section of your proposal is \textit{related
 %  work}. Here you demonstrate that you have read and understand what
@@ -257,7 +262,7 @@ application.
 \subsection{Technical Challenges}
 \label{subsec:tech_challenges}
 The foremost technical challenges in our project deal with the logistics of incorporating
-a probabilistic model into our memory mechanism, the mathematics involved in said models,
+probabilistic models into our memory mechanism, the mathematics involved in these models,
 and the programming interface exposed to the end user.
 
 Regarding the interface that the end user (programmer) sees, she should be unaware of 
@@ -271,10 +276,10 @@ whatever probabilistic applications she will be using it for. This would involve
 her to create combinations of queries and queries of different types.
 
 Regarding mathematics, we will need to pursue further research regarding mathematical 
-and probabilistic methods that we expect to implement in our library. After said implementation,
-we should make sure to verify that said mathematical or probabilistic models behave as expected. 
-For instance, if the previous values inserted into memory were ``2, 2, 2, 4, 4, 6``, and we queried ``x > 2``, 
-then the return value should be ``4``, since ``4`` is the most frequent value that satisfies the query.
+and probabilistic methods that we expect to implement in our library. After implementing these methods,
+we will need to verify that mathematical or probabilistic models behave as expected. 
+For instance, if the previous values inserted into memory were ``2, 2, 2, 4, 4, 6", and we queried ``x > 2", 
+then the return value should be ``4", since ``4" is the most frequent value that satisfies the query.
 Of course, in our actual implementation, we will have more complicated mechanisms than the one above.
 Thus, another challenge involves testing, through confusion matrices or other machine-learning techniques,
 that our return values achieve a certain standard of accuracy or fidelity.
@@ -293,7 +298,7 @@ that our return values achieve a certain standard of accuracy or fidelity.
 \label{subsec:eval_criteria}
 In order to convince users that our probabilistic approach is an improvement on the
 current status quo, we will, as stated before, write example applications using our 
-probabilistic library that demonstrate the benefits of using said library. To accomplish 
+probabilistic library that demonstrate the benefits of using this library. To accomplish 
 this, we will write the same (or a similar) applications using a standard, non-probabilistic memory model
 and compare and constrast the two methods with various benchmarks and other metrics.
 
