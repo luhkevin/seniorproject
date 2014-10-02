@@ -19,6 +19,7 @@
 \usepackage{mdwlist}
 \usepackage{url}
 \usepackage{float}
+\usepackage{listings}
 
 \begin{document} 
 
@@ -376,6 +377,18 @@ and the other numbers with probability $\frac{2}{15}$. With a standard programmi
 With our library, the programmer would be able to accomplish this much more intuitively. Our
 anticipated user interface would provide an abstraction such that the programmer would simply
 provide the probability distribution that she desires; in this case, it would that of the loaded dice.
+
+\lstset{language=Caml, caption={Code for Dice Example}}
+\begin{lstlisting}[frame=single]
+let create (distribution : [Int]) =
+    let mem = new[Int] in
+        storeList(mem, distribution);
+        mem
+let loadedDie = create [1,1,2,3,4,5,6]
+query(loadedDie) ==> (* 1 is twice as likely
+    to appear as the other numbers *)
+\end{lstlisting}
+
 
 %Suppose you have implemented your approach and it is functioning. Now
 %how are you going to convince readers your approach is better than
