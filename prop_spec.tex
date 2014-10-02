@@ -48,16 +48,15 @@
 % Next we write out our abstract -- generally a two paragraph maximum,
 % executive summary of the motivation and contributions of the work.
 \begin{abstract}
-    Our goal is to create a programming language library that provides an interface and implementation 
-    for programming with a probablistic associative memory. 
-    
+    Our goal is to create a programming language library that provides an interface
+    for programming with a probabilistic associative memory, as well as various implementations of these memories. 
     An associative memory allows queries by content rather than by address or location.
     In addition, as with standard memory, associative memory remembers every value stored.
-
     On the other hand, probabilistic associative memory returns a value based on a probability model 
     for a given memory query. This allows it to use less space than regular
     associative memories, making it useful for applications that prioritize low memory footprints over 
-    fidelity. 
+    fidelity. On top of this, our library will provide an intuitive interface to this probabilistic
+    associative memory to facilliate programming efficiency for the end user.
 %  \textit{The purpose of this document is three-fold. First, it
 %    describes the requirements of the project proposal. Second, it
 %    presents this information in a style your proposal should
@@ -84,37 +83,38 @@
 The standard way to access a stored value in memory is by address. 
 This involves finding the physical position of that address in memory
 and returning the stored value. Meanwhile, associative memory allows
-searching for a values based on the stored content. An analogous structure
+searching for values based on the stored content. An analogous structure
 in programming languages is the hashtable, which returns an output value
 based on an input key. 
 
 Standard, non-probabilistic associative memories are useful for when one needs to query memory based 
 on some input data or tag. For instance, router firmware will often employ associative 
-memories to store tables of IP addresses, which serve as the "next hop" for incoming 
-packets. Since routers looking for the "next hop" have a specific, standard query 
+memories to store tables of IP addresses, which serve as the ``next hop" for incoming 
+packets. Since routers looking for the ``next hop" have a specific, standard query 
 format -- e.g. an IP address of the form www.xxx.yyy.zzz -- it makes sense to store the 
 routing tables based around this input string.
 
-With probabilistic memories, for a given query, we return the most "likely" candidate 
+With probabilistic memories, for a given query, we return the most ``likely" candidate 
 based on some specified probability model of the values stored in memory. 
 Since our queries work directly with a probability model, it would offer more fluidity
 with programming that involves statistical modeling or simulations. Returning values
 based on a probability also saves memory because not every value has to be stored. The 
 memory mechanism can extrapolate or interpolate a response to a query based on values 
-previously inserted into memory. 
+previously inserted into memory. See Figure 1 for a representation of the flow of 
+this probabilistic mechanism.
 
-We also strive to add support for structured data in our probabilistic associative memory.
+We will also strive to add support for structured data in our probabilistic associative memory.
 In a standard associative memory scheme, a similarity query is done by comparing input bits
-to the values stored in memory. However, this does not allow for good similarity comparisons
+to the values stored in memory. However, this does not allow for accurate similarity comparisons
 between trees or lists, as the memory is not aware of the underlying structure. As a result,
-many applications on structured data will first flatten the structure, do the calculations
-it needs, then reconstruct the original structure of that data. With a built-in type system
+many applications on structured data will first flatten the structure, perform the requisite calculations
+, then reconstruct the original structure of that data. With a built-in type system
 that supports structured data, the user will be able to directly manipulate the data in memory 
 while keeping the structure intact.
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[width=0.9\linewidth]{pammodel}
+		\includegraphics[width=1\linewidth]{pammodel}
 	\end{center}
 	\vspace{-12pt}
 	\caption{Model of Probabilistic Associative Memory Mechanism}
@@ -148,18 +148,38 @@ while keeping the structure intact.
 With regards to existing related work, we are not looking to
 advance associative memory theory. Rather, we are seeking to research existing
 models for associative memory, provide a common probabilistic query interface, and create 
-implementations that fit this interface. With that being said, there are many works that 
+implementations that fit this interface. With that in mind, there are many works that 
 address different forms of associative memory. 
 
-One of the seminal works concerning associative memories is Willshaw's ``Non-holographic
-Associative Memory". This paper describes a model for a probabilistic associative memory
+One of the seminal works concerning associative memories is Willshaw's \textit{Non-holographic
+Associative Memory}~\cite{holographic}. This paper describes a model for a probabilistic associative memory
 that creates a mapping between elements of space A and space B, by storing information
 in space C. We can think of space C as a memory, and queries to the memory will be elements
 of space B, with the result being the corresponding element in space A.
 
+\textbf{Fidelity discussion?}
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[width=1\linewidth]{mapping}
+	\end{center}
+	\vspace{-12pt}
+	\caption{Storing a relation A-B in C}
+	\label{fig:mapping}
+\end{figure}
+
 In this model, to ``insert" a relation $(a, b)$, we let $a$ make an ``impression" on C through $b$.
 To fulfill a memory query $b$, we do a reverse mapping of all the values in C through $b$
 back onto A, to find the most probabilistic value of A.
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[width=1\linewidth]{mapping1}
+	\end{center}
+	\vspace{-12pt}
+	\caption{Recovering A from B}
+	\label{fig:mapping}
+\end{figure}
+
 This model ensures that the chance of a false positive is less than or equal to $\frac{1}{N}$, where $N$
 is the size of the space of A. With that constraint, this model requires $\frac{1}{ln(2)} \approx 1.44$
 times as much memory as regular random access memory, but it has associative capabilities. 
@@ -170,36 +190,38 @@ This paper was the first to present a model for emulating an associative memory
 probabilistically, and much of the following research on memory compression methods
 for probabilistic associative memory were based on this work.
 
+Research in associative memory has close connections to neural networks. Our brains function as 
+associative memories where we can retrieve memories based similarity between stimuli and the memories themselves. 
+Indeed, Norman and Bobrow~\cite{bobrow} construct a memory model which describes how we retrieve 
+items in memory from partial descriptions, even if some part of the description is incorrect or inaccurate. 
+
+Applying this memory model to computation, Hinton~\cite{hinton} draws a connection between Norman and Bobrow's idea of 
+retreiving memories based on partial descriptions and content-addressable memories.
+Hinton then notes that although this content-addressable memory is a useful representation,  
+it is difficult to efficiently ``search for content" through a memory space. 
+%In this model, memory is a ``pattern of activity" that constructs the most plausible process based on the given memory queries. 
+Hinton ends by claiming that while this model is conceptually not difficult, it is difficult to actually 
+implement it. He mentions that an approach to this problem that has arisen recently is with stochastic processes 
+-- heralding a probabilistic approach to this associative memory problem. Thus, both Willshaw and Hinton offer probabilistic models
+of dealing with associative memories.
+
 Later on, the development of Hopfield networks introduced a new form of neural network
 that handles associative memory. These neural networks may be used as content-addressable memory by
 storing memories on a constant number of nodes and connections, with a similar loss of 
 fidelity as the Willshaw paper's model. While it had been shown that the theoretical maximum capacity for these networks
 can asymptotically approach twice the network size (Gardner), the initial Hopfield model 
-provided relatively low capacity. Work by Palm (2012) details the history of 
+provided relatively low capacity. Work by Palm~\cite{palm} details the history of 
 neural associative memories (including the Willshaw model), the limitations of the initial Hopfield model, and the improvements
 that have been made upon it. Namely, it mentions using the Hebb learning rule over the original
 Hopfield learning rule and the importance of sparse coding of patterns. 
 
 Sparse coding in particular is quite important in Hopfield networks (and in unsupervised
-machine learning in general). For various applications, it is very helpful to utilize
+machine learning in general). For various applications, it is beneficial to utilize
 structural similarities to represent the input in a smaller space. In particular, astonishingly
-accurate reconstructions can be made of damaged or noisy images, where details that were 
+accurate reconstructions can be created from damaged or noisy images, where details that were 
 not even present in the input can be recovered. While this particular example primarily has its uses in, say, 
-medical imaging (Yang, 2012), sparse coding has been incredibly useful in increasing the
-capacity and efficiency of these neural associative memories. 
-
-
-
------
-According to Norman and Bobrow (ref..From Hinden), we can recall items from partial descriptions, 
-even if some part of the description is incorrect!  Hinden (ref...) notes this "content-addressable" 
-feature of memory and draws a comparison to content-addressable memory in computers. Hinden then notes 
-that a big problem is making this "search for content" or inference efficient. In this model, memory is 
-a ``pattern of activity" that constructs the most plausible process based on the given memory queries. 
-Hinden ends by claiming that while this model is conceptually not difficult, it is difficult to actually 
-implement it. Lastly, Hinden notes that an approach to this problem that arisen recently is with stochastic processes -- 
-heralding a probabilistic approach to this associative memory problem. 
------
+medical imaging~\cite{yang}, sparse coding has been incredibly useful in increasing the
+capacity of these neural associative memories. 
 
 %Perhaps the most important section of your proposal is \textit{related
 %  work}. Here you demonstrate that you have read and understand what
@@ -222,11 +244,7 @@ heralding a probabilistic approach to this associative memory problem.
 %proposal has at least $6$ references. Fortunately, \LaTeX{} makes
 %citations easy. Your TA has had no difficulty, as the work of Ivanov
 %\textit{et al.}
-~\cite{palm} %demonstrates. Need help with \LaTeX{}?
 %Be sure to check out
-~\cite{holographic} %and
-~\cite{distributed}%, two
-~\cite{bobrow}
 %helpful on-line resources.
 
 %What defines a good resource? Wikipedia is \textbf{NOT} a good
@@ -379,18 +397,17 @@ With our library, the programmer would be able to accomplish this much more intu
 anticipated user interface would provide an abstraction such that the programmer would simply
 provide the probability distribution that she desires; in this case, it would that of the loaded dice.
 
-\lstset{language=Caml, caption={Code for Dice Example}}
+\lstset{language=Caml, caption={Code for Dice Example}, captionpos=b, xleftmargin=\parindent, xrightmargin=\parindent}
 \begin{lstlisting}[frame=single]
 let create (distribution : [Int]) =
     let mem = new[Int] in
         storeList(mem, distribution);
         mem
 let loadedDie = create [1,1,2,3,4,5,6]
-query(loadedDie) ==> (* 1 is twice as likely
-    to appear as the other numbers *)
+query(loadedDie) ==> (* 1 is twice as 
+    likely to appear as the other 
+    numbers *)
 \end{lstlisting}
-
-
 %Suppose you have implemented your approach and it is functioning. Now
 %how are you going to convince readers your approach is better than
 %what exists? In the factorization example, you could just compare
