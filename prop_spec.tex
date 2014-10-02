@@ -114,7 +114,7 @@ while keeping the structure intact.
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[width=0.9\linewidth]{pammodel}
+		\includegraphics[width=1\linewidth]{pammodel}
 	\end{center}
 	\vspace{-12pt}
 	\caption{Model of Probabilistic Associative Memory Mechanism}
@@ -158,11 +158,28 @@ in space C. We can think of space C as a memory, and queries to the memory will 
 of space B, with the result being the corresponding element in space A.
 
 \textbf{Fidelity discussion?}
-\textbf{DIAGRAM}
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[width=1\linewidth]{mapping}
+	\end{center}
+	\vspace{-12pt}
+	\caption{Storing a relation A-B in C}
+	\label{fig:mapping}
+\end{figure}
 
 In this model, to ``insert" a relation $(a, b)$, we let $a$ make an ``impression" on C through $b$.
 To fulfill a memory query $b$, we do a reverse mapping of all the values in C through $b$
 back onto A, to find the most probabilistic value of A.
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[width=1\linewidth]{mapping1}
+	\end{center}
+	\vspace{-12pt}
+	\caption{Recovering A from B}
+	\label{fig:mapping}
+\end{figure}
+
 This model ensures that the chance of a false positive is less than or equal to $\frac{1}{N}$, where $N$
 is the size of the space of A. With that constraint, this model requires $\frac{1}{ln(2)} \approx 1.44$
 times as much memory as regular random access memory, but it has associative capabilities. 
@@ -380,18 +397,17 @@ With our library, the programmer would be able to accomplish this much more intu
 anticipated user interface would provide an abstraction such that the programmer would simply
 provide the probability distribution that she desires; in this case, it would that of the loaded dice.
 
-\lstset{language=Caml, caption={Code for Dice Example}}
+\lstset{language=Caml, caption={Code for Dice Example}, captionpos=b, xleftmargin=\parindent, xrightmargin=\parindent}
 \begin{lstlisting}[frame=single]
 let create (distribution : [Int]) =
     let mem = new[Int] in
         storeList(mem, distribution);
         mem
 let loadedDie = create [1,1,2,3,4,5,6]
-query(loadedDie) ==> (* 1 is twice as likely
-    to appear as the other numbers *)
+query(loadedDie) ==> (* 1 is twice as 
+    likely to appear as the other 
+    numbers *)
 \end{lstlisting}
-
-
 %Suppose you have implemented your approach and it is functioning. Now
 %how are you going to convince readers your approach is better than
 %what exists? In the factorization example, you could just compare
