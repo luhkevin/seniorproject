@@ -48,16 +48,15 @@
 % Next we write out our abstract -- generally a two paragraph maximum,
 % executive summary of the motivation and contributions of the work.
 \begin{abstract}
-    Our goal is to create a programming language library that provides an interface and implementation 
-    for programming with a probablistic associative memory. 
-    
+    Our goal is to create a programming language library that provides an interface
+    for programming with a probabilistic associative memory, as well as various implementations of these memories. 
     An associative memory allows queries by content rather than by address or location.
     In addition, as with standard memory, associative memory remembers every value stored.
-
     On the other hand, probabilistic associative memory returns a value based on a probability model 
     for a given memory query. This allows it to use less space than regular
     associative memories, making it useful for applications that prioritize low memory footprints over 
-    fidelity. 
+    fidelity. On top of this, our library will provide an intuitive interface to this probabilistic
+    associative memory to facilliate programming efficiency for the end user.
 %  \textit{The purpose of this document is three-fold. First, it
 %    describes the requirements of the project proposal. Second, it
 %    presents this information in a style your proposal should
@@ -84,31 +83,32 @@
 The standard way to access a stored value in memory is by address. 
 This involves finding the physical position of that address in memory
 and returning the stored value. Meanwhile, associative memory allows
-searching for a values based on the stored content. An analogous structure
+searching for values based on the stored content. An analogous structure
 in programming languages is the hashtable, which returns an output value
 based on an input key. 
 
 Standard, non-probabilistic associative memories are useful for when one needs to query memory based 
 on some input data or tag. For instance, router firmware will often employ associative 
-memories to store tables of IP addresses, which serve as the "next hop" for incoming 
-packets. Since routers looking for the "next hop" have a specific, standard query 
+memories to store tables of IP addresses, which serve as the ``next hop" for incoming 
+packets. Since routers looking for the ``next hop" have a specific, standard query 
 format -- e.g. an IP address of the form www.xxx.yyy.zzz -- it makes sense to store the 
 routing tables based around this input string.
 
-With probabilistic memories, for a given query, we return the most "likely" candidate 
+With probabilistic memories, for a given query, we return the most ``likely" candidate 
 based on some specified probability model of the values stored in memory. 
 Since our queries work directly with a probability model, it would offer more fluidity
 with programming that involves statistical modeling or simulations. Returning values
 based on a probability also saves memory because not every value has to be stored. The 
 memory mechanism can extrapolate or interpolate a response to a query based on values 
-previously inserted into memory. 
+previously inserted into memory. See Figure 1 for a representation of the flow of 
+this probabilistic mechanism.
 
-We also strive to add support for structured data in our probabilistic associative memory.
+We will also strive to add support for structured data in our probabilistic associative memory.
 In a standard associative memory scheme, a similarity query is done by comparing input bits
-to the values stored in memory. However, this does not allow for good similarity comparisons
+to the values stored in memory. However, this does not allow for accurate similarity comparisons
 between trees or lists, as the memory is not aware of the underlying structure. As a result,
-many applications on structured data will first flatten the structure, do the calculations
-it needs, then reconstruct the original structure of that data. With a built-in type system
+many applications on structured data will first flatten the structure, perform the requisite calculations
+, then reconstruct the original structure of that data. With a built-in type system
 that supports structured data, the user will be able to directly manipulate the data in memory 
 while keeping the structure intact.
 
