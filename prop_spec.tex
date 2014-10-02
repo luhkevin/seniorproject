@@ -263,7 +263,10 @@ Our first step is to create a programming language interface for probabilistic
 associative memories. This involves implementing a domain specific language: 
 defining a type system as well as a syntax for programming with an underlying memory.
 A major component of this syntax will be the way to store into a memory, 
-and the different types of queries we can make to the memory.
+and the different types of queries we can make to the memory. The complexity allowed
+within our query interface is of particular importance, as it will be directly
+interfacing with the probability model. Thus, we must carefully consider 
+how additional complexity may be implemented within models. 
 
 Next, we will implement various types of probabilistic associative memories.
 One implementation would focus on accuracy, and keep track of every value that
@@ -275,7 +278,8 @@ to utilize the typing to enhance similarity queries on data types such as lists 
 
 By creating this interface, users of this programming language will be able to
 choose the type of memory and probabilistic model that most suits the needs of their particular
-application. 
+application. Moreover, besides providing easy usage of provided probabilistic models, 
+it will allow users to implement the interface with their own models as necessary. 
 
 \begin{figure}[H]
 	\begin{center}
@@ -309,15 +313,17 @@ The foremost technical challenges in our project deal with the logistics of inco
 probabilistic models into our memory mechanism, the mathematics involved in these models,
 and the programming interface exposed to the end user.
 
-Regarding the interface that the end user (programmer) sees, she should be unaware of 
+Regarding the interface that the end user (programmer) sees, she should not have to be aware of 
 the inner workings of each probabilistic model, but expect reasonable and intuitive return values
 to each query into the probabilistic memory. For instance, if she is prioritizing accuracy 
 in her use of the library, she would expect a return value that was previously inserted and that 
 returns the highest probability for the given query.
 
-We also need to give the programmer enough power and flexibility with our library for 
+However, we also need to give the programmer enough power and flexibility with our library for 
 whatever probabilistic applications she will be using it for. This would involve enabling 
-her to create combinations of queries and queries of different types.
+her to create combinations of queries and queries of different types. Still, flexibility may 
+come at the cost of complexity - implementing features to accommodate arbitrary data, queries,
+and probabilistic models will quickly increase the complexity of this project. 
 
 Regarding mathematics, we will need to pursue further research regarding mathematical 
 and probabilistic methods that we expect to implement in our library. After implementing these methods,
