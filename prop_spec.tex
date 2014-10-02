@@ -47,7 +47,7 @@
 % Next we write out our abstract -- generally a two paragraph maximum,
 % executive summary of the motivation and contributions of the work.
 \begin{abstract}
-    Our goal is to create a library (OPaml) that provides an interface and implementation 
+    Our goal is to create a programming language library that provides an interface and implementation 
     for programming with a probablistic associative memory. 
     
     An associative memory allows queries by content rather than by address or location.
@@ -83,7 +83,7 @@
 The standard way to access a stored value in memory is by address. 
 This involves finding the physical position of that address in memory
 and returning the stored value. Meanwhile, associative memory allows
-searching for a values based on the stored content. An analagous structure
+searching for a values based on the stored content. An analogous structure
 in programming languages is the hashtable, which returns an output value
 based on an input key. 
 
@@ -94,7 +94,7 @@ packets. Since routers looking for the "next hop" have a specific, standard quer
 format -- e.g. an IP address of the form www.xxx.yyy.zzz -- it makes sense to store the 
 routing tables based around this input string.
 
-With proabilistic memories, for a given query, we return the most "likely" candidate 
+With probabilistic memories, for a given query, we return the most "likely" candidate 
 based on some specified probability model of the values stored in memory. 
 Since our queries work directly with a probability model, it would offer more fluidity
 with programming that involves statistical modeling or simulations. Returning values
@@ -177,6 +177,19 @@ neural associative memories, the limitations of the initial Hopfield model, and 
 that have been made upon it. Namely, it mentions using the Hebb learning rule over the original
 Hopfield learning rule and the importance of sparse coding of patterns.
 
+
+-----
+According to Norman and Bobrow (ref..From Hinden), we can recall items from partial descriptions, 
+even if some part of the description is incorrect!  Hinden (ref...) notes this "content-addressable" 
+feature of memory and draws a comparison to content-addressable memory in computers. Hinden then notes 
+that a big problem is making this "search for content" or inference efficient. In this model, memory is 
+a ``pattern of activity" that constructs the most plausible process based on the given memory queries. 
+Hinden ends by claiming that while this model is conceptually not difficult, it is difficult to actually 
+implement it. Lastly, Hinden notes that an approach to this problem that arisen recently is with stochastic processes -- 
+heralding a probabilistic approach to this associative memory problem. 
+-----
+
+
 %Perhaps the most important section of your proposal is \textit{related
 %  work}. Here you demonstrate that you have read and understand what
 %others in the field have done. This ensures you (1) know the
@@ -198,10 +211,11 @@ Hopfield learning rule and the importance of sparse coding of patterns.
 %proposal has at least $6$ references. Fortunately, \LaTeX{} makes
 %citations easy. Your TA has had no difficulty, as the work of Ivanov
 %\textit{et al.}
-~\cite{ivanov14} %demonstrates. Need help with \LaTeX{}?
+~\cite{palm} %demonstrates. Need help with \LaTeX{}?
 %Be sure to check out
-~\cite{latex_wikibook} %and
-~\cite{ctan_pdf}%, two
+~\cite{holographic} %and
+~\cite{distributed}%, two
+~\cite{bobrow}
 %helpful on-line resources.
 
 %What defines a good resource? Wikipedia is \textbf{NOT} a good
@@ -222,13 +236,16 @@ Hopfield learning rule and the importance of sparse coding of patterns.
 \section{Project Proposal}
 \label{sec:project_proposal}
 We will be using the OCaml language to implement the aforementioned probabilistic 
-associative memory. OCaml is a functional language with a strong type and versatile
-system. This will be useful in implementing typed, structured data in our library. 
-Based on the specific probability distribution and model in use, our library would return 
+associative memory. Based on the specific probability distribution and model in use, our library would return 
 a different memory value for each query. As such, our library will have ``plug and play`` support for 
 different probability paradigms. After we have finished creating our library, we will 
 write applications with the library to demonstrate the benefits of using our implementation
 of probabilistic associative memory.
+
+If given time, we are also considering exploring extensions that may leverage structured data
+in our memory. Since OCaml is a functional language with a strong and versatile type
+system, we may explore how a memory may be 
+able to use typing to achieve different methods of processing queries. 
 
 %Now is the time to introduce your proposed project in all of its
 %glory. Admittedly, this is not the easiest since you probably have not
@@ -245,7 +262,7 @@ defining a type system as well as a syntax for programming with an underlying me
 A major component of this syntax will be the way to store into a memory, 
 and the different types of queries we can make to the memory.
 
-Next, we will implement various types of probablistic associative memories.
+Next, we will implement various types of probabilistic associative memories.
 One implementation would focus on accuracy, and keep track of every value that
 was stored in it. Another implementation will try to conserve memory space,
 and compress the stored values. We will work on several different compression methods,
@@ -302,7 +319,7 @@ her to create combinations of queries and queries of different types.
 Regarding mathematics, we will need to pursue further research regarding mathematical 
 and probabilistic methods that we expect to implement in our library. After implementing these methods,
 we will need to verify that mathematical or probabilistic models behave as expected. 
-For instance, if the previous values inserted into memory were ``2, 2, 2, 4, 4, 6", and we queried ``x > 2", 
+For instance, if the previous values inserted into a high-fidelity probabilistic memory were ``2, 2, 2, 4, 4, 6", and we queried ``x > 2", 
 then the return value should be ``4", since ``4" is the most frequent value that satisfies the query.
 Of course, in our actual implementation, we will have more complicated mechanisms than the one above.
 Thus, another challenge involves testing, through confusion matrices or other machine-learning techniques,
@@ -324,10 +341,13 @@ In order to convince users that our probabilistic approach is an improvement on 
 current status quo, we will, as stated before, write example applications using our 
 probabilistic library that demonstrate the benefits of using this library. To accomplish 
 this, we will write the same (or a similar) applications using a standard, non-probabilistic memory model
-and compare and constrast the two methods with various benchmarks and other metrics.
+and compare and contrast the two methods with various benchmarks and other metrics.
 
-Regarding benchmarks, we will attempt to show how the probabilistic approach leads to 
-a lower memory footprint, but still return values similar to an expected baseline. 
+Regarding benchmarks, we will attempt to show how the probabilistic approach may lead to 
+a lower memory footprint, but still return values similar to an expected baseline.
+We do not plan on improving on the capabilities of current-state associative memory
+systems, but these benchmarks should show that we approach implementations of similar
+quality. 
 Regarding other metrics, we will show how using our probabilistic library can yield 
 fewer lines of code and has more logical fluidity for programs that require statistical 
 and probabilistic methods and than a vanilla implementation of the same program in OCaml. 
@@ -338,9 +358,9 @@ The function of this application is twofold: By running the simulation through m
 that our probability model works correctly; that is, that it ``learns" and ``predicts" the correct values, over multiple trials,
 based on what's currently stored in memory.
 
-In addition, we can demonstrate the logical fluidity of using our proabilistic library.
+In addition, we can demonstrate the logical fluidity of using our probabilistic library.
 With a standard programming model, this loaded dice simulation might require many lines of casework and probability space scaling
-that ends up being unintuitive and not logicially fluid. For example, say we wanted to assign ''1" to show up with probability $\frac{1}{3}$
+that ends up being unintuitive and not logically fluid. For example, say we wanted to assign ''1" to show up with probability $\frac{1}{3}$
 and the other numbers with probability $\frac{2}{15}$. With a standard programming model, we would have to run the simulation on a space from
 1 to 15, instead of 1 to 6, and essentially map $\{1\} \rightarrow \{1, 2, 3, 4, 5\}, \{2\} \rightarrow \{6, 7\}$, etc...
 
