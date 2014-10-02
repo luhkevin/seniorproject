@@ -148,14 +148,17 @@ while keeping the structure intact.
 With regards to existing related work, we are not looking to
 advance associative memory theory. Rather, we are seeking to research existing
 models for associative memory, provide a common probabilistic query interface, and create 
-implementations that fit this interface. With that being said, there are many works that 
+implementations that fit this interface. With that in mind, there are many works that 
 address different forms of associative memory. 
 
-One of the seminal works concerning associative memories is Willshaw's ``Non-holographic
-Associative Memory". This paper describes a model for a probabilistic associative memory
+One of the seminal works concerning associative memories is Willshaw's \textit{Non-holographic
+Associative Memory}~\cite{holographic}. This paper describes a model for a probabilistic associative memory
 that creates a mapping between elements of space A and space B, by storing information
 in space C. We can think of space C as a memory, and queries to the memory will be elements
 of space B, with the result being the corresponding element in space A.
+
+\textbf{Fidelity discussion?}
+\textbf{DIAGRAM}
 
 In this model, to ``insert" a relation $(a, b)$, we let $a$ make an ``impression" on C through $b$.
 To fulfill a memory query $b$, we do a reverse mapping of all the values in C through $b$
@@ -170,34 +173,37 @@ This paper was the first to present a model for emulating an associative memory
 probabilistically, and much of the following research on memory compression methods
 for probabilistic associative memory were based on this work.
 
+Research in associative memory has close connections to neural networks. Our brains function as 
+associative memories where we can retreive memories based similarity between stimuli and the memories themselves. 
+Indeed, Norman and Bobrow~\cite{bobrow} construct a memory model which describes how we retreive 
+items in memory from partial descriptions, even if some part of the description is incorrect or inaccurate. 
+
+Applying this memory model to computation, Hinton~\cite{hinton} draws a connection between Norman and Bobrow's idea of 
+retreiving memories based on partial descriptions and content-addressable memories.
+Hinton then notes that although this content-addressable memory is a useful representation,  
+it is difficult to efficiently ``search for content" through a memory space. 
+%In this model, memory is a ``pattern of activity" that constructs the most plausible process based on the given memory queries. 
+Hinton ends by claiming that while this model is conceptually not difficult, it is difficult to actually 
+implement it. He mentions that an approach to this problem that has arisen recently is with stochastic processes 
+-- heralding a probabilistic approach to this associative memory problem. Thus, both Willshaw and Hinton offer probabilistic models
+of dealing with associative memories.
+
 With respect to additional implementations of our interface, we plan to look into 
 Hopfield networks. These neural networks may be used as content-addressable memory by
 storing memories on a constant number of nodes and connections, with a similar loss of 
-fidelity as the Willshaw paper's model. Work by Palm (2012) details the history of 
+fidelity as the Willshaw paper's model. Work by Palm~\cite{palm} details the history of 
 neural associative memories (including the Willshaw model), the limitations of the initial Hopfield model, and the improvements
 that have been made upon it. Namely, it mentions using the Hebb learning rule over the original
 Hopfield learning rule and the importance of sparse coding of patterns. 
 
 Sparse coding in particular is quite important in Hopfield networks (and in unsupervised
-machine learning in general). For various applications, it is very helpful to utilize
+machine learning in general). For various applications, it is beneficial to utilize
 structural similarities to represent the input in a smaller space. In particular, astonishingly
-accurate reconstructions can be made of damaged or noisy images, where details that were 
+accurate reconstructions can be created from damaged or noisy images, where details that were 
 not even present in the input can be recovered. While this particular example primarily has its uses in, say, 
-medical imaging (Yang, 2012), sparse coding has been incredibly useful in increasing the
+medical imaging~\cite{yang}, sparse coding has been incredibly useful in increasing the
 capacity of these neural associative memories. 
 
-
-
------
-According to Norman and Bobrow (ref..From Hinden), we can recall items from partial descriptions, 
-even if some part of the description is incorrect!  Hinden (ref...) notes this "content-addressable" 
-feature of memory and draws a comparison to content-addressable memory in computers. Hinden then notes 
-that a big problem is making this "search for content" or inference efficient. In this model, memory is 
-a ``pattern of activity" that constructs the most plausible process based on the given memory queries. 
-Hinden ends by claiming that while this model is conceptually not difficult, it is difficult to actually 
-implement it. Lastly, Hinden notes that an approach to this problem that arisen recently is with stochastic processes -- 
-heralding a probabilistic approach to this associative memory problem. 
------
 
 
 %Perhaps the most important section of your proposal is \textit{related
@@ -221,11 +227,7 @@ heralding a probabilistic approach to this associative memory problem.
 %proposal has at least $6$ references. Fortunately, \LaTeX{} makes
 %citations easy. Your TA has had no difficulty, as the work of Ivanov
 %\textit{et al.}
-~\cite{palm} %demonstrates. Need help with \LaTeX{}?
 %Be sure to check out
-~\cite{holographic} %and
-~\cite{distributed}%, two
-~\cite{bobrow}
 %helpful on-line resources.
 
 %What defines a good resource? Wikipedia is \textbf{NOT} a good
