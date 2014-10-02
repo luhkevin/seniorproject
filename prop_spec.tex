@@ -198,8 +198,8 @@ for probabilistic associative memory were based on this work.
 \label{subsec:modern}
 
 Research in associative memory has close connections to neural networks. Our brains function as 
-associative memories where we can retreive memories based similarity between stimuli and the memories themselves. 
-Indeed, Norman and Bobrow~\cite{bobrow} construct a memory model which describes how we retreive 
+associative memories where we can retrieve memories based similarity between stimuli and the memories themselves. 
+Indeed, Norman and Bobrow~\cite{bobrow} construct a memory model which describes how we retrieve 
 items in memory from partial descriptions, even if some part of the description is incorrect or inaccurate. 
 
 Applying this memory model to computation, Hinton~\cite{hinton} draws a connection between Norman and Bobrow's idea of 
@@ -214,11 +214,12 @@ of dealing with associative memories.
 
 \subsection{Implementations}
 \label{subsec:implementations}
-
-With respect to additional implementations of our interface, we plan to look into 
-Hopfield networks. These neural networks may be used as content-addressable memory by
+Later on, the development of Hopfield networks introduced a new form of neural network
+that handles associative memory. These neural networks may be used as content-addressable memory by
 storing memories on a constant number of nodes and connections, with a similar loss of 
-fidelity as the Willshaw paper's model. Work by Palm~\cite{palm} details the history of 
+fidelity as the Willshaw paper's model. While it had been shown that the theoretical maximum capacity for these networks
+can asymptotically approach twice the network size~\cite{gardner}, the initial Hopfield model 
+provided relatively low capacity. Work by Palm~\cite{palm} details the history of 
 neural associative memories (including the Willshaw model), the limitations of the initial Hopfield model, and the improvements
 that have been made upon it. Namely, it mentions using the Hebb learning rule over the original
 Hopfield learning rule and the importance of sparse coding of patterns. 
@@ -230,8 +231,6 @@ accurate reconstructions can be created from damaged or noisy images, where deta
 not even present in the input can be recovered. While this particular example primarily has its uses in, say, 
 medical imaging~\cite{yang}, sparse coding has been incredibly useful in increasing the
 capacity of these neural associative memories. 
-
-
 
 %Perhaps the most important section of your proposal is \textit{related
 %  work}. Here you demonstrate that you have read and understand what
@@ -276,7 +275,7 @@ capacity of these neural associative memories.
 \label{sec:project_proposal}
 We will be using the OCaml language to implement the aforementioned probabilistic 
 associative memory. Based on the specific probability distribution and model in use, our library would return 
-a different memory value for each query. As such, our library will have ``plug and play`` support for 
+a different memory value for each query. As such, our library will have ``plug and play" support for 
 different probability paradigms. After we have finished creating our library, we will 
 write applications with the library to demonstrate the benefits of using our implementation
 of probabilistic associative memory.
@@ -292,8 +291,8 @@ of probabilistic associative memory.
 Our first step is to create a programming language interface for probabilistic
 associative memories. This involves implementing a domain specific language: 
 defining a type system as well as a syntax for programming with an underlying memory.
-A major component of this syntax will be the way to store into a memory, 
-and the different types of queries we can make to the memory. The complexity allowed
+A major component of this syntax will be the grammar of memory storage, 
+as well as the different types of queries we can make to the memory. The complexity allowed
 within our query interface is of particular importance, as it will be directly
 interfacing with the probability model. Thus, we must carefully consider 
 how additional complexity may be implemented within models. 
@@ -301,15 +300,15 @@ how additional complexity may be implemented within models.
 Next, we will implement various types of probabilistic associative memories.
 One implementation would focus on accuracy, and keep track of every value that
 was stored in it. Another implementation will try to conserve memory space,
-and compress the stored values. We will work on several different compression methods,
-including neural networks and network flow equilibrium. Finally we will create
+and compress the stored values. We will work on several different data representation methods,
+including those related to neural networks. Finally we will create
 a type of memory to work specifically with structured data, allowing the memory
-to utilize the typing to enhance similarity queries on data types such as lists or trees.
+to recognize types and improve accuracy of similarity queries on data such as lists or trees.
 
 By creating this interface, users of this programming language will be able to
 choose the type of memory and probabilistic model that most suits the needs of their particular
-application. Moreover, besides providing easy usage of provided probabilistic models, 
-it will allow users to implement the interface with their own models as necessary. 
+application. Moreover, it will allow users to implement the interface with their own models as necessary, 
+as well as provide easy usage of the provided probabilistic models (Figure 4).
 
 \begin{figure}[H]
 	\begin{center}
@@ -339,9 +338,10 @@ it will allow users to implement the interface with their own models as necessar
 
 \subsection{Technical Challenges}
 \label{subsec:tech_challenges}
-The foremost technical challenges in our project deal with the logistics of incorporating
-probabilistic models into our memory mechanism, the mathematics involved in these models,
-and the programming interface exposed to the end user.
+The foremost technical challenges in our project deal with 
+the programming interface exposed to the end user,
+the logistics of incorporating probabilistic models into our memory mechanism, and
+the mathematics involved in these models.
 
 Regarding the interface that the end user (programmer) sees, she should not have to be aware of 
 the inner workings of each probabilistic model, but expect reasonable and intuitive return values
@@ -351,7 +351,7 @@ returns the highest probability for the given query.
 
 However, we also need to give the programmer enough power and flexibility with our library for 
 whatever probabilistic applications she will be using it for. This would involve enabling 
-her to create combinations of queries and queries of different types. Still, flexibility may 
+her to create query combinations and queries of different types. Still, flexibility may 
 come at the cost of complexity - implementing features to accommodate arbitrary data, queries,
 and probabilistic models will quickly increase the complexity of this project. 
 
@@ -378,15 +378,16 @@ that our return values achieve a certain standard of accuracy or fidelity.
 \label{subsec:eval_criteria}
 In order to convince users that our probabilistic approach is an improvement on the
 current status quo, we will, as stated before, write example applications using our 
-probabilistic library that demonstrate the benefits of using this library. To accomplish 
+probabilistic library that demonstrate the its benefits. To accomplish 
 this, we will write the same (or a similar) applications using a standard, non-probabilistic memory model
 and compare and contrast the two methods with various benchmarks and other metrics.
 
 Regarding benchmarks, we will attempt to show how the probabilistic approach may lead to 
 a lower memory footprint, but still return values similar to an expected baseline.
-We do not plan on improving on the capabilities of current-state associative memory
+We do not plan on improving on the capabilities of modern associative memory
 systems, but these benchmarks should show that we approach implementations of similar
 quality. 
+
 Regarding other metrics, we will show how using our probabilistic library can yield 
 fewer lines of code and has more logical fluidity for programs that require statistical 
 and probabilistic methods and than a vanilla implementation of the same program in OCaml. 
@@ -394,18 +395,18 @@ and probabilistic methods and than a vanilla implementation of the same program 
 For instance, we might begin by programming a simple dice-rolling application where the programmer wishes
 to simulate an unfair six-sided dice, i.e. where the probability of rolling a number from 1 to 6 is not $\frac{1}{6}$
 The function of this application is twofold: By running the simulation through multiple trials, we can demonstrate 
-that our probability model works correctly; that is, that it ``learns" and ``predicts" the correct values, over multiple trials,
-based on what's currently stored in memory.
+that our probability model works correctly; that is, that it generates the expected distribution values
+based on the given inputs.
 
-In addition, we can demonstrate the logical fluidity of using our probabilistic library.
+In addition, we will demonstrate the logical fluidity of using our probabilistic library:
 With a standard programming model, this loaded dice simulation might require many lines of casework and probability space scaling
-that ends up being unintuitive and not logically fluid. For example, say we wanted to assign ''1" to show up with probability $\frac{1}{3}$
+that ends up being unintuitive. For example, say we wanted to assign ''1" to show up with probability $\frac{1}{3}$
 and the other numbers with probability $\frac{2}{15}$. With a standard programming model, we would have to run the simulation on a space from
 1 to 15, instead of 1 to 6, and essentially map $\{1\} \rightarrow \{1, 2, 3, 4, 5\}, \{2\} \rightarrow \{6, 7\}$, etc...
 
-With our library, the programmer would be able to accomplish this much more intuitively. Our
+With our library, the programmer would be able to accomplish this much more intuitively. Listing 1 shows a potential representation of how we might use the library interface. Our
 anticipated user interface would provide an abstraction such that the programmer would simply
-provide the probability distribution that she desires; in this case, it would that of the loaded dice.
+provide the probability distribution that she desires.
 
 \lstset{language=Caml, caption={Code for Dice Example}, captionpos=b, xleftmargin=\parindent, xrightmargin=\parindent}
 \begin{lstlisting}[frame=single]
