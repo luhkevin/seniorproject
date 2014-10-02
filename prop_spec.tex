@@ -151,7 +151,7 @@ models for associative memory, provide a common probabilistic query interface, a
 implementations that fit this interface. With that being said, there are many works that 
 address different forms of associative memory. 
 
-One of the seminal works concerning associative memories is ``Non-holographic
+One of the seminal works concerning associative memories is Willshaw's ``Non-holographic
 Associative Memory". This paper describes a model for a probabilistic associative memory
 that creates a mapping between elements of space A and space B, by storing information
 in space C. We can think of space C as a memory, and queries to the memory will be elements
@@ -174,9 +174,18 @@ With respect to additional implementations of our interface, we plan to look int
 Hopfield networks. These neural networks may be used as content-addressable memory by
 storing memories on a constant number of nodes and connections, with a similar loss of 
 fidelity as the Willshaw paper's model. Work by Palm (2012) details the history of 
-neural associative memories, the limitations of the initial Hopfield model, and the improvements
+neural associative memories (including the Willshaw model), the limitations of the initial Hopfield model, and the improvements
 that have been made upon it. Namely, it mentions using the Hebb learning rule over the original
-Hopfield learning rule and the importance of sparse coding of patterns.
+Hopfield learning rule and the importance of sparse coding of patterns. 
+
+Sparse coding in particular is quite important in Hopfield networks (and in unsupervised
+machine learning in general). For various applications, it is very helpful to utilize
+structural similarities to represent the input in a smaller space. In particular, astonishingly
+accurate reconstructions can be made of damaged or noisy images, where details that were 
+not even present in the input can be recovered. While this particular example primarily has its uses in, say, 
+medical imaging (Yang, 2012), sparse coding has been incredibly useful in increasing the
+capacity of these neural associative memories. 
+
 
 
 -----
@@ -243,17 +252,11 @@ different probability paradigms. After we have finished creating our library, we
 write applications with the library to demonstrate the benefits of using our implementation
 of probabilistic associative memory.
 
-If given time, we are also considering exploring extensions that may leverage structured data
-in our memory. Since OCaml is a functional language with a strong and versatile type
-system, we may explore how a memory may be 
-able to use typing to achieve different methods of processing queries. 
-
 %Now is the time to introduce your proposed project in all of its
 %glory. Admittedly, this is not the easiest since you probably have not
 %done much actual research yet. Even so, setting and realizing
 %realistic research goals is an important skill. Begin by summarizing
 %what you are going to do and the expected benefit it will bring.
-
 \subsection{Anticipated Approach}
 \label{subsec:approach}
 
@@ -268,8 +271,8 @@ One implementation would focus on accuracy, and keep track of every value that
 was stored in it. Another implementation will try to conserve memory space,
 and compress the stored values. We will work on several different compression methods,
 including neural networks and network flow equilibrium. Finally we will create
-a type of memory to work specifically with structured data, allowing similarity
-queries on data types such as lists or trees.
+a type of memory to work specifically with structured data, allowing the memory
+to utilize the typing to enhance similarity queries on data types such as lists or trees.
 
 By creating this interface, users of this programming language will be able to
 choose the type of memory and probabilistic model that most suits the needs of their particular
@@ -406,12 +409,12 @@ query(loadedDie) ==> (* 1 is twice as likely
 % (shown below), are used to create indented\bulleted\outline style
 % lists.
 \begin{itemize*}
-	\item {\sc already completed}: Preliminary reading. Began implementation of probabilistic associative memory.\vspace{3pt}
-	\item {\sc prior-to thanksgiving} : Review OCaml and the necessary mathematics, begin designing the end user interface to the library and the probabilistic mechanisms involved in querying memory.\vspace{3pt}
+	\item {\sc already completed}: Preliminary reading and research. Brainstorm ideas and design of probabilistic associative memory. \vspace{3pt}
+	\item {\sc end of October} : Continue to research; also review OCaml and the necessary mathematics and probability\vspace{3pt}
+	\item {\sc prior-to Thanksgiving} : Begin designing the user interface to the library and how to integrate the probabilistic mechanisms involved in querying memory.\vspace{3pt}
 	\item {\sc prior-to christmas} : Start programming a basic probabilistic model into memory queries.\vspace{3pt}
-	\item {\sc completion tasks} : Verify implementation is bug-free. Conduct accuracy testing. Complete write-up.\vspace{3pt}
-	\item {\sc if there's time} : Begin modularizing the system such that various probabilistic models can be used fluidly and easily. 
-                                    Start thinking about applications for the library.
+	\item {\sc completion tasks} : Finish example applications, verify implementation is bug-free, and conduct accuracy testing. Complete write-up.\vspace{3pt}
+	\item {\sc if there's time} : Begin modularizing the system such that various probabilistic models can be used fluidly and easily. Create more example applications for the library.
 \end{itemize*}
 
 % We next move onto the bibliography.
