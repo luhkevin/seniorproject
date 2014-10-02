@@ -47,7 +47,7 @@
 % Next we write out our abstract -- generally a two paragraph maximum,
 % executive summary of the motivation and contributions of the work.
 \begin{abstract}
-    Our goal is to create a library (OPaml) that provides an interface and implementation 
+    Our goal is to create a programming language library that provides an interface and implementation 
     for programming with a probablistic associative memory. 
     
     An associative memory allows queries by content rather than by address or location.
@@ -168,6 +168,19 @@ neural associative memories, the limitations of the initial Hopfield model, and 
 that have been made upon it. Namely, it mentions using the Hebb learning rule over the original
 Hopfield learning rule and the importance of sparse coding of patterns.
 
+
+-----
+According to Norman and Bobrow (ref..From Hinden), we can recall items from partial descriptions, 
+even if some part of the description is incorrect!  Hinden (ref...) notes this "content-addressable" 
+feature of memory and draws a comparison to content-addressable memory in computers. Hinden then notes 
+that a big problem is making this "search for content" or inference efficient. In this model, memory is 
+a ``pattern of activity" that constructs the most plausible process based on the given memory queries. 
+Hinden ends by claiming that while this model is conceptually not difficult, it is difficult to actually 
+implement it. Lastly, Hinden notes that an approach to this problem that arisen recently is with stochastic processes -- 
+heralding a probabilistic approach to this associative memory problem. 
+-----
+
+
 %Perhaps the most important section of your proposal is \textit{related
 %  work}. Here you demonstrate that you have read and understand what
 %others in the field have done. This ensures you (1) know the
@@ -189,10 +202,11 @@ Hopfield learning rule and the importance of sparse coding of patterns.
 %proposal has at least $6$ references. Fortunately, \LaTeX{} makes
 %citations easy. Your TA has had no difficulty, as the work of Ivanov
 %\textit{et al.}
-~\cite{ivanov14} %demonstrates. Need help with \LaTeX{}?
+~\cite{palm} %demonstrates. Need help with \LaTeX{}?
 %Be sure to check out
-~\cite{latex_wikibook} %and
-~\cite{ctan_pdf}%, two
+~\cite{holographic} %and
+~\cite{distributed}%, two
+~\cite{bobrow}
 %helpful on-line resources.
 
 %What defines a good resource? Wikipedia is \textbf{NOT} a good
