@@ -151,13 +151,15 @@ models for associative memory, provide a common probabilistic query interface, a
 implementations that fit this interface. With that in mind, there are many works that 
 address different forms of associative memory. 
 
+\subsection{Founding Research}
+\label{subsec:founding}
+
 One of the seminal works concerning associative memories is Willshaw's \textit{Non-holographic
 Associative Memory}~\cite{holographic}. This paper describes a model for a probabilistic associative memory
 that creates a mapping between elements of space A and space B, by storing information
 in space C. We can think of space C as a memory, and queries to the memory will be elements
 of space B, with the result being the corresponding element in space A.
 
-\textbf{Fidelity discussion?}
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=1\linewidth]{mapping}
@@ -167,16 +169,18 @@ of space B, with the result being the corresponding element in space A.
 	\label{fig:mapping}
 \end{figure}
 
-In this model, to ``insert" a relation $(a, b)$, we let $a$ make an ``impression" on C through $b$.
+In this model, to ``insert" a relation $(a, b)$, we let $a$ make an ``impression" on C through $b$ (Figure 2).
 To fulfill a memory query $b$, we do a reverse mapping of all the values in C through $b$
-back onto A, to find the most probabilistic value of A.
+back onto A, to find the most probabilistic value of A. As shown in Figure 3, there is a restriction placed on the validity of the
+elements in the reverse mapping based on the original domain of A. This maintains a certain threshold of fidelity and accuracy in
+the probabilistic memory.
 
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=1\linewidth]{mapping1}
 	\end{center}
 	\vspace{-12pt}
-	\caption{Recovering A from B}
+	\caption{Recovering A from B and C}
 	\label{fig:mapping}
 \end{figure}
 
@@ -186,9 +190,12 @@ times as much memory as regular random access memory, but it has associative cap
 If we were to implement associative memory with random access memory, we would need at least twice the space,
 since each part of the association needs to be recorded in memory.
 
-This paper was the first to present a model for emulating an associative memory
+Willshaw's paper was the first to present a model for emulating an associative memory
 probabilistically, and much of the following research on memory compression methods
 for probabilistic associative memory were based on this work.
+
+\subsection{Modern Connections}
+\label{subsec:modern}
 
 Research in associative memory has close connections to neural networks. Our brains function as 
 associative memories where we can retreive memories based similarity between stimuli and the memories themselves. 
@@ -204,6 +211,9 @@ Hinton ends by claiming that while this model is conceptually not difficult, it 
 implement it. He mentions that an approach to this problem that has arisen recently is with stochastic processes 
 -- heralding a probabilistic approach to this associative memory problem. Thus, both Willshaw and Hinton offer probabilistic models
 of dealing with associative memories.
+
+\subsection{Implementations}
+\label{subsec:implementations}
 
 With respect to additional implementations of our interface, we plan to look into 
 Hopfield networks. These neural networks may be used as content-addressable memory by
