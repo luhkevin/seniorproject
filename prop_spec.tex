@@ -372,18 +372,17 @@ With our library, the programmer would be able to accomplish this much more intu
 anticipated user interface would provide an abstraction such that the programmer would simply
 provide the probability distribution that she desires; in this case, it would that of the loaded dice.
 
-\lstset{language=Caml, caption={Code for Dice Example}}
+\lstset{language=Caml, caption={Code for Dice Example}, captionpos=b, xleftmargin=\parindent}
 \begin{lstlisting}[frame=single]
 let create (distribution : [Int]) =
     let mem = new[Int] in
         storeList(mem, distribution);
         mem
 let loadedDie = create [1,1,2,3,4,5,6]
-query(loadedDie) ==> (* 1 is twice as likely
-    to appear as the other numbers *)
+query(loadedDie) ==> (* 1 is twice as 
+    likely to appear as the other 
+    numbers *)
 \end{lstlisting}
-
-
 %Suppose you have implemented your approach and it is functioning. Now
 %how are you going to convince readers your approach is better than
 %what exists? In the factorization example, you could just compare
