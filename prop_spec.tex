@@ -170,10 +170,12 @@ This paper was the first to present a model for emulating an associative memory
 probabilistically, and much of the following research on memory compression methods
 for probabilistic associative memory were based on this work.
 
-With respect to additional implementations of our interface, we plan to look into 
-Hopfield networks. These neural networks may be used as content-addressable memory by
+Later on, the development of Hopfield networks introduced a new form of neural network
+that handles associative memory. These neural networks may be used as content-addressable memory by
 storing memories on a constant number of nodes and connections, with a similar loss of 
-fidelity as the Willshaw paper's model. Work by Palm (2012) details the history of 
+fidelity as the Willshaw paper's model. While it had been shown that the theoretical maximum capacity for these networks
+can asymptotically approach twice the network size (Gardner), the initial Hopfield model 
+provided relatively low capacity. Work by Palm (2012) details the history of 
 neural associative memories (including the Willshaw model), the limitations of the initial Hopfield model, and the improvements
 that have been made upon it. Namely, it mentions using the Hebb learning rule over the original
 Hopfield learning rule and the importance of sparse coding of patterns. 
@@ -184,7 +186,7 @@ structural similarities to represent the input in a smaller space. In particular
 accurate reconstructions can be made of damaged or noisy images, where details that were 
 not even present in the input can be recovered. While this particular example primarily has its uses in, say, 
 medical imaging (Yang, 2012), sparse coding has been incredibly useful in increasing the
-capacity of these neural associative memories. 
+capacity and efficiency of these neural associative memories. 
 
 
 
@@ -198,7 +200,6 @@ Hinden ends by claiming that while this model is conceptually not difficult, it 
 implement it. Lastly, Hinden notes that an approach to this problem that arisen recently is with stochastic processes -- 
 heralding a probabilistic approach to this associative memory problem. 
 -----
-
 
 %Perhaps the most important section of your proposal is \textit{related
 %  work}. Here you demonstrate that you have read and understand what
