@@ -47,8 +47,8 @@
 % Next we write out our abstract -- generally a two paragraph maximum,
 % executive summary of the motivation and contributions of the work.
 \begin{abstract}
-    Our goal is to create a library (OPaml) that provides an interface and implementation 
-    for programming with a probabilistic associative memory. 
+    Our goal is to create a programming language library that provides an interface and implementation 
+    for programming with a probablistic associative memory. 
     
     An associative memory allows queries by content rather than by address or location.
     In addition, as with standard memory, associative memory remembers every value stored.
@@ -110,6 +110,15 @@ many applications on structured data will first flatten the structure, do the ca
 it needs, then reconstruct the original structure of that data. With a built-in type system
 that supports structured data, the user will be able to directly manipulate the data in memory 
 while keeping the structure intact.
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[width=0.9\linewidth]{pammodel}
+	\end{center}
+	\vspace{-12pt}
+	\caption{Model of Probabilistic Associative Memory Mechanism}
+	\label{fig:pammodel}
+\end{figure}
 
 %You should begin by introducing your topic. You should define core
 %terminology specific to the field, introduce the problem statement,
@@ -177,6 +186,19 @@ medical imaging (Yang, 2012), sparse coding has been incredibly useful in increa
 capacity of these neural associative memories. 
 
 
+
+-----
+According to Norman and Bobrow (ref..From Hinden), we can recall items from partial descriptions, 
+even if some part of the description is incorrect!  Hinden (ref...) notes this "content-addressable" 
+feature of memory and draws a comparison to content-addressable memory in computers. Hinden then notes 
+that a big problem is making this "search for content" or inference efficient. In this model, memory is 
+a ``pattern of activity" that constructs the most plausible process based on the given memory queries. 
+Hinden ends by claiming that while this model is conceptually not difficult, it is difficult to actually 
+implement it. Lastly, Hinden notes that an approach to this problem that arisen recently is with stochastic processes -- 
+heralding a probabilistic approach to this associative memory problem. 
+-----
+
+
 %Perhaps the most important section of your proposal is \textit{related
 %  work}. Here you demonstrate that you have read and understand what
 %others in the field have done. This ensures you (1) know the
@@ -198,10 +220,11 @@ capacity of these neural associative memories.
 %proposal has at least $6$ references. Fortunately, \LaTeX{} makes
 %citations easy. Your TA has had no difficulty, as the work of Ivanov
 %\textit{et al.}
-~\cite{ivanov14} %demonstrates. Need help with \LaTeX{}?
+~\cite{palm} %demonstrates. Need help with \LaTeX{}?
 %Be sure to check out
-~\cite{latex_wikibook} %and
-~\cite{ctan_pdf}%, two
+~\cite{holographic} %and
+~\cite{distributed}%, two
+~\cite{bobrow}
 %helpful on-line resources.
 
 %What defines a good resource? Wikipedia is \textbf{NOT} a good
@@ -232,13 +255,11 @@ We also intend to explore extensions that may leverage structured data
 in our memory. Since OCaml is a functional language with a strong and versatile type
 system, we may explore how a memory may be 
 able to use typing to achieve different methods of processing queries. 
-
 %Now is the time to introduce your proposed project in all of its
 %glory. Admittedly, this is not the easiest since you probably have not
 %done much actual research yet. Even so, setting and realizing
 %realistic research goals is an important skill. Begin by summarizing
 %what you are going to do and the expected benefit it will bring.
-
 \subsection{Anticipated Approach}
 \label{subsec:approach}
 
@@ -262,11 +283,11 @@ application.
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[width=0.90\linewidth]{block}
+		\includegraphics[width=1\linewidth]{block2}
 	\end{center}
 	\vspace{-12pt}
-	\caption{Example Figure/Graph}
-	\label{fig:block}
+	\caption{Programming Pipeline of our Library}
+	\label{fig:block2}
 \end{figure}
 
 %Having summarized \textit{what} you are going to do, its time to
@@ -379,12 +400,12 @@ provide the probability distribution that she desires; in this case, it would th
 % (shown below), are used to create indented\bulleted\outline style
 % lists.
 \begin{itemize*}
-	\item {\sc already completed}: Preliminary reading. Began implementation of probabilistic associative memory.\vspace{3pt}
-	\item {\sc prior-to thanksgiving} : Review OCaml and the necessary mathematics, begin designing the end user interface to the library and the probabilistic mechanisms involved in querying memory.\vspace{3pt}
+	\item {\sc already completed}: Preliminary reading and research. Brainstorm ideas and design of probabilistic associative memory. \vspace{3pt}
+	\item {\sc end of October} : Continue to research; also review OCaml and the necessary mathematics and probability\vspace{3pt}
+	\item {\sc prior-to Thanksgiving} : Begin designing the user interface to the library and how to integrate the probabilistic mechanisms involved in querying memory.\vspace{3pt}
 	\item {\sc prior-to christmas} : Start programming a basic probabilistic model into memory queries.\vspace{3pt}
-	\item {\sc completion tasks} : Verify implementation is bug-free. Conduct accuracy testing. Complete write-up.\vspace{3pt}
-	\item {\sc if there's time} : Begin modularizing the system such that various probabilistic models can be used fluidly and easily. 
-                                    Start thinking about applications for the library.
+	\item {\sc completion tasks} : Finish example applications, verify implementation is bug-free, and conduct accuracy testing. Complete write-up.\vspace{3pt}
+	\item {\sc if there's time} : Begin modularizing the system such that various probabilistic models can be used fluidly and easily. Create more example applications for the library.
 \end{itemize*}
 
 % We next move onto the bibliography.
