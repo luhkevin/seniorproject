@@ -32,9 +32,9 @@
 %\thanks{ }}
 \numberofauthors{3}
 \author{
-    Fan Yin \\ \email{fanyin@seas.upenn.edu}
-    \and Haolin Lu \\ \email{haolinlu@seas.upenn.edu}
-    \and Yukuan Zhang\\ \email{yukuan@seas.upenn.edu}
+    Fan Yin \\ \email{fanyin@seas.upenn.edu} \\Univ. of Pennsylvania \\ Philadelphia, PA
+    \and Haolin Lu \\ \email{haolinlu@seas.upenn.edu} \\Univ. of Pennsylvania \\ Philadelphia, PA
+    \and Yukuan Zhang\\ \email{yukuan@seas.upenn.edu} \\Univ. of Pennsylvania \\ Philadelphia, PA
 }
 %\author{
 %\alignauthor Radoslav Ivanov \\ \email{rivanov@seas.upenn.edu} \\ Univ. of Pennsylvania \\ Philadelphia, PA 
@@ -48,14 +48,14 @@
 % Next we write out our abstract -- generally a two paragraph maximum,
 % executive summary of the motivation and contributions of the work.
 \begin{abstract}
-    Our goal is to create a programming language library that provides an interface
+    The goal of this project is to create a programming language library that provides an interface
     for programming with a probabilistic associative memory, as well as various implementations of these memories. 
     An associative memory allows queries by content rather than by address or location.
     In addition, as with standard memory, associative memory remembers every value stored.
     On the other hand, probabilistic associative memory returns a value based on a probability model 
     for a given memory query. This allows it to use less space than regular
     associative memories, making it useful for applications that prioritize low memory footprints over 
-    fidelity. On top of this, our library will provide an intuitive interface to this probabilistic
+    fidelity. At the user level, this library will provide an intuitive interface to this probabilistic
     associative memory to facilliate programming efficiency for the end user.
 %  \textit{The purpose of this document is three-fold. First, it
 %    describes the requirements of the project proposal. Second, it
@@ -88,14 +88,14 @@ in programming languages is the hashtable, which returns an output value
 based on an input key. 
 
 Standard, non-probabilistic associative memories are useful for when one needs to query memory based 
-on some input data or tag. For instance, router firmware will often employ associative 
-memories to store tables of IP addresses, which serve as the ``next hop" for incoming 
+on some input data or tag. For instance, router firmware often employs associative 
+memories to store tables of Internet Protocol (IP) addresses, which serve as the ``next hop" for incoming 
 packets. Since routers looking for the ``next hop" have a specific, standard query 
 format -- e.g. an IP address of the form www.xxx.yyy.zzz -- it makes sense to store the 
 routing tables based around this input string.
 
-With probabilistic memories, for a given query, we return the most ``likely" candidate 
-based on some specified probability model of the values stored in memory. 
+With probabilistic memories, for a given query, the most ``likely" candidate 
+is returned based on some specified probability model of the values stored in memory. 
 Since our queries work directly with a probability model, it would offer more fluidity
 with programming that involves statistical modeling or simulations. Returning values
 based on a probability also saves memory because not every value has to be stored. The 
@@ -103,12 +103,12 @@ memory mechanism can extrapolate or interpolate a response to a query based on v
 previously inserted into memory. See Figure 1 for a representation of the flow of 
 this probabilistic mechanism.
 
-We will also strive to add support for structured data in our probabilistic associative memory.
+The implementation may also include support for structured data in the probabilistic associative memory.
 In a standard associative memory scheme, a similarity query is done by comparing input bits
 to the values stored in memory. However, this does not allow for accurate similarity comparisons
 between trees or lists, as the memory is not aware of the underlying structure. As a result,
-many applications on structured data will first flatten the structure, perform the requisite calculations
-, then reconstruct the original structure of that data. With a built-in type system
+many applications on structured data will first flatten the structure, perform the requisite 
+calculations, then reconstruct the original structure of that data. With a built-in type system
 that supports structured data, the user will be able to directly manipulate the data in memory 
 while keeping the structure intact.
 
@@ -145,8 +145,7 @@ while keeping the structure intact.
 \section{Related Work}
 \label{sec:related_work}
 
-With regards to existing related work, we are not looking to
-advance associative memory theory. Rather, we are seeking to research existing
+With regards to existing related work, the goal of this project is not to advance associative memory theory. Rather, it is seeking to research existing
 models for associative memory, provide a common probabilistic query interface, and create 
 implementations that fit this interface. With that in mind, there are many works that 
 address different forms of associative memory. 
@@ -226,7 +225,7 @@ Hopfield learning rule and the importance of sparse coding of patterns.
 
 Sparse coding in particular is quite important in Hopfield networks (and in unsupervised
 machine learning in general). For various applications, it is beneficial to utilize
-structural similarities to represent the input in a smaller space. In particular, astonishingly
+structural similarities to represent the input in a smaller space. In particular, quite 
 accurate reconstructions can be created from damaged or noisy images, where details that were 
 not even present in the input can be recovered. While this particular example primarily has its uses in, say, 
 medical imaging~\cite{yang}, sparse coding has been incredibly useful in increasing the
@@ -273,11 +272,10 @@ capacity of these neural associative memories.
 
 \section{Project Proposal}
 \label{sec:project_proposal}
-We will be using the OCaml language to implement the aforementioned probabilistic 
+The OCaml language will be used to implement the aforementioned probabilistic 
 associative memory. Based on the specific probability distribution and model in use, our library would return 
 a different memory value for each query. As such, our library will have ``plug and play" support for 
-different probability paradigms. After we have finished creating our library, we will 
-write applications with the library to demonstrate the benefits of using our implementation
+different probability paradigms. After the library is created, applications will be created with the library to demonstrate the benefits of using this implementation
 of probabilistic associative memory.
 
 %Now is the time to introduce your proposed project in all of its
@@ -288,7 +286,7 @@ of probabilistic associative memory.
 \subsection{Anticipated Approach}
 \label{subsec:approach}
 
-Our first step is to create a programming language interface for probabilistic
+The first step is to create a programming language interface for probabilistic
 associative memories. This involves implementing a domain specific language: 
 defining a type system as well as a syntax for programming with an underlying memory.
 A major component of this syntax will be the grammar of memory storage, 
@@ -378,7 +376,7 @@ that our return values achieve a certain standard of accuracy or fidelity.
 \label{subsec:eval_criteria}
 In order to convince users that our probabilistic approach is an improvement on the
 current status quo, we will, as stated before, write example applications using our 
-probabilistic library that demonstrate the its benefits. To accomplish 
+probabilistic library that demonstrate the benefits. To accomplish 
 this, we will write the same (or a similar) applications using a standard, non-probabilistic memory model
 and compare and contrast the two methods with various benchmarks and other metrics.
 
@@ -393,12 +391,12 @@ fewer lines of code and has more logical fluidity for programs that require stat
 and probabilistic methods and than a vanilla implementation of the same program in OCaml. 
 
 For instance, we might begin by programming a simple dice-rolling application where the programmer wishes
-to simulate an unfair six-sided dice, i.e. where the probability of rolling a number from 1 to 6 is not $\frac{1}{6}$
-The function of this application is twofold: By running the simulation through multiple trials, we can demonstrate 
-that our probability model works correctly; that is, that it generates the expected distribution values
+to simulate an unfair six-sided dice, i.e. where the probability of rolling a number from 1 to 6 is not $\frac{1}{6}$.
+The function of this application is twofold: by running the simulation through multiple trials, it can be demonstrated 
+that this probability model works correctly; that is, that it generates the expected distribution values
 based on the given inputs.
 
-In addition, we will demonstrate the logical fluidity of using our probabilistic library:
+In addition, the logical fluidity of using the probabilistic library will be demonstrated:
 With a standard programming model, this loaded dice simulation might require many lines of casework and probability space scaling
 that ends up being unintuitive. For example, say we wanted to assign ''1" to show up with probability $\frac{1}{3}$
 and the other numbers with probability $\frac{2}{15}$. With a standard programming model, we would have to run the simulation on a space from
