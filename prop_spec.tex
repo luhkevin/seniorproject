@@ -186,7 +186,7 @@ the probabilistic memory.
 This model ensures that the chance of a false positive is less than or equal to $\frac{1}{N}$, where $N$
 is the size of the space of A. With that constraint, this model requires $\frac{1}{ln(2)} \approx 1.44$
 times as much memory as regular random access memory, but it has associative capabilities. 
-If we were to implement associative memory with random access memory, we would need at least twice the space,
+Implementing associative memory with random access memory would require at least twice the space,
 since each part of the association needs to be recorded in memory.
 
 Willshaw's paper was the first to present a model for emulating an associative memory
@@ -197,12 +197,12 @@ for probabilistic associative memory were based on this work.
 \label{subsec:modern}
 
 Research in associative memory has close connections to neural networks. Our brains function as 
-associative memories where we can retrieve memories based similarity between stimuli and the memories themselves. 
-Indeed, Norman and Bobrow~\cite{bobrow} construct a memory model which describes how we retrieve 
+associative memories that can retrieve memories based similarity between stimuli and the memories themselves. 
+Indeed, Norman and Bobrow~\cite{bobrow} construct a memory model which describes how minds retrieve 
 items in memory from partial descriptions, even if some part of the description is incorrect or inaccurate. 
 
 Applying this memory model to computation, Hinton~\cite{hinton} draws a connection between Norman and Bobrow's idea of 
-retreiving memories based on partial descriptions and content-addressable memories.
+retrieving memories based on partial descriptions and content-addressable memories.
 Hinton then notes that although this content-addressable memory is a useful representation,  
 it is difficult to efficiently ``search for content" through a memory space. 
 %In this model, memory is a ``pattern of activity" that constructs the most plausible process based on the given memory queries. 
@@ -290,7 +290,7 @@ The first step is to create a programming language interface for probabilistic
 associative memories. This involves implementing a domain specific language: 
 defining a type system as well as a syntax for programming with an underlying memory.
 A major component of this syntax will be the grammar of memory storage, 
-as well as the different types of queries we can make to the memory. The complexity allowed
+as well as the different types of queries that can be made to the memory. The complexity allowed
 within our query interface is of particular importance, as it will be directly
 interfacing with the probability model. Thus, we must carefully consider 
 how additional complexity may be implemented within models. 
