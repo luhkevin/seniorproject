@@ -197,7 +197,7 @@ how additional complexity may be implemented within models.
 On a basic level, there are certain required operations that need to be 
 supported, such as creation of a memory and storage of values. Moreover,
 there must be some form of querying, with at least basic support for querying
-for a literal equality match. A diagram of the interface can be shown in Figure 1.
+for a literal equality match. A diagram of the interface is shown in Figure 1.
 
 Additional complexity can be added with support for OCaml's pairs and the 
 ability to query for a match of the left, right, or both parts of the pair. Functions that transform
@@ -287,7 +287,7 @@ at certain places. First, a set of training data along with the truncated senten
 Then, the percentage of words that each program autocompleted correctly will be returned as the evaluation metric. 
 
 The second criterion, which is the main focus of the library, involves simplifying the programming interface for associative memory techniques.
-To evaluate this criterion, we will analyze how generic our code is. That is, given an autocompletion program, suppose one wanted to adapt this 
+To evaluate this criterion, we will analyze how generic our code is. Suppose that given an autocompletion program, one wanted to adapt this 
 program for recognizing a melody based only on a musical fragment or phrase. Ideally, the library would facillitate minimal changes to the existing 
 autocompletion program. The user would only need to provide different functions for evaluating the data, and the rest of the framework can remain as it is. 
 
