@@ -55,26 +55,8 @@
     for a given memory query. This project provides an intuitive interface to this probabilistic
     associative memory to facilliate programming efficiency for the end user.
 
-%  \textit{The purpose of this document is three-fold. First, it
-%    describes the requirements of the project proposal. Second, it
-%    presents this information in a style your proposal should
-%    mimic. Third, by viewing the *.tex `code behind', some basic
-%    \LaTeX{} technique can be learned. Do not feel compelled to
-%    completely follow our style -- but do use it as a guide.}%
-    
-  %\textit{Like this `report', your proposal is expected to have an
-  %  abstract. An abstract is a two-paragraph maximum executive summary
-  %  of your work. It should briefly outline your problem statement and
-  %  its (expected) contributions.}
 \end{abstract}
 
-% Then we proceed into the body of the report itself. The effect of
-% the 'section' command is obvious, but also notice 'label'. Its good
-% practice to label every (sub)-section, graph, equation etc. -- this
-% gives us a way to dynamically reference it later in the text via the
-% 'ref' command, e.g., instead of writing `Section 1', you can write
-% `Section~\ref{sec:intro}', which is useful if the section number
-% changes.
 \section{Introduction}
 \label{sec:intro}
 
@@ -109,7 +91,8 @@ In a simplistic representation of a probability model, a frequency table of memo
 The queries would then consist of a set of values, and a likelihood would be generated based on both frequency and some matching metric in that query-set.
 Thus, the memory mechanism can extrapolate or interpolate a response to a query based on values 
 previously inserted into memory. 
-See Figure 1 for a representation of the flow of this probabilistic mechanism.
+
+%See Figure 1 for a representation of the flow of this probabilistic mechanism.
 
 The implementation may also include support for structured data in the probabilistic associative memory.
 In a standard associative memory scheme, a similarity query is done by comparing input bits
@@ -133,26 +116,6 @@ This project strives to provide a simple, flexible interface to work with these 
 %	\label{fig:pammodel}
 %\end{figure}
 
-%You should begin by introducing your topic. You should define core
-%terminology specific to the field, introduce the problem statement,
-%and make clear the benefits (motivate!) of resolving that problem
-%statement. If there are many preliminaries (\textit{e.g.,}
-%definitions, conceptual explanations) you need to handle before
-%jumping into your topic, it may be worthwhile to create an explicit
-%``Background'' section.
-%
-%Let us suppose you are attempting to build a constant time integer
-%factorization algorithm. You would want to briefly explain that
-%factorization is the process of breaking an integer into its prime
-%multipliers. Give a simple example. Your problem statement would
-%conclude that factorization is an unneccesarily complex
-%process. Finally, you would state that via your proposed system,
-%factorization will be easy and the consequences that will
-%have. Namely, the RSA-encryption algorithm will be broken.
-
-% The header of this document might have been a little intimidatating
-% to beginners. Notice once you are in the body of the document,
-% however, LaTeX commands are minimal and 'normal text' is frequent.
 
 \section{Related Work}
 \label{sec:related_work}
@@ -242,58 +205,16 @@ not even present in the input can be recovered. While this particular example pr
 medical imaging~\cite{yang}, sparse coding has been incredibly useful in increasing the
 capacity of these neural associative memories. 
 
-%Perhaps the most important section of your proposal is \textit{related
-%  work}. Here you demonstrate that you have read and understand what
-%others in the field have done. This ensures you (1) know the
-%state-of-the-art, (2) are not re-doing others work, and (3) you know
-%the performance levels you must achieve to make a contribution. As you
-%discuss each related work, make note of how each has advanced the
-%field. Keep in mind that this section should not read like a regular
-%research paper you write for other classes. In other words, you should
-%not just discuss related work for the sake of having a related work
-%section; rather, tell a story about the state-of-the-art of the field
-%and where your work fits in.
-
-% Here we see our first citations. It's just a simple command, the
-% body of which is the keyword-label assigned to resources over in the
-% *.bib file
-%This section should have in-line citations to your bibliography
-%(really all sections should have citations, but we expect them to be
-%most dense in this section). We are going to require that your
-%proposal has at least $6$ references. Fortunately, \LaTeX{} makes
-%citations easy. Your TA has had no difficulty, as the work of Ivanov
-%\textit{et al.}
-%Be sure to check out
-%helpful on-line resources.
-
-%What defines a good resource? Wikipedia is \textbf{NOT} a good
-%resource. We would like to see references from academic
-%journals/conferences (ACM, IEEE, etc.). We realize not everyone is
-%doing pure research and for students with `implementation' projects
-%such sources may be rare. No matter the case, your sources need to be
-%reputable.
-
-%Let us return to your factorization proposal. You should put out the
-%earliest related work; na\"{i}ve methods like trial divison and the
-%Sieve of Eratosthenes, but state they are of no modern relevance. Then
-%discuss modern methods like the Quadratic Sieve and General Number
-%Field Sieve. Note the humongous time and memory bounds of these
-%algorithms. But wait! You are going to propose a better way $\ldots$
-
 
 \section{Project Proposal}
 \label{sec:project_proposal}
-The OCaml language will be used to implement the aforementioned probabilistic 
-associative memory. Based on the specific probability distribution and model in use, our library would return 
-a different memory value for each query. As such, our library will have ``plug and play" support for 
-different probability paradigms. After the library is created, applications will be created with the library to demonstrate the benefits of using this implementation
+The OCaml language will be used to implement this probabilistic associative memory. 
+Based on the specific probability distribution and model in use, the library would return 
+a different memory value for each query.
+As such, our library will have user-defined support for different probability paradigms. 
+After the library is created, applications will be created with the library to demonstrate the benefits of using this implementation
 of probabilistic associative memory.
 
-%Now is the time to introduce your proposed project in all of its
-%glory. Admittedly, this is not the easiest since you probably have not
-%done much actual research yet. Even so, setting and realizing
-%realistic research goals is an important skill. Begin by summarizing
-%what you are going to do and the expected benefit it will bring.
 \subsection{Anticipated Approach}
 \label{subsec:approach}
 
@@ -302,8 +223,8 @@ associative memories. This involves implementing a domain specific language:
 defining a type system as well as a syntax for programming with an underlying memory.
 A major component of this syntax will be the grammar of memory storage, 
 as well as the different types of queries that can be made to the memory. The complexity allowed
-within our query interface is of particular importance, as it will be directly
-interfacing with the probability model. Thus, we must carefully consider 
+within our query interface is of particular importance, as it directly
+interfaces with the probability model. Thus, we must carefully consider 
 how additional complexity may be implemented within models. 
 
 Next, we will implement various types of probabilistic associative memories.
@@ -328,28 +249,10 @@ as well as provide easy usage of the provided probabilistic models (Figure 4).
 	\label{fig:block2}
 \end{figure}
 
-%Having summarized \textit{what} you are going to do, its time to
-%describe \textit{how} you plan to do it. Our factorization example
-%does not work so well here (it is likely impossible to realize) -- so
-%let us suppose you are going to create a service that takes a
-%cell-phone picture of a building and returns via text-message, the
-%name of that building\footnote{Do not use this idea -- someone did it
-%  in a previous year.}.
-%
-%In this case you might want to talk about establishing a server to
-%receive pictures via MMS. Once the picture is received, you will run
-%an edge extraction algorithm over it. Then, similarity between the
-%submitted picture and those stored (and tagged) in a MySQL database
-%will be computing using algorithm $XYZ$. Finally, the tag of the most
-%similar image will be returned to the user. Do not bore the reader
-%with trivial details, but give them an overview; a block-flow diagram
-%would prove helpful (and is required).
-
 \subsection{Technical Challenges}
 \label{subsec:tech_challenges}
-The foremost technical challenges in our project involves
-the programming interface exposed to the end user,
-the logistics of incorporating probabilistic models into our memory mechanism, and
+The foremost technical challenges in our project involve creating the programming interface,
+the logistics of incorporating probabilistic models into the memory mechanism, and
 the mathematics involved in these models.
 
 Regarding the interface that the end user (programmer) sees, she should not have to be aware of 
@@ -358,38 +261,28 @@ to each query into the probabilistic memory. For instance, if she is prioritizin
 in her use of the library, she would expect a return value that was previously inserted and that 
 returns the highest probability for the given query.
 
-However, we also need to give the programmer enough power and flexibility with our library for 
-whatever probabilistic applications she will be using it for. This would involve enabling 
+However, it is also necessary to give the programmer enough power and flexibility with our library for 
+whatever probabilistic applications she will be using it for. This involves enabling 
 her to create query combinations and queries of different types. Still, flexibility may 
 come at the cost of complexity - implementing features to accommodate arbitrary data, queries,
-and probabilistic models will quickly increase the complexity of this project. 
+and probabilistic models quickly increases the complexity of this project. 
 
-Regarding mathematics, we will need to pursue further research regarding mathematical 
-and probabilistic methods that we expect to implement in our library. After implementing these methods,
+Regarding mathematics, it is necessary to further research mathematical 
+and probabilistic methods that would be implemented in this library. After implementing these methods,
 we will need to verify that mathematical or probabilistic models behave as expected. 
 For instance, if the previous values inserted into a high-fidelity probabilistic memory were ``2, 2, 2, 4, 4, 6", and we queried ``x > 2", 
-then the return value should be ``4", since ``4" is the most frequent value that satisfies the query.
+then the return value based on a specific probabilistic model should be ``4", since ``4" is the most frequent value that satisfies the query.
 Of course, in our actual implementation, we will have more complicated mechanisms than the one above.
 Thus, another challenge involves testing, through confusion matrices or other machine-learning techniques,
 that our return values achieve a certain standard of accuracy or fidelity.
 
-%In this subsection note where you anticipate having \underline{novel}
-%difficulty. Maybe you have never setup a MySQL database or even used
-%SQL before at all -- yes, that is a challenge -- but not one readers
-%care about. More novel would be the fact that many buildings on Penn's
-%campus look similar and your classifier may be inaccurate in such
-%instances. The purpose of this section is two-fold: 1) you will think
-%about which parts of your project would require the most time and
-%effort and 2) you will convince the reader that this is a project
-%worth undertaking.
-
 \subsection{Evaluation Criteria}
 \label{subsec:eval_criteria}
-In order to convince users that our probabilistic approach is an improvement on the
-current status quo, we will, as stated before, write example applications using our 
-probabilistic library that demonstrate the benefits. To accomplish 
-this, we will write the same (or a similar) applications using a standard, non-probabilistic memory model
-and compare and contrast the two methods with various benchmarks and other metrics.
+In order to convince users that the probabilistic approach is an improvement on the
+current status quo, example applications will be written using this probabilistic library. 
+
+%To accomplish this, we will write the same (or a similar) applications using a standard, non-probabilistic memory model
+%and compare and contrast the two methods with various benchmarks and other metrics.
 
 Regarding benchmarks, we will attempt to show how the probabilistic approach may lead to 
 a lower memory footprint, but still return values similar to an expected baseline.
@@ -397,23 +290,21 @@ We do not plan on improving on the capabilities of modern associative memory
 systems, but these benchmarks should show that we approach implementations of similar
 quality. 
 
-Regarding other metrics, we will show how using our probabilistic library can yield 
+Regarding other metrics, it will be shown how this probabilistic library can yield 
 fewer lines of code and has more logical fluidity for programs that require statistical 
-and probabilistic methods and than a vanilla implementation of the same program in OCaml. 
+and probabilistic methods than a vanilla implementation of the same program in OCaml. 
 
 For instance, we might begin by programming a simple dice-rolling application where the programmer wishes
 to simulate an unfair six-sided dice, i.e. where the probability of rolling a number from 1 to 6 is not $\frac{1}{6}$.
 The function of this application is twofold: by running the simulation through multiple trials, it can be demonstrated 
 that this probability model works correctly; that is, that it generates the expected distribution values
-based on the given inputs.
-
-In addition, the logical fluidity of using the probabilistic library will be demonstrated:
+based on the given inputs. In addition, the logical fluidity of using the probabilistic library will be demonstrated:
 With a standard programming model, this loaded dice simulation might require many lines of casework and probability space scaling
 that ends up being unintuitive. For example, say we wanted to assign ''1" to show up with probability $\frac{1}{3}$
 and the other numbers with probability $\frac{2}{15}$. With a standard programming model, we would have to run the simulation on a space from
 1 to 15, instead of 1 to 6, and essentially map $\{1\} \rightarrow \{1, 2, 3, 4, 5\}, \{2\} \rightarrow \{6, 7\}$, etc...
 
-With our library, the programmer would be able to accomplish this much more intuitively. Listing 1 shows a potential representation of how we might use the library interface. Our
+With this library, the programmer would be able to accomplish this much more intuitively. Listing 1 shows a potential representation of how we might use the library interface. Our
 anticipated user interface would provide an abstraction such that the programmer would simply
 provide the probability distribution that she desires.
 
@@ -428,18 +319,6 @@ query(loadedDie) ==> (* 1 is twice as
     likely to appear as the other 
     numbers *)
 \end{lstlisting}
-%Suppose you have implemented your approach and it is functioning. Now
-%how are you going to convince readers your approach is better than
-%what exists? In the factorization example, you could just compare
-%run-times between algorithms run on the same input. The image
-%recognition example might use a percentage of accurate
-%classifications. Other fields may have established testing benchmarks.
-%
-%No matter the case, you need to prove you have contributed to the
-%field. This will be easier for some than others. In particular, those
-%with `sensory' projects involving visual or sonic elements need to
-%think this point through -- objective measures are always better than
-%subjective ones.
 
 \section{Research Timeline}
 \label{sec:research_timeline}
@@ -471,110 +350,6 @@ query(loadedDie) ==> (* 1 is twice as
 % hard enough, there is probably a command to do exactly this (and
 % wouldn't need tweaked after edits).
 \vspace{175pt}
-
-% We then use appendices to share some additional information with
-% you, though you won't need appendices in your own proposal.
-%\appendix
-%\section{Other Specifics}
-%\label{app:other_specifics}
-%Your proposal need not have appendices like this section and the next
-%but we still have info to share:
-
-% The usage of 'enumerate' (similar to 'itemize') we talked about
-% above
-
-% You may also notice we have many 'vspace' commands lying
-% around. These create 'vertical space' and are a way to force LaTeX
-% to cooperate, sometimes. Don't get too involved with using them
-% initially, though, because adding or deleting a single line of task
-% can dramatically change how LaTeX chooses to format, page, and space
-% the document
-%\begin{enumerate*}
-%\item {\sc proposal length}: We require that your proposal be 4--5
-%  pages in length, bibliography included. Be careful, \LaTeX{} and our
-%  style-file in particular are \textit{extremely} space efficient. An
-%  9-page MS-Word document could easily become a 5-page \LaTeX{}
-%  one.\vspace{5pt}
-%
-%\item {\sc plagarism}: \textbf{DO NOT} plagarize. If you are caught,
-%  you will fail the class (\textit{i.e.}, not graduate), or worse.
-%
-%\end{enumerate*}
-
-%\section{\LaTeX{} Examples}
-%\label{app:latex_examples}
-
-% This paragraph makes use of dynamic references. Remember how we've
-% been 'label'-ing everything; sections, etc? Using 'ref' we can
-% reference them. Add a new figure/section at the beginning? This
-% technique automatically re-numbers when you build, so you don't have
-% to make static changes.
-%At this point, the proposal specification is complete. From here on
-%out, we are just going to show off some commonly used \LaTeX{}
-%technique. Be sure to look at the `code behind' and see
-%Tab.~\ref{tab:some_table}, Eqn.~\ref{eqn:some_equation} and
-%Fig.~\ref{fig:some_graph} for the output! Keep in mind that the
-%appendix is usually not a good place for your figures. Place them
-%where you need them and remember to refer to them in the body of your
-%text; otherwise, the reader will keep reading and will miss them!
-
-% Math is obviously one of LaTeX's strengths. Math can be typeset
-% in-line, or off-set in equation 'environments' like this. You'll
-% need to look up symbols on an as-needed basis, but I'll assure you
-% -- they are ALL there.
-%\begin{equation}
-%M(p) = \int^\infty_0 (1+\alpha x)^{-\gamma}x^{p-1}dx
-%\label{eqn:some_equation}
-%\end{equation}
-
-% We next encounter tables and figures (images). Big things like these
-% are known as 'floats' in LaTeX because their position is not
-% fixed. Notice that '[htb!]' follows the start of each
-% environment. We are telling LaTeX that we'd like to put the
-% table/fig 'h' - HERE, precisely where it follows in the
-% narrative. If LaTeX determines it doesn't look good here, 't' tells
-% LaTeX we'd like it at the top of this column, and if that doesn't
-% work, use 'b', the bottom of the column. Other options are
-% available. LaTeX shifts floats around to ensure images don't end up
-% on page/column boundaries, which would result in a waste of space
-% for text.
-
-% We insert a table into the document. Notice the '| c | c | c |'
-% argument provided to the tabular environment. This says we want
-% three columns, all with center-alignment, with vertical bars between
-% them. In the body of argument, an ampersand '&' separates cells, and
-% a double forward-slash '\\' is used to create new lines. Otherwise,
-% commands should be self explanatory.
-%\begin{table}[htb!]
-%	\begin{center}
-%  \begin{tabular}{| c | c | c |}
-%    \hline
-%    \textbf{User Type} & \textbf{Cleanup\%} & \textbf{Honesty\%} \\ \hline
-%    Good & 90-100\% & 100\% \\ \hline
-%    Purely Malicous & 0-10\% & 0\% \\ \hline
-%		Malicious Provider & 0-10\% & 100\% \\ \hline
-%		Feedback Malicous & 90-100\% & 0\% \\ \hline
-%		Disguised Malicous & 50-100\% & 50-100\% \\ \hline
-%		Sybil Attacker & 0-10\% & Irrelevant \\ \hline
-%  \end{tabular}
-%	\caption{Example Table}
-%  \label{tab:some_table}
-%	\vspace{-10pt}
-%	\end{center}
-%\end{table}
-
-% We insert a graph/figure into the document. This is a pretty
-% straightforward process once you get the image into a file format
-% that LaTeX plays nice with. Then we just scale it as
-% a % of the column width.
-%\begin{figure}[htb!]
-%	\begin{center}
-%		\includegraphics[width=0.75\linewidth]{some_graph}
-%	\end{center}
-%	\vspace{-12pt}
-%	\caption{Example Figure/Graph}
-%	\label{fig:some_graph}
-%\end{figure}
 
 \end{document} 
 
