@@ -107,14 +107,6 @@ Practical applications of probabilistic associative memories involve various app
 These involve appliactions such as image reconstruction from noisy input data, or search autocompletion.
 This project strives to provide a simple, flexible interface to work with these probabilistic associative memories.
 
-%\begin{figure}[H]
-%	\begin{center}
-%		\includegraphics[width=1\linewidth]{pammodel}
-%	\end{center}
-%	\vspace{-12pt}
-%	\caption{Model of Probabilistic Associative Memory Mechanism}
-%	\label{fig:pammodel}
-%\end{figure}
 
 
 \section{Related Work}
@@ -205,10 +197,20 @@ how additional complexity may be implemented within models.
 On a basic level, there are certain required operations that need to be 
 supported, such as creation of a memory and storage of values. Moreover,
 there must be some form of querying, with at least basic support for querying
-for a literal equality match. A diagram of the interface can be shown here: \textbf{FIGURE REFERENCE HERE}. 
+for a literal equality match. A diagram of the interface can be shown in Figure 1.
+
 Additional complexity can be added with support for OCaml's pairs and the 
 ability to query for a match of the left, right, or both parts of the pair. Functions that transform
 queries using logical operations may be added as well. 
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[width=1\linewidth]{pammodel}
+	\end{center}
+	\vspace{-12pt}
+	\caption{Model of Probabilistic Associative Memory Mechanism}
+	\label{fig:pammodel}
+\end{figure}
 
 Perhaps a very significant source of complexity would come from advanced
 queries, which raises the question
@@ -235,7 +237,7 @@ including those related to neural networks.
 By creating this interface, users of this programming language will be able to
 choose the type of memory and probabilistic model that most suits the needs of their particular
 application. Moreover, it will allow users to implement the interface with their own models as necessary, 
-as well as provide easy usage of the provided probabilistic models (Figure 4).
+as well as provide easy usage of the provided probabilistic models (Figure 2).
 
 \begin{figure}[H]
 	\begin{center}
@@ -275,47 +277,57 @@ that our return values achieve a certain standard of accuracy or fidelity.
 
 \subsection{Evaluation Criteria}
 \label{subsec:eval_criteria}
-In order to convince users that the probabilistic approach is an improvement on the
-current status quo, example applications will be written using this probabilistic library. 
+There are two main criteria which, combined, makes this library novel and effective. 
+The first criterion is that it provides comparable results to other associative memory techniques. 
+For instance, an autocomplete program (of sentences) can be written with this library and compared against an existing implementation of autocompletion. 
+Evaluating the correctness and results of these autocompletion programs may involve taking a collection of existing sentences and truncating them
+at certain places. First, a set of training data along with the truncated sentences will be passed into both autocompletion programs. 
+Then, the percentage of words that each program autocompleted correctly will be returned as the evaluation metric. 
 
-%To accomplish this, we will write the same (or a similar) applications using a standard, non-probabilistic memory model
-%and compare and contrast the two methods with various benchmarks and other metrics.
+The second criterion, which is the main focus of the library, involves simplifying the programming interface for associative memory techniques.
+To evaluate this criterion, we will analyze how generic our code is. That is, given an autocompletion program, suppose one wanted to adapt this 
+program for recognizing a melody based only on a musical fragment or phrase. Ideally, the library would facillitate minimal changes to the existing 
+autocompletion program. The user would only need to provide different functions for evaluating the data, and the rest of the framework can remain as it is. 
 
-Regarding benchmarks, we will attempt to show how the probabilistic approach may lead to 
-a lower memory footprint, but still return values similar to an expected baseline.
-We do not plan on improving on the capabilities of modern associative memory
-systems, but these benchmarks should show that we approach implementations of similar
-quality. 
+The utility of this library lies in its generality in implementing associative memory techniques. While this project does not attempt to improve 
+existing associative memory algorithms, it seeks to provide a simple, flexible interface for implementing associative memory applications.
 
-Regarding other metrics, it will be shown how this probabilistic library can yield 
-fewer lines of code and has more logical fluidity for programs that require statistical 
-and probabilistic methods than a vanilla implementation of the same program in OCaml. 
+%We do not plan on improving on the capabilities of modern associative memory
+%systems, but these benchmarks should show that we approach implementations of similar
+%quality. 
 
-For instance, we might begin by programming a simple dice-rolling application where the programmer wishes
-to simulate an unfair six-sided dice, i.e. where the probability of rolling a number from 1 to 6 is not $\frac{1}{6}$.
-The function of this application is twofold: by running the simulation through multiple trials, it can be demonstrated 
-that this probability model works correctly; that is, that it generates the expected distribution values
-based on the given inputs. In addition, the logical fluidity of using the probabilistic library will be demonstrated:
-With a standard programming model, this loaded dice simulation might require many lines of casework and probability space scaling
-that ends up being unintuitive. For example, say we wanted to assign ''1" to show up with probability $\frac{1}{3}$
-and the other numbers with probability $\frac{2}{15}$. With a standard programming model, we would have to run the simulation on a space from
-1 to 15, instead of 1 to 6, and essentially map $\{1\} \rightarrow \{1, 2, 3, 4, 5\}, \{2\} \rightarrow \{6, 7\}$, etc...
+%Regarding other metrics, it will be shown how this probabilistic library can yield 
+%fewer lines of code and has more logical fluidity for programs that require statistical
+%and probabilistic methods than a vanilla implementation of the same program in OCaml. 
 
-With this library, the programmer would be able to accomplish this much more intuitively. Listing 1 shows a potential representation of how we might use the library interface. Our
-anticipated user interface would provide an abstraction such that the programmer would simply
-provide the probability distribution that she desires.
+%Regarding benchmarks, we will attempt to show how the probabilistic approach may lead to 
+%a lower memory footprint, but still return values similar to an expected baseline.
 
-\lstset{language=Caml, caption={Code for Dice Example}, captionpos=b, xleftmargin=\parindent, xrightmargin=\parindent}
-\begin{lstlisting}[frame=single]
-let create (distribution : [Int]) =
-    let mem = new[Int] in
-        storeList(mem, distribution);
-        mem
-let loadedDie = create [1,1,2,3,4,5,6]
-query(loadedDie) ==> (* 1 is twice as 
-    likely to appear as the other 
-    numbers *)
-\end{lstlisting}
+%For instance, we might begin by programming a simple dice-rolling application where the programmer wishes
+%to simulate an unfair six-sided dice, i.e. where the probability of rolling a number from 1 to 6 is not $\frac{1}{6}$.
+%The function of this application is twofold: by running the simulation through multiple trials, it can be demonstrated 
+%that this probability model works correctly; that is, that it generates the expected distribution values
+%based on the given inputs. In addition, the logical fluidity of using the probabilistic library will be demonstrated:
+%With a standard programming model, this loaded dice simulation might require many lines of casework and probability space scaling
+%that ends up being unintuitive. For example, say we wanted to assign ''1" to show up with probability $\frac{1}{3}$
+%and the other numbers with probability $\frac{2}{15}$. With a standard programming model, we would have to run the simulation on a space from
+%1 to 15, instead of 1 to 6, and essentially map $\{1\} \rightarrow \{1, 2, 3, 4, 5\}, \{2\} \rightarrow \{6, 7\}$, etc...
+
+%With this library, the programmer would be able to accomplish this much more intuitively. Listing 1 shows a potential representation of how we might use the library interface. Our
+%anticipated user interface would provide an abstraction such that the programmer would simply
+%provide the probability distribution that she desires.
+
+%\lstset{language=Caml, caption={Code for Dice Example}, captionpos=b, xleftmargin=\parindent, xrightmargin=\parindent}
+%\begin{lstlisting}[frame=single]
+%let create (distribution : [Int]) =
+%    let mem = new[Int] in
+%        storeList(mem, distribution);
+%        mem
+%let loadedDie = create [1,1,2,3,4,5,6]
+%query(loadedDie) ==> (* 1 is twice as 
+%    likely to appear as the other 
+%    numbers *)
+%\end{lstlisting}
 
 \section{Research Timeline}
 \label{sec:research_timeline}
