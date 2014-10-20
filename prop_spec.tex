@@ -129,43 +129,18 @@ implementations that fit this interface. With that in mind, there are many works
 
 One of the seminal works concerning associative memories is Willshaw's \textit{Non-holographic
 Associative Memory}~\cite{holographic}. This paper describes a model for a probabilistic associative memory
-that creates a mapping between elements of space A and space B, by storing information
-in space C. We can think of space C as a memory, and queries to the memory will be elements
-of space B, with the result being the corresponding element in space A.
-
-\begin{figure}[H]
-	\begin{center}
-		\includegraphics[width=1\linewidth]{mapping}
-	\end{center}
-	\vspace{-12pt}
-	\caption{Storing a relation A-B in C}
-	\label{fig:mapping}
-\end{figure}
-
-In this model, to ``insert" a relation $(a, b)$, we let $a$ make an ``impression" on C through $b$ (Figure 2).
-To fulfill a memory query $b$, we do a reverse mapping of all the values in C through $b$
-back onto A, to find the most probabilistic value of A. As shown in Figure 3, there is a restriction placed on the validity of the
-elements in the reverse mapping based on the original domain of A. This maintains a certain threshold of fidelity and accuracy in
-the probabilistic memory.
-
-\begin{figure}[H]
-	\begin{center}
-		\includegraphics[width=1\linewidth]{mapping1}
-	\end{center}
-	\vspace{-12pt}
-	\caption{Recovering A from B and C}
-	\label{fig:mapping}
-\end{figure}
-
-This model ensures that the chance of a false positive is less than or equal to $\frac{1}{N}$, where $N$
-is the size of the space of A. With that constraint, this model requires $\frac{1}{ln(2)} \approx 1.44$
-times as much memory as regular random access memory, but it has associative capabilities. 
-Implementing associative memory with random access memory would require at least twice the space,
-since each part of the association needs to be recorded in memory.
+that holds relations between elements of a query space and elements of an output space. A query
+to the memory comes in the form of an element in the query space, and the memory returns the
+output that was most likely related to the query element, with a certain degree of confidence.
+This model also guaranteed that if a query element was never stored in the memory, a relation
+would not be found for that element, with the same degree of confidence as above.
 
 Willshaw's paper was the first to present a model for emulating an associative memory
-probabilistically, and much of the following research on memory compression methods
-for probabilistic associative memory were based on this work.
+probabilistically, without storing each element pair explicitly,
+and much of the following research on memory compression methods
+for probabilistic associative memory were based on this work. While Willshaw's model
+enforced a strict mapping between the stored elements, later work also found ways to
+give likely matches for elements which the memory has never seen.
 
 \subsection{Modern Connections}
 \label{subsec:modern}
