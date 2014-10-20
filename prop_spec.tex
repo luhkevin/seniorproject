@@ -212,12 +212,12 @@ queries using logical operations may be added as well.
 	\label{fig:pammodel}
 \end{figure}
 
-Perhaps a very significant source of complexity would come from advanced
+Perhaps a very significant source of complexity would come from evaluating
 queries, which raises the question
 of how they may be implemented. 
 As a simple example, queries for matching strings can be implemented in varying 
-degrees of complexity - from simple literal matching, to wildcard matching, to
-entire regex evaluation. For generic datatypes as supported in this presented
+degrees of complexity - from simple literal matching, to edit distance matching, 
+to even meaning analysis. For generic datatypes, as supported in this presented
 library, the issue becomes much more difficult. We anticipate requiring user
 input in order to determine how to calculate similarity, much like how 
 supervised machine learning algorithms require features to be decided. 
@@ -269,11 +269,13 @@ and probabilistic models quickly increases the complexity of this project.
 Regarding mathematics, it is necessary to further research mathematical 
 and probabilistic methods that would be implemented in this library. After implementing these methods,
 we will need to verify that mathematical or probabilistic models behave as expected. 
-For instance, if the previous values inserted into a high-fidelity probabilistic memory were ``2, 2, 2, 4, 4, 6", and we queried ``x > 2", 
-then the return value based on a specific probabilistic model should be ``4", since ``4" is the most frequent value that satisfies the query.
-Of course, in our actual implementation, we will have more complicated mechanisms than the one above.
-Thus, another challenge involves testing, through confusion matrices or other machine-learning techniques,
-that our return values achieve a certain standard of accuracy or fidelity.
+For instance, if the previous values inserted into a high-fidelity probabilistic memory were ``cat, dog, mouse, horse", and we queried for an entry that best
+matches ``mousse", 
+then the expected return value would be ``mouse", since ``mouse" is the word most
+similar to our input. 
+Of course, in our actual implementation, we will have more complicated mechanisms than the one above. Perhaps the correct answer should not be ``mouse" depending
+on how the user defines similarity. 
+Thus, another challenge involves testing that our return values achieve a certain standard of accuracy or fidelity.
 
 \subsection{Evaluation Criteria}
 \label{subsec:eval_criteria}
