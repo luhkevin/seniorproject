@@ -51,12 +51,10 @@
     The goal of this project is to create a programming language library that provides an interface
     for programming with a probabilistic associative memory, as well as various implementations of these memories. 
     An associative memory allows queries by content rather than by address or location.
-    In addition, as with standard memory, associative memory remembers every value stored.
-    On the other hand, probabilistic associative memory returns a value based on a probability model 
-    for a given memory query. This allows it to use less space than regular
-    associative memories, making it useful for applications that prioritize low memory footprints over 
-    fidelity. At the user level, this library will provide an intuitive interface to this probabilistic
+    Probabilistic associative memory returns a value based on a probability model
+    for a given memory query. This project provides an intuitive interface to this probabilistic
     associative memory to facilliate programming efficiency for the end user.
+
 %  \textit{The purpose of this document is three-fold. First, it
 %    describes the requirements of the project proposal. Second, it
 %    presents this information in a style your proposal should
@@ -87,15 +85,18 @@ searching for values based on the stored content. An analogous structure
 in programming languages is the hashtable, which returns an output value
 based on an input key. 
 
-Standard, non-probabilistic associative memories are useful for when one needs to query memory based 
+Standard associative memories are useful for when one needs to query memory based 
 on some input data or tag. For instance, router firmware often employs associative 
 memories to store tables of Internet Protocol (IP) addresses, which serve as the ``next hop" for incoming 
 packets. Since routers looking for the ``next hop" have a specific, standard query 
 format -- e.g. an IP address of the form www.xxx.yyy.zzz -- it makes sense to store the 
 routing tables based around this input string.
 
+
 With probabilistic memories, for a given query, the most ``likely" value in our memory space
 is returned based on some specified probability model of the values stored in memory.
+
+
 Since our queries work directly with a probability model, it would offer more fluidity
 with programming that involves statistical modeling or simulations. Returning values
 based on a probability also saves memory because not every value has to be stored. 
