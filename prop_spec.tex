@@ -94,12 +94,14 @@ packets. Since routers looking for the ``next hop" have a specific, standard que
 format -- e.g. an IP address of the form www.xxx.yyy.zzz -- it makes sense to store the 
 routing tables based around this input string.
 
-With probabilistic memories, for a given query, the most ``likely" candidate 
-is returned based on some specified probability model of the values stored in memory. 
+With probabilistic memories, for a given query, the most ``likely" value in our memory space
+is returned based on some specified probability model of the values stored in memory.
 Since our queries work directly with a probability model, it would offer more fluidity
 with programming that involves statistical modeling or simulations. Returning values
-based on a probability also saves memory because not every value has to be stored. The 
-memory mechanism can extrapolate or interpolate a response to a query based on values 
+based on a probability also saves memory because not every value has to be stored. 
+For instance, a frequency table of memory values can be constructed as memory values are stored.
+The queries would then consist of a set of values, and the highest frequency value in that query-set would be returned.
+Thus, the memory mechanism can extrapolate or interpolate a response to a query based on values 
 previously inserted into memory. See Figure 1 for a representation of the flow of 
 this probabilistic mechanism.
 
