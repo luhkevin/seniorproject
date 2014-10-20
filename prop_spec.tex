@@ -93,9 +93,16 @@ format -- e.g. an IP address of the form www.xxx.yyy.zzz -- it makes sense to st
 routing tables based around this input string.
 
 
-With probabilistic memories, for a given query, the most ``likely" value in our memory space
-is returned based on some specified probability model of the values stored in memory.
+A probabilistic associative memory differs from an associative memory in the sense that 
+values stored in the former are not guaranteed to be recalled with 100-percent fidelity. 
 
+
+Suppose there existed some database of words where ``kat" appeared once and the word ``cat" appeared 100 times.
+If this collection were stored within a regular associative memory, and the memory is queried for a string matching ``kat", the memory 
+would return ``kat" because it was stored in the memory. With a probabilistic memory, the same query may return ``cat", simply because 
+''cat" matches closely with ``kat" and it occurs much more often. The word ``cat" would thus be considered the more ``likely" match.
+Thus, with probabilistic memories, the most ``likely" value is returned for a given query based on some probability model of the values
+stored in memory.
 
 Since our queries work directly with a probability model, it would offer more fluidity
 with programming that involves statistical modeling or simulations. Returning values
