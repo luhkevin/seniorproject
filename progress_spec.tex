@@ -16,6 +16,7 @@
  
 % These 'usepackage' commands are a way of importing additional LaTeX
 % styles and formattings that aren't part of the 'standard library'
+\usepackage{amsmath}
 \usepackage{mdwlist}
 \usepackage{url}
 \usepackage{float}
@@ -260,7 +261,18 @@ represents another way for structured data to be used with other standard machin
 algorithms, such as autoencoders.
 
 %TODO: structured data and convolution kernels
+\begin{gather}
+y = s(Wx + b)
+\end{gather}
 
+
+\begin{gather}
+x = s(W' y  + b')
+\end{gather}
+
+\begin{gather}
+L(x,z) = -\sum_{k=1}^d [x_k \log z_k + (1-x_k) \log( 1-z_k)]
+\end{gather}
 % possibly implementation
 Notice that as the dimension
 of the hidden layer increases, the optimal transformation matrix approaches the identity, since
