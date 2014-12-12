@@ -47,6 +47,7 @@
 
 % TODO: don't mention ocaml except in system implementation.
 % TODO: get rid of "we"?
+% TODO: Figure renaming
 
 % Next we write out our abstract -- generally a two paragraph maximum,
 % executive summary of the motivation and contributions of the work.
@@ -199,9 +200,10 @@ Hinton ends by claiming that while this model is conceptually not difficult, it 
 actually implement it. He mentions that an approach to this problem that has arisen recently is with 
 stochastic processes -- heralding a probabilistic approach to this associative memory problem.
 
-To address the issue of increasingly large data sets, resulting in larger and larger feature vectors,
-much research has been made to decrease dimensionality of feature vectors. One such modern technique
-is the autoencoder. Researchers Hinton and Salakhutdinov %cite
+Hinton's issue of searching through a memory efficiently is related to the size of the data sets that
+one would feed into a neural network.  To address the issue of increasingly large data sets, 
+resulting in larger and larger feature vectors, much research has been made to decrease dimensionality 
+of feature vectors. One such modern technique is the autoencoder. Researchers Hinton and Salakhutdinov %cite
 describe a method of creating deep autoencoders to learn low dimensionality codes that maintain
 high fidelity with respect to codes of the original dimension.
 
@@ -238,8 +240,8 @@ descent on the error between the output and the original input.
 
 %TODO: talk more about the memory?
 %TODO: clean up ML part?
-Figure 2 shows a model of the workflow of using this programming library. In similar fashion to 
-standard machine learning applications, the user will start with a set of training data which can 
+Figure 3 shows a model of the workflow of using this programming library, as used for machine learning. 
+In similar fashion to standard machine learning applications, the user will start with a set of training data which can 
 take various structures such as trees or lists. The user will then need to specify the type and 
 structure of the data he is inputting to the library, so the library will know how to process it 
 appropriately. Regarding this data specification, the user will do this implicitly when he processes 
@@ -263,6 +265,7 @@ structure.
 \label{sec:sysimp}
 
 %TODO: how much do we want to talk about blas/lapack here?
+
 In order to implement a generalized process for handling structured data, the programming language 
 library has been written in OCaml. OCaml is a functional language, so it will be more elegant and 
 efficient to use when handling structured data. That is, eventually, the library will have the 
@@ -272,6 +275,13 @@ functional as languages such as Haskell. It has procedural elements that facilli
 implementing and prototyping the various algorithms and models that we have researched. In addition, 
 there is a linear algebra for OCaml called Lacaml that uses BLAS and LAPACK as its backend, which 
 are two well-established, robust and performant linear algebra libraries.
+
+\subsection{Current Progress}
+\label{sec:current prog}
+
+Currently, a simple probabilistic memory with a histogram-based memory backend that handles basic 
+types, such as integers, booleans, pairs, and other simple types has been implemented. To expand 
+upon this basic framework...
 
 \section{System Performance}
 \label{sec:sysperformance}
