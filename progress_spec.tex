@@ -47,6 +47,7 @@
 
 % TODO: don't mention ocaml except in system implementation.
 % TODO: get rid of "we"?
+% TODO: Figure re-numbering
 
 % Next we write out our abstract -- generally a two paragraph maximum,
 % executive summary of the motivation and contributions of the work.
@@ -119,7 +120,6 @@ will have the biggest impact.
 	\label{fig:mlworkflow}
 \end{figure}
 
-
 %The implementation may also include support for structured data in the probabilistic associative memory.
 %In a standard associative memory scheme, a similarity query is done by comparing input bits
 %to the values stored in memory. However, this does not allow for accurate similarity comparisons
@@ -145,25 +145,33 @@ the type and structure of the data. Whether the input data set is
 represented as lists, pairs, trees, or another type of data structure will 
 have a huge impact on how feature extraction will occur. 
 
-So far, we have investigated various methods of handling this issue with structured data, 
-Since we intend to apply our extraction methods on top of our probabilistic
-associative memory, we have also begun working on the memory backend of our
-library interface. It is necessary to introduce the autoencoder and kernel 
-methods to further elaborate on this: Autoencoders are neural networks that
-take in a set of data and return a reduced, compressed representation of that
+So far, the various methods of handling this issue with structured data have been investigated.
+Since these extraction methods are intended to be applied on top of the probabilistic
+associative memory, work on the memory backend of the library interface has also been accomplished.
+It is necessary to introduce the autoencoder and kernel methods to further elaborate on this: 
+Autoencoders are neural networks that take in a set of data and return a reduced, compressed representation of that
 data. That is, it returns an encoding. This is akin to feature extraction, 
 since the whole concept of feature extraction is finding the essential features 
-of a set of data. Kernel methods, on the other hand, are a way of projecting
+of a set of data. As shown in figure 2, kernel methods, are a way of projecting
 a set of data in one space to another space, with the intention that it may
-be easier to extract essential data in the latter space.
+be easier to extract and separate essential data in the latter space. 
 
-What must still be done is integrating these two methods with our library.
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[width=0.75\linewidth]{kernelmeth}
+	\end{center}
+	\vspace{-12pt}
+	\caption{Model of Standard Machine Learning Workflow}
+	\label{fig:kernelmeth}
+\end{figure}
+
+What must still be done is integrating these two methods with the library interface.
 As will be detailed later, there has been research done on linear autoencoders
 for structured data, and there has also been previous work on convolution 
 kernels for natural language processing -- a field that processes a lot of 
 data in the form of structured trees. What will be done is to better understand
 the mathematical machinery behind autoencoders and kernel methods, and to
-implement those methods in our library.
+implement those methods in the library.
 
 % TODO: get rid of 'probabilistic' here if we're getting rid of that in related work
 % TODO: get rid of any mentions of performance here if we're not really talking about that later
@@ -172,9 +180,9 @@ probabilistic associative memory and will go more in-depth about autoencoders
 and convolution kernels. Then, it will establish a model or workflow of the 
 library interface, and the process of using this interface for a machine
 learning application. After that, it will go into some details of the library
-implementation, and discuss our choice of language -- OCaml -- and some third-
-party libraies we used. Finally, we will discuss the performance of our current
-implementation, as well as the remaining work that must be done.
+implementation, and discuss the choice of language -- OCaml -- and some third-
+party libraies that were used. Finally, the performance of the current
+implementation will be discussed, as well as the remaining work that must be done.
 
 \section{Related Work}
 \label{sec:related_work}
@@ -199,11 +207,12 @@ Hinton ends by claiming that while this model is conceptually not difficult, it 
 actually implement it. He mentions that an approach to this problem that has arisen recently is with 
 stochastic processes -- heralding a probabilistic approach to this associative memory problem.
 
-To address the issue of increasingly large data sets, resulting in larger and larger feature vectors,
-much research has been made to decrease dimensionality of feature vectors. One such modern technique
-is the autoencoder. Researchers Hinton and Salakhutdinov~\cite{autoencoder}
-describe a method of creating deep autoencoders to learn low dimensionality codes that maintain
-high fidelity with respect to codes of the original dimension.
+Hinton's issue of searching through a memory efficiently is related to the size of the data sets that
+one would feed into a neural network.  To address the issue of increasingly large data sets, 
+resulting in larger and larger feature vectors, much research has been made to decrease 
+dimensionality of feature vectors. One such modern technique is the autoencoder. Researchers Hinton 
+and Salakhutdinov ~\cite{autoencoder} describe a method of creating deep autoencoders to learn low 
+dimensionality codes that maintain high fidelity with respect to codes of the original dimension.
 
 \begin{figure}[h]
 	\begin{center}
@@ -253,7 +262,37 @@ algorithms, such as autoencoders.
 \section{System Model}
 \label{sec:sysmodel}
 
+Lorem Ipsum Query Interface
+Lorem Ipsum Query Interface
+Lorem Ipsum Query Interface
+Lorem Ipsum Query Interface
+Lorem Ipsum Query Interface
+Lorem Ipsum Query Interface
+Lorem Ipsum Query Interface
+Lorem Ipsum Query Interface
+Lorem Ipsum Query Interface
+
 %TODO: remember to change figure numbers
+
+%FIGURE: Standard flow for this library implementation
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[width=1\linewidth]{queryint}
+	\end{center}
+	\vspace{-12pt}
+	\caption{Query Interface of Library}
+	\label{fig:queryint}
+\end{figure}
+
+Lorem Ipsum Query Interface
+Lorem Ipsum Query Interface
+Lorem Ipsum Query Interface
+Lorem Ipsum Query Interface
+Lorem Ipsum Query Interface
+Lorem Ipsum Query Interface
+Lorem Ipsum Query Interface
+Lorem Ipsum Query Interface
+Lorem Ipsum Query Interface
 
 %FIGURE: Standard flow for this library implementation
 \begin{figure}[H]
@@ -267,8 +306,8 @@ algorithms, such as autoencoders.
 
 %TODO: talk more about the memory?
 %TODO: clean up ML part?
-Figure 2 shows a model of the workflow of using this programming library. In similar fashion to 
-standard machine learning applications, the user will start with a set of training data which can 
+Figure 3 shows a model of the workflow of using this programming library, as used for machine learning. 
+In similar fashion to standard machine learning applications, the user will start with a set of training data which can 
 take various structures such as trees or lists. The user will then need to specify the type and 
 structure of the data he is inputting to the library, so the library will know how to process it 
 appropriately. Regarding this data specification, the user will do this implicitly when he processes 
@@ -281,8 +320,8 @@ extraction will more or less proceed according to standard machine learning meth
 That is, the library will run the vectors through classification algorithms and models 
 and return the classification results or decisions.
 
-From our research, we have investigated methods that handle ``automatic" feature extraction, given
-the data type or structure. To reiterate, convolution kernel methods and linear autoencoder networks 
+As stated before, there is literature on machine learning methods that handle ``automatic" feature extraction, given
+the data type or structure Recall that convolution kernel methods and linear autoencoder networks 
 could accomplish this extraction over various structures of data. These methods have been tested and 
 applied to NLP applications and classification problems involving data stored in trees and sequences.
 Thus, the approach of this library should at least work for any sort of tree-like or list-like 
@@ -292,13 +331,14 @@ structure.
 \label{sec:sysimp}
 
 %TODO: how much do we want to talk about blas/lapack here?
+
 In order to implement a generalized process for handling structured data, the programming language 
 library has been written in OCaml. OCaml is a functional language, so it will be more elegant and 
 efficient to use when handling structured data. That is, eventually, the library will have the 
 capability to handle custom, user-defined data types, and creating a user-defined type in OCaml is a 
 more fluid process than it would be in procedural languages. OCaml, however, is not as purely 
 functional as languages such as Haskell. It has procedural elements that facillitates the ease of 
-implementing and prototyping the various algorithms and models that we have researched. In addition, 
+implementing and prototyping the various algorithms and models that have been encountered so far. In addition, 
 there is a linear algebra for OCaml called Lacaml that uses BLAS and LAPACK as its backend, which 
 are two well-established, robust and performant linear algebra libraries.
 
@@ -319,6 +359,13 @@ as the input. To create useful representations even in these situations, the aut
 by intentionally corrupting the input, passing it through the autoencoder, and doing a gradient
 descent on the error between the output and the original input. This trains the autoencoder
 to be able to reconstruct partially missing input, as is the goal of our query interface.
+
+\subsection{Current Progress}
+\label{sec:current prog}
+
+Currently, a simple probabilistic memory with a histogram-based memory backend that handles basic 
+types, such as integers, booleans, pairs, and other simple types has been implemented. To expand 
+upon this basic framework...
 
 \section{System Performance}
 \label{sec:sysperformance}
@@ -364,8 +411,6 @@ reference implementation error.
 	\caption{Cross-entropy error of target implementation}
 	\label{fig:performance}
 \end{figure}
-
-
 
 \section{Remaining Work}
 \label{sec:project_proposal}
