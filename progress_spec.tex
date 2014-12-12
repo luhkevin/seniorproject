@@ -179,7 +179,6 @@ implementation, as well as the remaining work that must be done.
 \section{Related Work}
 \label{sec:related_work}
 
-
 With regards to existing related work, the goal of this project is not to advance associative memory 
 techniques. Rather, it is seeking to research existing models for associative memories, provide a 
 simple probabilistic query interface, and integrate a method of extracting essential features from 
@@ -206,11 +205,11 @@ is the autoencoder. Researchers Hinton and Salakhutdinov %cite
 describe a method of creating deep autoencoders to learn low dimensionality codes that maintain
 high fidelity with respect to codes of the original dimension.
 
-An extension of classic autoencoders called a denoising autoencoder has the ability to reconstruct partially missing or
-corrupt inputs. This property of denoising autoencoders make them extremely promising for use
-in a memory system. Denoising autoencoders work by passing input through a hidden layer, a matrix
-that represents a transformation, to encode it in a lower dimension. The original input is then
-``retrieved" by doing a reverse transformation on the encoded version. 
+An extension of classic autoencoders called a denoising autoencoder has the ability to reconstruct 
+partially missing or corrupt inputs. This property of denoising autoencoders make them extremely 
+promising for use in a memory system. Denoising autoencoders work by passing input through a hidden 
+layer, a matrix that represents a transformation, to encode it in a lower dimension. The original 
+input is then ``retrieved" by doing a reverse transformation on the encoded version. 
 
 %TODO: structured data and convolution kernels
 
@@ -221,7 +220,6 @@ the identity matrix is the best possible representation if the hidden layer had 
 as the input. To create useful representations even in these situations, the autoencoder is trained
 by intentionally corrupting the input, passing it through the autoencoder, and doing a gradient
 descent on the error between the output and the original input.
-
 
 \section{System Model}
 \label{sec:sysmodel}
@@ -238,31 +236,28 @@ descent on the error between the output and the original input.
 	\label{fig:ourworkflow}
 \end{figure}
 
-
-
 %TODO: talk more about the memory?
 %TODO: clean up ML part?
-Figure 2 shows a model of the workflow of using this programming library. Similar to standard 
-machine learning applications, the user will start with a set of training data which can take 
-various structures such as trees or lists. The user will need to specify the type or structure
-of data he is using to the library, so the library will know how to process it appropriately. 
-For instance, extracting feature vectors from text represented as trees could be very different
-from extracting vectors from text represented as lists. Next, the library will use an algorithm
-or model, as detailed later, to actually perform this feature extraction. In comparison to the
-standard machine learning workflow in figure 1, the workflow when using this library will provide
-automatic feature extraction, as opposed to requiring the programmer to manually extract the 
-feature through his own custom code.
-The rest of the library after feature extraction will more or less proceed according to standard machine learning methods.
+Figure 2 shows a model of the workflow of using this programming library. In similar fashion to 
+standard machine learning applications, the user will start with a set of training data which can 
+take various structures such as trees or lists. The user will then need to specify the type and 
+structure of the data he is inputting to the library, so the library will know how to process it 
+appropriately. Regarding this data specification, the user will do this implicitly when he processes 
+his sample data and loads it into custom types defined by the library or by OCaml itself. 
+Next, the library will use an algorithm or model to actually perform this feature extraction. In 
+comparison to the standard machine learning workflow in figure 1, the workflow when using this 
+library will provide automatic feature extraction, as opposed to requiring the programmer to 
+manually extract the feature through his own custom code.  The rest of the library after feature 
+extraction will more or less proceed according to standard machine learning methods.
 That is, the library will run the vectors through classification algorithms and models 
 and return the classification results or decisions.
 
-
-%TODO: We say "reiterate" here, so make sure to talk about convolution kernels and autoencoder 
-%networks in related work
 From our research, we have investigated methods that handle ``automatic" feature extraction, given
 the data type or structure. To reiterate, convolution kernel methods and linear autoencoder networks 
-could accomplish this. These methods have been tested and applied to NLP applications and 
-classification problems.
+could accomplish this extraction over various structures of data. These methods have been tested and 
+applied to NLP applications and classification problems involving data stored in trees and sequences.
+Thus, the approach of this library should at least work for any sort of tree-like or list-like 
+structure.
 
 \section{System Implementation}
 \label{sec:sysimp}
@@ -271,13 +266,12 @@ classification problems.
 In order to implement a generalized process for handling structured data, the programming language 
 library has been written in OCaml. OCaml is a functional language, so it will be more elegant and 
 efficient to use when handling structured data. That is, eventually, the library will have the 
-capability to handle user-defined data types, and creating a user-defined type in OCaml is a more
-fluid process than it would be in procedural languages. OCaml, however, is not as purely functional 
-as languages such as Haskell. It has procedural elements that facillitates the ease of implementing 
-and prototyping the various algorithms and models that we have researched. In addition, there is a 
-linear algebra for OCaml called Lacaml that uses BLAS and LAPACK as its backend, which are two
-well-established, robust and performant linear algebra libraries.
-
+capability to handle custom, user-defined data types, and creating a user-defined type in OCaml is a 
+more fluid process than it would be in procedural languages. OCaml, however, is not as purely 
+functional as languages such as Haskell. It has procedural elements that facillitates the ease of 
+implementing and prototyping the various algorithms and models that we have researched. In addition, 
+there is a linear algebra for OCaml called Lacaml that uses BLAS and LAPACK as its backend, which 
+are two well-established, robust and performant linear algebra libraries.
 
 \section{System Performance}
 \label{sec:sysperformance}
