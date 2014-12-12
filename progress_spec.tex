@@ -60,7 +60,7 @@
     accomplish this by providing an easier way to handle structured input data for the user. 
 \end{abstract}
 
-\section{Introduction}
+\section{Background}
 \label{sec:intro}
 
 The standard way to access a stored value in memory is by address. 
@@ -114,9 +114,40 @@ This project strives to provide a simple, flexible interface to work with these 
 %FIGURE: Standard flow for ML 
 Training data --> manually convert into feature vectors --> run vectors through classifier algorithms/models --> get classification results/decisions
 
-\section{Background}
+\section{Introduction}
 \label{sec:intro}
-Background stuff......
+
+So far, we have investigated various methods of handling structured data, 
+specifically methods of extracting feature vectors from input data. Since
+we intend to apply our extraction methods on top of our probabilistic 
+associative memory, we have also begun working on the memory backend of our
+library interface. It is necessary to introduce the autoencoder and kernel 
+methods to further elaborate on this: Autoencoders are neural networks that
+take in a set of data and return a reduced, compressed representation of that
+data. That is, it returns an encoding. This is akin to feature extraction, 
+since the whole concept of feature extraction is finding the essential features 
+of a set of data. Kernel methods, on the other hand, are a way of projecting
+a set of data in one space to another space, with the intention that it may
+be easier to extract essential data in the latter space
+
+What must still be done is integrating these two methods with our library.
+As will be detailed later, there has been research done on linear autoencoders
+for structured data, and there has also been previous work on convolution 
+kernels for natural language processing -- a field that processes a lot of 
+data in the form of structured trees. What will be done is to better understand
+the mathematical machinery behind autoencoders and kernel methods, and to
+implement those methods in our library.
+
+% TODO: get rid of 'probabilistic' here if we're getting rid of that in related work
+% TODO: get rid of any mentions of performance here if we're not really talking about that later
+In the next section, the paper will proceed by delineating works related to 
+probabilistic associative memory and will go more in-depth about autoencoders 
+and convolution kernels. Then, it will establish a model or workflow of the 
+library interface, and the process of using this interface for a machine
+learning application. After that, it will go into some details of the library
+implementation, and discuss our choice of language -- OCaml -- and some third-
+party libraies we used. Finally, we will discuss the performance of our current
+implementation, and lastly we will discuss the remaining work that must be done.
 
 \section{Related Work}
 \label{sec:related_work}
