@@ -94,9 +94,12 @@ mathematical models is required. In this respect, ``feature extraction" is essen
 standard for a majority of machine learning algorithms. Feature extraction involves transforming the
 input data into a vector of real numbers, while trying to encapsulate as much of the information
 in the original data as possible. These vectors are then run through the model to improve accuracy,
-acquire a result, or both. Machine learning ideas and techniques will be crucial to this project,
+acquire a result, or both. See figure 1 for a representation of this process. 
+Machine learning ideas and techniques will be crucial to this project,
 as they will be used as the foundation of the memory system, as well as being the area where this project
 will have the biggest impact.
+
+%TODO: reference to figure 1...update?
 
 %Since our queries work directly with a probability model, it would offer more fluidity
 %with programming that involves statistical modeling or simulations. 
@@ -137,9 +140,13 @@ will have the biggest impact.
 \section{Introduction}
 \label{sec:intro}
 
-So far, we have investigated various methods of handling structured data, 
-specifically methods of extracting feature vectors from input data. Since
-we intend to apply our extraction methods on top of our probabilistic 
+In machine learning, the issue of feature extraction is dependent upon
+the type and structure of the data. Whether the input data set is 
+represented as lists, pairs, trees, or another type of data structure will 
+have a huge impact on how feature extraction will occur. 
+
+So far, we have investigated various methods of handling this issue with structured data, 
+Since we intend to apply our extraction methods on top of our probabilistic
 associative memory, we have also begun working on the memory backend of our
 library interface. It is necessary to introduce the autoencoder and kernel 
 methods to further elaborate on this: Autoencoders are neural networks that
@@ -198,6 +205,24 @@ is the autoencoder. Researchers Hinton and Salakhutdinov~\cite{autoencoder}
 describe a method of creating deep autoencoders to learn low dimensionality codes that maintain
 high fidelity with respect to codes of the original dimension.
 
+\begin{figure}[h]
+	\begin{center}
+		\includegraphics[width=0.75\linewidth]{filters_corruption_30.png}
+	\end{center}
+	\vspace{-12pt}
+	\caption{Features extracted from pictures of single digits}
+	\label{fig:features}
+\end{figure}
+
+As an example - figure \ref{fig:features} is a set of features for pictures of handwritten single 
+numerical digits (0-9) from the 
+MNIST dataset, a dataset with 60,000 training examples
+and 10,000 test examples. All of the examples have 
+been normalized in size and position, as well as color. Due to the preprocessing, 
+it is commonly used in machine learning for testing out learning techniques on real world data. 
+These features were extracted from a simple one-layer autoencoder, which manages to capture small
+regions of the input image as "features". 
+
 %TODO cite the deeplearning website
 An extension of classic autoencoders called a denoising autoencoder has the ability to reconstruct partially missing or
 corrupt inputs. This property of denoising autoencoders make them extremely promising for use
@@ -238,19 +263,6 @@ descent on the error between the output and the original input.
 \section{System Model}
 \label{sec:sysmodel}
 
-%TODO: talk more about the memory?
-%TODO: clean up ML part?
-Figure 1 shows a model of the workflow of using this programming library. Similar to standard 
-machine learning applications, the user will start with a set of training data which can take 
-various structures such as trees or lists. The user will need to specify the type or structure
-of data he is using to the library, so the library will know how to process it appropriately. 
-For instance, extracting feature vectors from text represented as trees could be very different
-from extracting vectors from text represented as lists. Next, the library will use an algorithm
-or model, as detailed later, to actually perform this feature extraction. The rest of the library 
-after feature extraction will more or less proceed according to standard machine learning methods.
-That is, the library will run the vectors through classification algorithms and models 
-and return the classification results or decisions.
-
 %TODO: remember to change figure numbers
 
 %FIGURE: Standard flow for this library implementation
@@ -263,18 +275,28 @@ and return the classification results or decisions.
 	\label{fig:ourworkflow}
 \end{figure}
 
+%TODO: talk more about the memory?
+%TODO: clean up ML part?
+Figure 2 shows a model of the workflow of using this programming library. In similar fashion to 
+standard machine learning applications, the user will start with a set of training data which can 
+take various structures such as trees or lists. The user will then need to specify the type and 
+structure of the data he is inputting to the library, so the library will know how to process it 
+appropriately. Regarding this data specification, the user will do this implicitly when he processes 
+his sample data and loads it into custom types defined by the library or by OCaml itself. 
+Next, the library will use an algorithm or model to actually perform this feature extraction. In 
+comparison to the standard machine learning workflow in figure 1, the workflow when using this 
+library will provide automatic feature extraction, as opposed to requiring the programmer to 
+manually extract the feature through his own custom code.  The rest of the library after feature 
+extraction will more or less proceed according to standard machine learning methods.
+That is, the library will run the vectors through classification algorithms and models 
+and return the classification results or decisions.
 
-Figure 1. 
-Training data --> specify the data types/structures --> push into library --> library extracts feature vectors, perhaps through convolution kernels OR the linear autoencoder networks -->
-run vectors through classifier algorithms/models --> get classification results/decisions
-
-
-%TODO: We say "reiterate" here, so make sure to talk about convolution kernels and autoencoder 
-%networks in related work
 From our research, we have investigated methods that handle ``automatic" feature extraction, given
 the data type or structure. To reiterate, convolution kernel methods and linear autoencoder networks 
-could accomplish this. These methods have been tested and applied to NLP applications and 
-classification problems.
+could accomplish this extraction over various structures of data. These methods have been tested and 
+applied to NLP applications and classification problems involving data stored in trees and sequences.
+Thus, the approach of this library should at least work for any sort of tree-like or list-like 
+structure.
 
 \section{System Implementation}
 \label{sec:sysimp}
@@ -283,12 +305,12 @@ classification problems.
 In order to implement a generalized process for handling structured data, the programming language 
 library has been written in OCaml. OCaml is a functional language, so it will be more elegant and 
 efficient to use when handling structured data. That is, eventually, the library will have the 
-capability to handle user-defined data types, and creating a user-defined type in OCaml is a more
-fluid process than it would be in procedural languages. OCaml, however, is not as purely functional 
-as languages such as Haskell. It has procedural elements that facillitates the ease of implementing and prototyping the various algorithms and models that we have researched. In addition, there is a 
-linear algebra for OCaml called Lacaml that uses BLAS and LAPACK as its backend, which are two
-well-established, robust and performant linear algebra libraries.
-
+capability to handle custom, user-defined data types, and creating a user-defined type in OCaml is a 
+more fluid process than it would be in procedural languages. OCaml, however, is not as purely 
+functional as languages such as Haskell. It has procedural elements that facillitates the ease of 
+implementing and prototyping the various algorithms and models that we have researched. In addition, 
+there is a linear algebra for OCaml called Lacaml that uses BLAS and LAPACK as its backend, which 
+are two well-established, robust and performant linear algebra libraries.
 
 \section{System Performance}
 \label{sec:sysperformance}
@@ -299,9 +321,42 @@ implementations. Due to randomization inherent in the algorithm though, performa
 standardized by either choosing the same random initialization parameters, or averaging 
 across multiple runs. 
 
-The latter was not possible due to performance issues in the current implementation. Initial
-tests with set parameters seem to generally favor the existing implementation. This is likely
-due to the gradient descent method used. 
+At the moment, substantial tests are not possible due to performance issues in the current 
+implementation. Initial
+manual tests with set parameters and tiny data points seem to heavily favor the existing 
+implementation with respect to performance. This is likely due to the gradient descent
+method used. While concrete 
+tests of actual data sets have not 
+been run, test runs of the reference implementation has been run locally. A chart of runtime
+performance for those runs is provided, as well as estimated performance of our current 
+implementation given our small manual tests (Figure \ref{fig:performance}). 
+
+\begin{figure}[h]
+	\begin{center}
+		\includegraphics[width=1\linewidth]{performance.png}
+	\end{center}
+	\vspace{-12pt}
+	\caption{Estimated runtime performance of current implementation and runtime performance of reference implementation}
+	\label{fig:performance}
+\end{figure}
+
+This reference implementation is run on the 
+Accuracy-wise, it seems that our current implementation suffers from a bit of inaccuracy
+when compared to the reference implementation. This is likely due to the symbolic math
+package used in the Python-based reference implementation, which can defer calculations
+and perform symbolic differentiation, resulting in higher accuracy. Since only
+small manual tests have been run, the following chart of cross-entropy error is with just the
+reference implementation error. 
+
+\begin{figure}[h]
+	\begin{center}
+		\includegraphics[width=1\linewidth]{error.png}
+	\end{center}
+	\vspace{-12pt}
+	\caption{Cross-entropy error of target implementation}
+	\label{fig:performance}
+\end{figure}
+
 
 
 \section{Remaining Work}
