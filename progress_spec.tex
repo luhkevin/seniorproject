@@ -148,7 +148,7 @@ data. That is, it returns an encoding. This is akin to feature extraction,
 since the whole concept of feature extraction is finding the essential features 
 of a set of data. Kernel methods, on the other hand, are a way of projecting
 a set of data in one space to another space, with the intention that it may
-be easier to extract essential data in the latter space
+be easier to extract essential data in the latter space.
 
 What must still be done is integrating these two methods with our library.
 As will be detailed later, there has been research done on linear autoencoders
@@ -167,7 +167,7 @@ library interface, and the process of using this interface for a machine
 learning application. After that, it will go into some details of the library
 implementation, and discuss our choice of language -- OCaml -- and some third-
 party libraies we used. Finally, we will discuss the performance of our current
-implementation, and lastly we will discuss the remaining work that must be done.
+implementation, as well as the remaining work that must be done.
 
 \section{Related Work}
 \label{sec:related_work}
@@ -190,9 +190,29 @@ memories.  Hinton then notes that although this content-addressable memory is a 
 representation, it is difficult to efficiently ``search for content" through a memory space. 
 Hinton ends by claiming that while this model is conceptually not difficult, it is difficult to 
 actually implement it. He mentions that an approach to this problem that has arisen recently is with 
-stochastic processes -- heralding a probabilistic approach to this associative memory problem. Thus, 
-both Willshaw and Hinton offer probabilistic models
-of dealing with associative memories.
+stochastic processes -- heralding a probabilistic approach to this associative memory problem.
+
+To address the issue of increasingly large data sets, resulting in larger and larger feature vectors,
+much research has been made to decrease dimensionality of feature vectors. One such modern technique
+is the autoencoder. Researchers Hinton and Salakhutdinov %cite
+describe a method of creating deep autoencoders to learn low dimensionality codes that maintain
+high fidelity with respect to codes of the original dimension.
+
+An extension of classic autoencoders called a denoising autoencoder has the ability to reconstruct partially missing or
+corrupt inputs. This property of denoising autoencoders make them extremely promising for use
+in a memory system. Denoising autoencoders work by passing input through a hidden layer, a matrix
+that represents a transformation, to encode it in a lower dimension. The original input is then
+``retrieved" by doing a reverse transformation on the encoded version. 
+
+%TODO: structured data and convolution kernels
+
+% possibly implementation
+Notice that as the dimension
+of the hidden layer increases, the optimal transformation matrix approaches the identity, since
+the identity matrix is the best possible representation if the hidden layer had the same dimension
+as the input. To create useful representations even in these situations, the autoencoder is trained
+by intentionally corrupting the input, passing it through the autoencoder, and doing a gradient
+descent on the error between the output and the original input.
 
 \section{System Model}
 \label{sec:sysmodel}
