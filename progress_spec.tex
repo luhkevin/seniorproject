@@ -301,7 +301,9 @@ Regarding third-party libraries, there is a linear algebra for OCaml called Laca
 and LAPACK (Linear Algebra PACKage)
 as its backend, which are two well-established, robust and performant linear algebra 
 libraries. Notably, the low-level BLAS is widely used in scientific computation in many more complicated
-higher level packages, such as MATLAB or R. 
+higher level packages, such as MATLAB or R. This allows decent performance with matrix operations
+and mathematical operations, while also allowing
+much of the higher-level logic to remain within within OCaml.
 
 In terms of the query interface, it currently contains all the functionality needed for basic 
 queries.  This includes the basic ``wildcard" and ``constant" queries, as well as support for 
@@ -321,7 +323,8 @@ different types of underlying mechanisms as a memory (Figure \ref{fig:queryint})
 \end{figure}
 
 One possible type of memory using the autoencoders discussed in the related work
-section has already been implemented. An autoencoder uses hidden layers (matrices) to perform 
+section has already been implemented, though it has not yet been integrated with
+structured data and the query interface. An autoencoder uses hidden layers (matrices) to perform 
 transformations on input vectors, compressing them to a lower dimension and doing a reverse 
 transformation to retrieve them. 
 
@@ -341,7 +344,10 @@ z = s(W' y  + b')
 \end{gather}
 
 Finally, it learns the correct matrices by comparing the input value $x$ to the retrieved value $z$ 
-using the cross-entropy error rate $L(x,z)$, and adjusting appropriately, as shown in Equation 3.
+using the cross-entropy error rate $L(x,z)$, as shown in Equation 3. The $W$ matrix and $b$ vector
+are updated using gradient descent. That is, the error is differentiated
+with respect to the weight matrix $W$ and the bias value $b$, and $W$ and $b$ are then updated in the
+direction of decreasing error. 
 
 \begin{gather}
 L(x,z) = -\sum_{k=1}^d [x_k \log z_k + (1-x_k) \log( 1-z_k)]
@@ -352,9 +358,7 @@ of the hidden layer increases, the optimal transformation matrix approaches the 
 the identity matrix is the best possible representation if the hidden layer had the same dimension
 as the input. To create useful representations even in these situations, the autoencoder is trained
 by intentionally corrupting the input, passing it through the autoencoder, and doing a gradient
-descent on the error between the output and the original input. That is, the error is differentiated
-with respect to the weight matrix $W$ and the bias value $b$, and $W$ and $b$ are then updated in the
-direction of decreasing error. This trains the autoencoder
+descent on the error between the output and the original input. This trains the autoencoder
 to be able to reconstruct partially missing input, as is the goal of the query interface.
 
 \section{System Performance}
