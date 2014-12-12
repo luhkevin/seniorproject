@@ -52,12 +52,12 @@
 % executive summary of the motivation and contributions of the work.
 \begin{abstract}
     Our goal is to create a programming language library that provides an interface
-    for programming with a probabilistic associative memory.  
-    An associative memory allows queries by content rather than by address or location.
-    Probabilistic associative memory returns a value based on a probability model
-    for a given memory query. This project provides an intuitive interface to this probabilistic
-    associative memory to facilliate programming efficiency for the end user. It will primarily 
-    accomplish this by providing an easier way to handle structured input data for the user. 
+    for programming with a probabilistic associative memory.
+    A probabilistic associative memory receives an input and returns a value associated with
+    or similar to the input. This project provides an intuitive interface to this probabilistic
+    associative memory to facilliate programming efficiency for the end user. It will primarily
+    accomplish this by providing an easier way to handle structured input data for the user, as well
+    as automatically managing user-defined types in memory.
 \end{abstract}
 
 \section{Background}
@@ -77,23 +77,34 @@ packets. Since routers looking for the ``next hop" have a specific, standard que
 format -- e.g. an IP address of the form www.xxx.yyy.zzz -- it makes sense to store the 
 routing tables based around this input string.
 
-A probabilistic associative memory differs from an associative memory in the sense that 
-values stored in the latter are not guaranteed to be recalled with 100-percent fidelity.
+Probabilistic associative memories retain the content-based characteristics of associative memories.
+However, they stop maintaining the discrete one-to-one relationship between input and output.
+A modern day realization of probabilistic associative memories is the neural network. A neural network
+consists of a series of functions acting on ``features" or characteristics of given input values. Using
+these functions, it can find relationships or make predictions on its inputs. It also
+reacts and changes whenever it sees new input to enhance accuracy for future input.
 
-For instance, suppose there existed some database of words where ``kat" appeared once and the word ``cat" appeared 100 times.
-If this collection were stored within a regular associative memory, and the memory is queried for a string matching ``kat", the memory 
-would return ``kat" because it was stored in the memory. With a probabilistic memory, the same query may return ``cat", simply because 
-''cat" matches closely with ``kat" and it occurs much more often. The word ``cat" would thus be considered the more ``likely" match.
-Thus, with probabilistic memories, the most ``likely" value is returned for a given query based on some probability model of the values
-stored in memory.
+Neural networks are a small part of the much broader topic of \textbf{machine learning}. Machine learning
+is widely used today to solve problems that lack easily definable patterns (i.e. natural language processing,
+computer vision, classification). A common feature of these problems is that they usually have a large amount
+of sample data available. The goal of machine learning algorithms is to build models based on an
+abundant amount of ``training data". Since the types of data vary wildly from one problem to the next,
+from sentences in several languages to video data from a camera, a way to reconcile the data with
+mathematical models is required. In this respect, ``feature extraction" is essentially the de facto
+standard for a majority of machine learning algorithms. Feature extraction involves transforming the
+input data into a vector of real numbers, while trying to encapsulate as much of the information
+in the original data as possible. These vectors are then run through the model to improve accuracy,
+acquire a result, or both. Machine learning ideas and techniques will be crucial to this project,
+as they will be used as the foundation of the memory system, as well as being the area where this project
+will have the biggest impact.
 
 %Since our queries work directly with a probability model, it would offer more fluidity
 %with programming that involves statistical modeling or simulations. 
 %Returning values based on a probability also saves memory because not every value has to be stored. 
-In a simplistic representation of a probability model, a frequency table of memory values can be constructed as memory values are stored.
-The queries would then consist of a set of values, and a likelihood would be generated based on both frequency and some matching metric in that query-set.
-Thus, the memory mechanism can extrapolate or interpolate a response to a query based on values 
-previously inserted into memory. 
+%In a simplistic representation of a probability model, a frequency table of memory values can be constructed as memory values are stored.
+%The queries would then consist of a set of values, and a likelihood would be generated based on both frequency and some matching metric in that query-set.
+%Thus, the memory mechanism can extrapolate or interpolate a response to a query based on values 
+%previously inserted into memory. 
 
 %See Figure 1 for a representation of the flow of this probabilistic mechanism.
 \begin{figure}[H]
@@ -106,22 +117,22 @@ previously inserted into memory.
 \end{figure}
 
 
-The implementation may also include support for structured data in the probabilistic associative memory.
-In a standard associative memory scheme, a similarity query is done by comparing input bits
-to the values stored in memory. However, this does not allow for accurate similarity comparisons
-between trees or lists, as the memory is not aware of the underlying structure. As a result,
-many applications on structured data will first flatten the structure, perform the requisite 
-calculations, then reconstruct the original structure of that data. With a built-in type system
-that supports structured data, the user will be able to directly manipulate the data in memory 
-while keeping the structure intact.
+%The implementation may also include support for structured data in the probabilistic associative memory.
+%In a standard associative memory scheme, a similarity query is done by comparing input bits
+%to the values stored in memory. However, this does not allow for accurate similarity comparisons
+%between trees or lists, as the memory is not aware of the underlying structure. As a result,
+%many applications on structured data will first flatten the structure, perform the requisite 
+%calculations, then reconstruct the original structure of that data. With a built-in type system
+%that supports structured data, the user will be able to directly manipulate the data in memory 
+%while keeping the structure intact.
 
-Practical applications of probabilistic associative memories involve various approximation and prediction methods.
-These involve appliactions such as image reconstruction from noisy input data, or search autocompletion.
-This project strives to provide a simple, flexible interface to work with these probabilistic associative memories.
+%Practical applications of probabilistic associative memories involve various approximation and prediction methods.
+%These involve appliactions such as image reconstruction from noisy input data, or search autocompletion.
+%This project strives to provide a simple, flexible interface to work with these probabilistic associative memories.
 
 %TODO 
 %FIGURE: Standard flow for ML 
-Training data --> manually convert into feature vectors --> run vectors through classifier algorithms/models --> get classification results/decisions
+%Training data --> manually convert into feature vectors --> run vectors through classifier algorithms/models --> get classification results/decisions
 
 \section{Introduction}
 \label{sec:intro}
@@ -219,7 +230,7 @@ classification problems.
 
 %TODO: how much do we want to talk about blas/lapack here?
 In order to implement a generalized process for handling structured data, the programming language 
-library will be written in OCaml. OCaml is a functional language, so it will be more elegant and 
+library has been written in OCaml. OCaml is a functional language, so it will be more elegant and 
 efficient to use when handling structured data. That is, eventually, the library will have the 
 capability to handle user-defined data types, and creating a user-defined type in OCaml is a more
 fluid process than it would be in procedural languages. OCaml, however, is not as purely functional 
@@ -231,9 +242,44 @@ well-established, robust and performant linear algebra libraries.
 \section{System Performance}
 \label{sec:sysperformance}
 
+The portion of the library that can be measured so far is the basic autoencoder model. 
+Since it is based on a reference implementation, we can compare performance statistics of both
+implementations. Due to randomization inherent in the algorithm though, performance must be
+standardized by either choosing the same random initialization parameters, or averaging 
+across multiple runs. 
+
+The latter was not possible due to performance issues in the current implementation. Initial
+tests with set parameters seem to generally favor the existing implementation. This is likely
+due to the gradient descent method used. 
+
 
 \section{Remaining Work}
 \label{sec:project_proposal}
+
+Currently, a basic autoencoder model has been implemented, and a specification of the library's
+interface, as well as a simple test implementation of the interface, has been created. 
+However, the autoencoder model is still far from finished. The most immediate improvement
+that we can make is to improve the performance of the basic autoencoder model. Since the gradient
+descent method being used is currently hand-written in OCaml, it seems that increasing 
+performance may require linking to external libraries. However, it still may be possible to
+optimize the current method, which would be preferable in order to keep as much of the 
+implementation in OCaml as possible.
+
+Next, provided that the gradient descent method used is optimized, the autoencoder model will 
+need to be built into a multi-layer autoencoder for accuracy. This introduces a significant
+amount of additional complexity, although the basic model will still be the foundation for
+the multi-layer model. 
+
+The most challenging task remaining will be to utilize the structured data kernels in order to
+provide structured data support. While methods have been written and published on paper,
+this is still rather unexplored implementation-wise. This portion alone will likely represent
+over half of the remaining work due to its complexity and relative novelty. 
+
+Performance will likely continue to be an issue throughout the remaining tasks, due to a lack
+of library support for the methods that will be implemented. Thus, we forsee that while this 
+library will be able to accomplish its goals, it may not be as performant as existing 
+libraries. However, even existing libraries are few in number, so this library will hopefully
+be impactful regardless. 
 
 %The first step is to create a programming language interface for probabilistic
 %associative memories. This involves implementing a domain specific language: 
