@@ -297,8 +297,11 @@ library has been written in OCaml. OCaml is a functional language, so it will be
 when handling structured data. In addition, OCaml has procedural elements that facillitates the ease 
 of implementing and prototyping the various algorithms and models that have been encountered so far. 
 Regarding third-party libraries, there is a linear algebra for OCaml called Lacaml that uses BLAS 
-and LAPACK as its backend, which are two well-established, robust and performant linear algebra 
-libraries.
+(Basic Linear Algebra Subprograms)
+and LAPACK (Linear Algebra PACKage)
+as its backend, which are two well-established, robust and performant linear algebra 
+libraries. Notably, the low-level BLAS is widely used in scientific computation in many more complicated
+higher level packages, such as MATLAB or R. 
 
 In terms of the query interface, it currently contains all the functionality needed for basic 
 queries.  This includes the basic ``wildcard" and ``constant" queries, as well as support for 
@@ -349,7 +352,9 @@ of the hidden layer increases, the optimal transformation matrix approaches the 
 the identity matrix is the best possible representation if the hidden layer had the same dimension
 as the input. To create useful representations even in these situations, the autoencoder is trained
 by intentionally corrupting the input, passing it through the autoencoder, and doing a gradient
-descent on the error between the output and the original input. This trains the autoencoder
+descent on the error between the output and the original input. That is, the error is differentiated
+with respect to the weight matrix $W$ and the bias value $b$, and $W$ and $b$ are then updated in the
+direction of decreasing error. This trains the autoencoder
 to be able to reconstruct partially missing input, as is the goal of the query interface.
 
 \section{System Performance}
@@ -383,16 +388,16 @@ Regarding accuracy, it seems that our current implementation suffers from a bit 
 when compared to the reference implementation. This is likely due to the symbolic math
 package used in the Python-based reference implementation, which can defer calculations
 and perform symbolic differentiation, resulting in higher accuracy. Since only
-small manual tests have been run, the following chart of cross-entropy error is with just the
+small manual tests have been run, the following chart (Figure \ref{fig:error}) of cross-entropy error is with just the
 reference implementation error. 
 
-\begin{figure}[H]
+\begin{figure}[h]
 	\begin{center}
 		\includegraphics[width=1\linewidth]{error.png}
 	\end{center}
 	\vspace{-12pt}
 	\caption{Cross-entropy error of target implementation}
-	\label{fig:performance}
+	\label{fig:error}
 \end{figure}
 
 \section{Remaining Work}
