@@ -278,10 +278,27 @@ implementations. Due to randomization inherent in the algorithm though, performa
 standardized by either choosing the same random initialization parameters, or averaging 
 across multiple runs. 
 
-The latter was not possible due to performance issues in the current implementation. Initial
-tests with set parameters seem to generally favor the existing implementation. This is likely
-due to the gradient descent method used. 
+At the moment, substantial tests are not possible due to performance issues in the current 
+implementation. Initial
+manual tests with set parameters and tiny data points seem to heavily favor the existing 
+implementation with respect to performance. This is likely due to the gradient descent
+method used. While concrete 
+tests of actual data sets have not 
+been run, test runs of the reference implementation has been run locally. A chart of
+performance for those runs is provided, as well as estimated performance of our current 
+implementation given our small manual tests. 
 
+This reference implementation is run on the MNIST dataset, a dataset with 60,000 training examples
+and 10,000 test examples of handwritten single numerical digits. All of the examples have 
+been normalized in size and position, as well as color. Due to the preprocessing, 
+it is commonly used in machine learning for testing out learning techniques on real world data. 
+
+Accuracy-wise, it seems that our current implementation suffers from a bit of inaccuracy
+when compared to the reference implementation. This is likely due to the symbolic math
+package used in the Python-based reference implementation, which can defer calculations
+and perform symbolic differentiation, resulting in higher accuracy. Again, since only
+small manual tests have been run, the following accuracy chart is with estimated current
+performance. 
 
 \section{Remaining Work}
 \label{sec:project_proposal}

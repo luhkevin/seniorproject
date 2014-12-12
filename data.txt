@@ -1,0 +1,37 @@
+
+Training epoch 0, cost  63.2891694201
+Training epoch 1, cost  55.7866565443
+Training epoch 2, cost  54.7631168984
+Training epoch 3, cost  54.2420533514
+Training epoch 4, cost  53.888670659
+Training epoch 5, cost  53.6203505434
+Training epoch 6, cost  53.4037459012
+Training epoch 7, cost  53.2219976788
+Training epoch 8, cost  53.0658010178
+Training epoch 9, cost  52.9295596873
+Training epoch 10, cost  52.8094163525
+Training epoch 11, cost  52.7024367362
+Training epoch 12, cost  52.606310148
+Training epoch 13, cost  52.5191693641
+Training epoch 14, cost  52.4395240004
+The no corruption code for file dA.py ran for 13.18m
+Training epoch 0, cost  81.7714190632
+Training epoch 1, cost  73.4285756365
+Training epoch 2, cost  70.8632686268
+Training epoch 3, cost  69.3396642015
+Training epoch 4, cost  68.4134660704
+Training epoch 5, cost  67.723705304
+Training epoch 6, cost  67.2401360252
+Training epoch 7, cost  66.849303071
+Training epoch 8, cost  66.5663948395
+Training epoch 9, cost  66.3591257941
+Training epoch 10, cost  66.1336658308
+Training epoch 11, cost  65.9893924612
+Training epoch 12, cost  65.8344131768
+Training epoch 13, cost  65.7185348901
+Training epoch 14, cost  65.6010749532
+The 30% corruption code for file dA.py ran for 12.91m
+
+real	26m6.921s
+user	26m7.375s
+sys	0m0.273s
