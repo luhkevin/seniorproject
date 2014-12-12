@@ -94,9 +94,12 @@ mathematical models is required. In this respect, ``feature extraction" is essen
 standard for a majority of machine learning algorithms. Feature extraction involves transforming the
 input data into a vector of real numbers, while trying to encapsulate as much of the information
 in the original data as possible. These vectors are then run through the model to improve accuracy,
-acquire a result, or both. Machine learning ideas and techniques will be crucial to this project,
+acquire a result, or both. See figure 1 for a representation of this process. 
+Machine learning ideas and techniques will be crucial to this project,
 as they will be used as the foundation of the memory system, as well as being the area where this project
 will have the biggest impact.
+
+%TODO: reference to figure 1...update?
 
 %Since our queries work directly with a probability model, it would offer more fluidity
 %with programming that involves statistical modeling or simulations. 
@@ -137,9 +140,13 @@ will have the biggest impact.
 \section{Introduction}
 \label{sec:intro}
 
-So far, we have investigated various methods of handling structured data, 
-specifically methods of extracting feature vectors from input data. Since
-we intend to apply our extraction methods on top of our probabilistic 
+In machine learning, the issue of feature extraction is dependent upon
+the type and structure of the data. Whether the input data set is 
+represented as lists, pairs, trees, or another type of data structure will 
+have a huge impact on how feature extraction will occur. 
+
+So far, we have investigated various methods of handling this issue with structured data, 
+Since we intend to apply our extraction methods on top of our probabilistic
 associative memory, we have also begun working on the memory backend of our
 library interface. It is necessary to introduce the autoencoder and kernel 
 methods to further elaborate on this: Autoencoders are neural networks that
@@ -172,6 +179,7 @@ implementation, and lastly we will discuss the remaining work that must be done.
 \section{Related Work}
 \label{sec:related_work}
 
+
 With regards to existing related work, the goal of this project is not to advance associative memory 
 techniques. Rather, it is seeking to research existing models for associative memories, provide a 
 simple probabilistic query interface, and integrate a method of extracting essential features from 
@@ -194,21 +202,9 @@ stochastic processes -- heralding a probabilistic approach to this associative m
 both Willshaw and Hinton offer probabilistic models
 of dealing with associative memories.
 
+
 \section{System Model}
 \label{sec:sysmodel}
-
-%TODO: talk more about the memory?
-%TODO: clean up ML part?
-Figure 1 shows a model of the workflow of using this programming library. Similar to standard 
-machine learning applications, the user will start with a set of training data which can take 
-various structures such as trees or lists. The user will need to specify the type or structure
-of data he is using to the library, so the library will know how to process it appropriately. 
-For instance, extracting feature vectors from text represented as trees could be very different
-from extracting vectors from text represented as lists. Next, the library will use an algorithm
-or model, as detailed later, to actually perform this feature extraction. The rest of the library 
-after feature extraction will more or less proceed according to standard machine learning methods.
-That is, the library will run the vectors through classification algorithms and models 
-and return the classification results or decisions.
 
 %TODO: remember to change figure numbers
 
@@ -223,9 +219,22 @@ and return the classification results or decisions.
 \end{figure}
 
 
-Figure 1. 
-Training data --> specify the data types/structures --> push into library --> library extracts feature vectors, perhaps through convolution kernels OR the linear autoencoder networks -->
-run vectors through classifier algorithms/models --> get classification results/decisions
+
+%TODO: talk more about the memory?
+%TODO: clean up ML part?
+Figure 2 shows a model of the workflow of using this programming library. Similar to standard 
+machine learning applications, the user will start with a set of training data which can take 
+various structures such as trees or lists. The user will need to specify the type or structure
+of data he is using to the library, so the library will know how to process it appropriately. 
+For instance, extracting feature vectors from text represented as trees could be very different
+from extracting vectors from text represented as lists. Next, the library will use an algorithm
+or model, as detailed later, to actually perform this feature extraction. In comparison to the
+standard machine learning workflow in figure 1, the workflow when using this library will provide
+automatic feature extraction, as opposed to requiring the programmer to manually extract the 
+feature through his own custom code.
+The rest of the library after feature extraction will more or less proceed according to standard machine learning methods.
+That is, the library will run the vectors through classification algorithms and models 
+and return the classification results or decisions.
 
 
 %TODO: We say "reiterate" here, so make sure to talk about convolution kernels and autoencoder 
@@ -244,7 +253,8 @@ library has been written in OCaml. OCaml is a functional language, so it will be
 efficient to use when handling structured data. That is, eventually, the library will have the 
 capability to handle user-defined data types, and creating a user-defined type in OCaml is a more
 fluid process than it would be in procedural languages. OCaml, however, is not as purely functional 
-as languages such as Haskell. It has procedural elements that facillitates the ease of implementing and prototyping the various algorithms and models that we have researched. In addition, there is a 
+as languages such as Haskell. It has procedural elements that facillitates the ease of implementing 
+and prototyping the various algorithms and models that we have researched. In addition, there is a 
 linear algebra for OCaml called Lacaml that uses BLAS and LAPACK as its backend, which are two
 well-established, robust and performant linear algebra libraries.
 
