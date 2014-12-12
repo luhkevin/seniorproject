@@ -104,7 +104,7 @@ will have the biggest impact.
 %TODO: reference to figure 1...update?
 
 %See Figure 1 for a representation of the flow of this probabilistic mechanism.
-\begin{figure}[H]
+\begin{figure}[h]
 	\begin{center}
 		\includegraphics[width=0.75\linewidth]{mlworkflow}
 	\end{center}
@@ -132,7 +132,7 @@ of a set of data. As shown in figure 2, kernel methods, are a way of projecting
 a set of data in one space to another space, with the intention that it may
 be easier to extract and separate essential data in the latter space. 
 
-\begin{figure}[H]
+\begin{figure}[h]
 	\begin{center}
 		\includegraphics[width=0.75\linewidth]{kernelmeth}
 	\end{center}
@@ -235,26 +235,6 @@ language processing, one often deals with parse trees as input data, and this ke
 represents another way for structured data to be used with other standard machine learning
 algorithms, such as autoencoders.
 
-%TODO: structured data and convolution kernels
-\begin{gather}
-y = s(Wx + b)
-\end{gather}
-
-
-\begin{gather}
-x = s(W' y  + b')
-\end{gather}
-
-\begin{gather}
-L(x,z) = -\sum_{k=1}^d [x_k \log z_k + (1-x_k) \log( 1-z_k)]
-\end{gather}
-% possibly implementation
-Notice that as the dimension
-of the hidden layer increases, the optimal transformation matrix approaches the identity, since
-the identity matrix is the best possible representation if the hidden layer had the same dimension
-as the input. To create useful representations even in these situations, the autoencoder is trained
-by intentionally corrupting the input, passing it through the autoencoder, and doing a gradient
-descent on the error between the output and the original input.
 
 \section{System Model}
 \label{sec:sysmodel}
@@ -262,7 +242,7 @@ descent on the error between the output and the original input.
 %TODO: remember to change figure numbers
 
 %FIGURE: Standard flow for this library implementation
-\begin{figure}[H]
+\begin{figure}[h]
 	\begin{center}
 		\includegraphics[width=0.75\linewidth]{ourworkflow}
 	\end{center}
@@ -317,7 +297,7 @@ the flexible type system of OCaml. The interface also has the ability to use dif
 of underlying mechanisms as a memory (Figure \ref{fig:queryint}).
 
 %FIGURE: Standard flow for this library implementation
-\begin{figure}[H]
+\begin{figure}[h]
 	\begin{center}
 		\includegraphics[width=1\linewidth]{queryint}
 	\end{center}
@@ -329,8 +309,29 @@ of underlying mechanisms as a memory (Figure \ref{fig:queryint}).
 We have created one possible type of memory using the autoencoders discussed in the related work
 section. An autoencoder uses hidden layers (matrices) to perform transformations on input vectors,
 compressing them to a lower dimension and doing a reverse transformation to retrieve them. 
-It learns the correct matrices by comparing the input values
-to the retrieved ones and adjusting appropriately. Notice that as the dimensionality
+Let the input vector be $x$. We can transform $x$ to a lower dimension vector $y$ by applying a
+transformation matrix $W$ and adding a bias value $b$, then applying a non-linear transformation
+$s$, such as the sigmoid function.
+
+\begin{gather}
+y = s(Wx + b)
+\end{gather}
+
+It can then ``retrieve" the original value by applying reverse transformations to $y$, using
+a different matrix $W'$ and bias factor $b'$.
+
+\begin{gather}
+z = s(W' y  + b')
+\end{gather}
+
+It learns the correct matrices by comparing the input value $x$
+to the retrieved value $z$ using the cross-entropy error rate $L(x,z)$, and adjusting appropriately.
+
+\begin{gather}
+L(x,z) = -\sum_{k=1}^d [x_k \log z_k + (1-x_k) \log( 1-z_k)]
+\end{gather}
+
+Notice that as the dimensionality
 of the hidden layer increases, the optimal transformation matrix approaches the identity, since
 the identity matrix is the best possible representation if the hidden layer had the same dimension
 as the input. To create useful representations even in these situations, the autoencoder is trained
