@@ -221,7 +221,7 @@ classification problems.
 
 %TODO: how much do we want to talk about blas/lapack here?
 In order to implement a generalized process for handling structured data, the programming language 
-library will be written in OCaml. OCaml is a functional language, so it will be more elegant and 
+library has been written in OCaml. OCaml is a functional language, so it will be more elegant and 
 efficient to use when handling structured data. That is, eventually, the library will have the 
 capability to handle user-defined data types, and creating a user-defined type in OCaml is a more
 fluid process than it would be in procedural languages. OCaml, however, is not as purely functional 
@@ -233,9 +233,44 @@ well-established, robust and performant linear algebra libraries.
 \section{System Performance}
 \label{sec:sysperformance}
 
+The portion of the library that can be measured so far is the basic autoencoder model. 
+Since it is based on a reference implementation, we can compare performance statistics of both
+implementations. Due to randomization inherent in the algorithm though, performance must be
+standardized by either choosing the same random initialization parameters, or averaging 
+across multiple runs. 
+
+The latter was not possible due to performance issues in the current implementation. Initial
+tests with set parameters seem to generally favor the existing implementation. This is likely
+due to the gradient descent method used. 
+
 
 \section{Remaining Work}
 \label{sec:project_proposal}
+
+Currently, a basic autoencoder model has been implemented, and a specification of the library's
+interface, as well as a simple test implementation of the interface, has been created. 
+However, the autoencoder model is still far from finished. The most immediate improvement
+that we can make is to improve the performance of the basic autoencoder model. Since the gradient
+descent method being used is currently hand-written in OCaml, it seems that increasing 
+performance may require linking to external libraries. However, it still may be possible to
+optimize the current method, which would be preferable in order to keep as much of the 
+implementation in OCaml as possible.
+
+Next, provided that the gradient descent method used is optimized, the autoencoder model will 
+need to be built into a multi-layer autoencoder for accuracy. This introduces a significant
+amount of additional complexity, although the basic model will still be the foundation for
+the multi-layer model. 
+
+The most challenging task remaining will be to utilize the structured data kernels in order to
+provide structured data support. While methods have been written and published on paper,
+this is still rather unexplored implementation-wise. This portion alone will likely represent
+over half of the remaining work due to its complexity and relative novelty. 
+
+Performance will likely continue to be an issue throughout the remaining tasks, due to a lack
+of library support for the methods that will be implemented. Thus, we forsee that while this 
+library will be able to accomplish its goals, it may not be as performant as existing 
+libraries. However, even existing libraries are few in number, so this library will hopefully
+be impactful regardless. 
 
 %The first step is to create a programming language interface for probabilistic
 %associative memories. This involves implementing a domain specific language: 
