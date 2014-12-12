@@ -251,15 +251,6 @@ algorithms, such as autoencoders.
 \section{System Model}
 \label{sec:sysmodel}
 
-%FIGURE: Standard flow for this library implementation
-\begin{figure}[h]
-	\begin{center}
-		\includegraphics[width=0.75\linewidth]{ourworkflow}
-	\end{center}
-	\vspace{-12pt}
-	\caption{Library Interface Workflow as Applied to Machine Learning}
-	\label{fig:ourworkflow}
-\end{figure}
 
 %TODO: talk more about the memory?
 Figure \ref{fig:ourworkflow} shows a model of the workflow of using this programming library, as 
@@ -267,6 +258,20 @@ used for machine learning. In similar fashion to standard machine learning appli
 will start with a set of training data which can take various structures such as trees or lists. The 
 user will then need to specify the type and structure of the data he is inputting to the library, so 
 the library will know how to process it appropriately. 
+
+
+%FIGURE: Standard flow for this library implementation
+\begin{figure}[h]
+	\begin{center}
+		\includegraphics[width=0.70\linewidth]{ourworkflow}
+	\end{center}
+	\vspace{-12pt}
+	\caption{Library Interface Workflow as Applied to Machine Learning}
+	\label{fig:ourworkflow}
+\end{figure}
+
+\vspace{10pt}
+
 Regarding this data specification, the user will do this implicitly when he processes 
 his sample data and loads it into custom types defined by the library or by OCaml itself. 
 Next, the library will use an algorithm or model to actually perform this feature extraction. In 
