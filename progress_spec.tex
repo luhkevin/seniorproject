@@ -250,16 +250,6 @@ language processing, one often deals with parse trees as input data, and this ke
 represents another way for structured data to be used with other standard machine learning
 algorithms, such as autoencoders.
 
-%TODO: structured data and convolution kernels
-
-% possibly implementation
-Notice that as the dimension
-of the hidden layer increases, the optimal transformation matrix approaches the identity, since
-the identity matrix is the best possible representation if the hidden layer had the same dimension
-as the input. To create useful representations even in these situations, the autoencoder is trained
-by intentionally corrupting the input, passing it through the autoencoder, and doing a gradient
-descent on the error between the output and the original input.
-
 \section{System Model}
 \label{sec:sysmodel}
 
@@ -311,6 +301,24 @@ functional as languages such as Haskell. It has procedural elements that facilli
 implementing and prototyping the various algorithms and models that we have researched. In addition, 
 there is a linear algebra for OCaml called Lacaml that uses BLAS and LAPACK as its backend, which 
 are two well-established, robust and performant linear algebra libraries.
+
+In terms of the query interface, it currently contains all the functionality needed for basic queries.
+This includes the basic ``wildcard" and ``constant" queries, as well as support for ``pair" and ``either"
+queries. This was created using the standard OCaml interface setup. In the future, extra queries
+will be needed to deal with structured data, but the interface will be easily extensible due to
+the flexible type system of OCaml.
+
+We have created one possible type of memory using the autoencoders discussed in the related work
+section. An autoencoder uses hidden layers (matrices) to perform transformations on input vectors,
+compressing them to a lower dimension and doing a reverse transformation to retrieve them. 
+It learns the correct matrices by comparing the input values
+to the retrieved ones and adjusting appropriately. Notice that as the dimensionality
+of the hidden layer increases, the optimal transformation matrix approaches the identity, since
+the identity matrix is the best possible representation if the hidden layer had the same dimension
+as the input. To create useful representations even in these situations, the autoencoder is trained
+by intentionally corrupting the input, passing it through the autoencoder, and doing a gradient
+descent on the error between the output and the original input. This trains the autoencoder
+to be able to reconstruct partially missing input, as is the goal of our query interface.
 
 \section{System Performance}
 \label{sec:sysperformance}
