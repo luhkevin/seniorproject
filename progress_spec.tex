@@ -207,6 +207,25 @@ of feature vectors. One such modern technique is the autoencoder. Researchers Hi
 describe a method of creating deep autoencoders to learn low dimensionality codes that maintain
 high fidelity with respect to codes of the original dimension.
 
+\begin{figure}[h]
+	\begin{center}
+		\includegraphics[width=0.75\linewidth]{filters_corruption_30.png}
+	\end{center}
+	\vspace{-12pt}
+	\caption{Features extracted from pictures of single digits}
+	\label{fig:features}
+\end{figure}
+
+As an example - figure \ref{fig:features} is a set of features for pictures of handwritten single 
+numerical digits (0-9) from the 
+MNIST dataset, a dataset with 60,000 training examples
+and 10,000 test examples. All of the examples have 
+been normalized in size and position, as well as color. Due to the preprocessing, 
+it is commonly used in machine learning for testing out learning techniques on real world data. 
+These features were extracted from a simple one-layer autoencoder, which manages to capture small
+regions of the input image as "features". 
+
+
 An extension of classic autoencoders called a denoising autoencoder has the ability to reconstruct 
 partially missing or corrupt inputs. This property of denoising autoencoders make them extremely 
 promising for use in a memory system. Denoising autoencoders work by passing input through a hidden 
@@ -298,21 +317,37 @@ manual tests with set parameters and tiny data points seem to heavily favor the 
 implementation with respect to performance. This is likely due to the gradient descent
 method used. While concrete 
 tests of actual data sets have not 
-been run, test runs of the reference implementation has been run locally. A chart of
+been run, test runs of the reference implementation has been run locally. A chart of runtime
 performance for those runs is provided, as well as estimated performance of our current 
-implementation given our small manual tests. 
+implementation given our small manual tests (Figure \ref{fig:performance}). 
 
-This reference implementation is run on the MNIST dataset, a dataset with 60,000 training examples
-and 10,000 test examples of handwritten single numerical digits. All of the examples have 
-been normalized in size and position, as well as color. Due to the preprocessing, 
-it is commonly used in machine learning for testing out learning techniques on real world data. 
+\begin{figure}[h]
+	\begin{center}
+		\includegraphics[width=1\linewidth]{performance.png}
+	\end{center}
+	\vspace{-12pt}
+	\caption{Estimated runtime performance of current implementation and runtime performance of reference implementation}
+	\label{fig:performance}
+\end{figure}
 
+This reference implementation is run on the 
 Accuracy-wise, it seems that our current implementation suffers from a bit of inaccuracy
 when compared to the reference implementation. This is likely due to the symbolic math
 package used in the Python-based reference implementation, which can defer calculations
-and perform symbolic differentiation, resulting in higher accuracy. Again, since only
-small manual tests have been run, the following accuracy chart is with estimated current
-performance. 
+and perform symbolic differentiation, resulting in higher accuracy. Since only
+small manual tests have been run, the following chart of cross-entropy error is with just the
+reference implementation error. 
+
+\begin{figure}[h]
+	\begin{center}
+		\includegraphics[width=1\linewidth]{error.png}
+	\end{center}
+	\vspace{-12pt}
+	\caption{Cross-entropy error of target implementation}
+	\label{fig:performance}
+\end{figure}
+
+
 
 \section{Remaining Work}
 \label{sec:project_proposal}
