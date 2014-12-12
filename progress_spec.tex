@@ -45,16 +45,19 @@
 \date{}
 \maketitle
 
+% TODO: don't mention ocaml except in system implementation.
+% TODO: get rid of "we"?
+
 % Next we write out our abstract -- generally a two paragraph maximum,
 % executive summary of the motivation and contributions of the work.
 \begin{abstract}
-    The goal of this project is to create a programming language library that provides an interface
-    for programming with a probabilistic associative memory, as well as various implementations of these memories. 
+    Our goal is to create a programming language library that provides an interface
+    for programming with a probabilistic associative memory.  
     An associative memory allows queries by content rather than by address or location.
     Probabilistic associative memory returns a value based on a probability model
     for a given memory query. This project provides an intuitive interface to this probabilistic
-    associative memory to facilliate programming efficiency for the end user.
-
+    associative memory to facilliate programming efficiency for the end user. It will primarily 
+    accomplish this by providing an easier way to handle structured input data for the user. 
 \end{abstract}
 
 \section{Introduction}
@@ -107,80 +110,86 @@ Practical applications of probabilistic associative memories involve various app
 These involve appliactions such as image reconstruction from noisy input data, or search autocompletion.
 This project strives to provide a simple, flexible interface to work with these probabilistic associative memories.
 
+%TODO 
+%FIGURE: Standard flow for ML 
+Training data --> manually convert into feature vectors --> run vectors through classifier algorithms/models --> get classification results/decisions
 
 \section{Related Work}
 \label{sec:related_work}
 
-With regards to existing related work, the goal of this project is not to advance associative memory techniques.
-Rather, it is seeking to research existing models for associative memory, provide a simple probabilistic query interface, and create 
-implementations that fit this interface. With that in mind, there are many works that address different forms of associative memory. 
+With regards to existing related work, the goal of this project is not to advance associative memory 
+techniques. Rather, it is seeking to research existing models for associative memories, provide a 
+simple probabilistic query interface, and integrate a method of extracting essential features from 
+the structured data that is input into the memory. With that in mind, there are many works that 
+address associative memory and feature extraction from structured data.
+
+Research in associative memory has close connections to neural networks. Our brains function as 
+associative memories that can retrieve memories based on similarity between stimuli and the memories 
+themselves.  Indeed, Norman and Bobrow~\cite{bobrow} construct a memory model which describes how 
+minds retrieve items in memory from partial descriptions, even if some part of the description is 
+incorrect or inaccurate. 
+
+Applying this memory model to computation, Hinton~\cite{hinton} draws a connection between Norman 
+and Bobrow's idea of retrieving memories based on partial descriptions and content-addressable 
+memories.  Hinton then notes that although this content-addressable memory is a useful 
+representation, it is difficult to efficiently ``search for content" through a memory space. 
+Hinton ends by claiming that while this model is conceptually not difficult, it is difficult to 
+actually implement it. He mentions that an approach to this problem that has arisen recently is with 
+stochastic processes -- heralding a probabilistic approach to this associative memory problem. Thus, 
+both Willshaw and Hinton offer probabilistic models
+of dealing with associative memories.
 
 \section{System Model}
 \label{sec:sysmodel}
 
-One of the seminal works concerning associative memories is Willshaw's \textit{Non-holographic
-Associative Memory}~\cite{holographic}. This paper describes a model for a probabilistic associative memory
-that holds relations between elements of a query space and elements of an output space. A query
-to the memory comes in the form of an element in the query space, and the memory returns the
-output that was most likely related to the query element, with a certain degree of confidence.
-This model also guaranteed that if a query element was never stored in the memory, a relation
-would not be found for that element, with the same degree of confidence as above.
+%TODO: talk more about the memory?
+%TODO: clean up ML part?
+Figure 1 shows a model of the workflow of using this programming library. Similar to standard 
+machine learning applications, the user will start with a set of training data which can take 
+various structures such as trees or lists. The user will need to specify the type or structure
+of data he is using to the library, so the library will know how to process it appropriately. 
+For instance, extracting feature vectors from text represented as trees could be very different
+from extracting vectors from text represented as lists. Next, the library will use an algorithm
+or model, as detailed later, to actually perform this feature extraction. The rest of the library 
+after feature extraction will more or less proceed according to standard machine learning methods.
+That is, the library will run the vectors through classification algorithms and models 
+and return the classification results or decisions.
 
-Willshaw's paper was the first to present a model for emulating an associative memory
-probabilistically, without storing each element pair explicitly,
-and much of the following research on memory compression methods
-for probabilistic associative memory were based on this work. While Willshaw's model
-enforced a strict mapping between the stored elements, later work also found ways to
-give likely matches for elements which the memory has never seen.
+%TODO: remember to change figure numbers
+
+%FIGURE: Standard flow for this library implementation
+Figure 1. 
+Training data --> specify the data types/structures --> push into library --> library extracts feature vectors, perhaps through convolution kernels OR the linear autoencoder networks -->
+run vectors through classifier algorithms/models --> get classification results/decisions
+
+
+%TODO: We say "reiterate" here, so make sure to talk about convolution kernels and autoencoder 
+%networks in related work
+From our research, we have investigated methods that handle ``automatic" feature extraction, given
+the data type or structure. To reiterate, convolution kernel methods and linear autoencoder networks 
+could accomplish this. These methods have been tested and applied to NLP applications and 
+classification problems.
 
 \section{System Implementation}
 \label{sec:sysimp}
 
-Research in associative memory has close connections to neural networks. Our brains function as 
-associative memories that can retrieve memories based on similarity between stimuli and the memories themselves. 
-Indeed, Norman and Bobrow~\cite{bobrow} construct a memory model which describes how minds retrieve 
-items in memory from partial descriptions, even if some part of the description is incorrect or inaccurate. 
+%TODO: how much do we want to talk about blas/lapack here?
+In order to implement a generalized process for handling structured data, the programming language 
+library will be written in OCaml. OCaml is a functional language, so it will be more elegant and 
+efficient to use when handling structured data. That is, eventually, the library will have the 
+capability to handle user-defined data types, and creating a user-defined type in OCaml is a more
+fluid process than it would be in procedural languages. OCaml, however, is not as purely functional 
+as languages such as Haskell. It has procedural elements that facillitates the ease of implementing and prototyping the various algorithms and models that we have researched. In addition, there is a 
+linear algebra for OCaml called Lacaml that uses BLAS and LAPACK as its backend, which are two
+well-established, robust and performant linear algebra libraries.
 
-Applying this memory model to computation, Hinton~\cite{hinton} draws a connection between Norman and Bobrow's idea of 
-retrieving memories based on partial descriptions and content-addressable memories.
-Hinton then notes that although this content-addressable memory is a useful representation,  
-it is difficult to efficiently ``search for content" through a memory space. 
-%In this model, memory is a ``pattern of activity" that constructs the most plausible process based on the given memory queries. 
-Hinton ends by claiming that while this model is conceptually not difficult, it is difficult to actually 
-implement it. He mentions that an approach to this problem that has arisen recently is with stochastic processes 
--- heralding a probabilistic approach to this associative memory problem. Thus, both Willshaw and Hinton offer probabilistic models
-of dealing with associative memories.
 
 \section{System Performance}
 \label{sec:sysperformance}
-Later on, the development of Hopfield networks introduced a new form of neural network
-that handles associative memory. These neural networks may be used as content-addressable memory by
-storing memories on a constant number of nodes and connections, with a similar loss of 
-fidelity as the Willshaw paper's model. While it had been shown that the theoretical maximum capacity for these networks
-can asymptotically approach twice the network size~\cite{gardner}, the initial Hopfield model 
-provided relatively low capacity. Work by Palm~\cite{palm} details the history of 
-neural associative memories (including the Willshaw model), the limitations of the initial Hopfield model, and the improvements
-that have been made upon it. Namely, it mentions using the Hebb learning rule over the original
-Hopfield learning rule and the importance of sparse coding of patterns. 
-
-Sparse coding in particular is quite important in Hopfield networks (and in unsupervised
-machine learning in general). For various applications, it is beneficial to utilize
-structural similarities to represent the input in a smaller space. In particular, quite 
-accurate reconstructions can be created from damaged or noisy images, where details that were 
-not even present in the input can be recovered. While this particular example primarily has its uses in, say, 
-medical imaging~\cite{yang}, sparse coding has been incredibly useful in increasing the
-capacity of these neural associative memories. 
 
 
 \section{Remaining Work}
 \label{sec:project_proposal}
-The OCaml language will be used to implement this probabilistic associative memory. 
-Based on the specific probability distribution and model in use, the library would return 
-a different memory value for each query.
-As such, our library will have user-defined support for different probability paradigms. 
-After the library is created, applications will be created with the library to demonstrate the benefits of using this implementation
-of probabilistic associative memory.
-
 
 %The first step is to create a programming language interface for probabilistic
 %associative memories. This involves implementing a domain specific language: 
@@ -245,8 +254,6 @@ of probabilistic associative memory.
 %	\label{fig:block2}
 %\end{figure}
 
-\subsection{Technical Challenges}
-\label{subsec:tech_challenges}
 %The foremost technical challenges in our project involve creating the programming interface,
 %the logistics of incorporating probabilistic models into the memory mechanism, and
 %the mathematics involved in these models.
@@ -292,13 +299,10 @@ of probabilistic associative memory.
 %existing associative memory algorithms, it seeks to provide a simple, flexible interface for implementing associative memory applications.
 
 
-\section{}
-\label{sec:}
-
 % We next move onto the bibliography.
 \bibliographystyle{plain} % Please do not change the bib-style
 \bibliography{progress_spec}  % Just the *.BIB filename
-
+\cite{holographic}
 % Here is a dirty hack. We insert so much vertical space that the
 % appendices, which want to begin in the left colunm underneath
 % "references", are pushed over to the right-hand column. If we looked
