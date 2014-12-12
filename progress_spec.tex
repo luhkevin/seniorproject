@@ -102,14 +102,6 @@ will have the biggest impact.
 
 %TODO: reference to figure 1...update?
 
-%Since our queries work directly with a probability model, it would offer more fluidity
-%with programming that involves statistical modeling or simulations. 
-%Returning values based on a probability also saves memory because not every value has to be stored. 
-%In a simplistic representation of a probability model, a frequency table of memory values can be constructed as memory values are stored.
-%The queries would then consist of a set of values, and a likelihood would be generated based on both frequency and some matching metric in that query-set.
-%Thus, the memory mechanism can extrapolate or interpolate a response to a query based on values 
-%previously inserted into memory. 
-
 %See Figure 1 for a representation of the flow of this probabilistic mechanism.
 \begin{figure}[H]
 	\begin{center}
@@ -119,23 +111,6 @@ will have the biggest impact.
 	\caption{Model of Standard Machine Learning Workflow}
 	\label{fig:mlworkflow}
 \end{figure}
-
-%The implementation may also include support for structured data in the probabilistic associative memory.
-%In a standard associative memory scheme, a similarity query is done by comparing input bits
-%to the values stored in memory. However, this does not allow for accurate similarity comparisons
-%between trees or lists, as the memory is not aware of the underlying structure. As a result,
-%many applications on structured data will first flatten the structure, perform the requisite 
-%calculations, then reconstruct the original structure of that data. With a built-in type system
-%that supports structured data, the user will be able to directly manipulate the data in memory 
-%while keeping the structure intact.
-
-%Practical applications of probabilistic associative memories involve various approximation and prediction methods.
-%These involve appliactions such as image reconstruction from noisy input data, or search autocompletion.
-%This project strives to provide a simple, flexible interface to work with these probabilistic associative memories.
-
-%TODO 
-%FIGURE: Standard flow for ML 
-%Training data --> manually convert into feature vectors --> run vectors through classifier algorithms/models --> get classification results/decisions
 
 \section{Introduction}
 \label{sec:intro}
@@ -211,7 +186,7 @@ Hinton's issue of searching through a memory efficiently is related to the size 
 one would feed into a neural network.  To address the issue of increasingly large data sets, 
 resulting in larger and larger feature vectors, much research has been made to decrease 
 dimensionality of feature vectors. One such modern technique is the autoencoder. Researchers Hinton 
-and Salakhutdinov ~\cite{autoencoder} describe a method of creating deep autoencoders to learn low 
+and Salakhutdinov~\cite{autoencoder} describe a method of creating deep autoencoders to learn low 
 dimensionality codes that maintain high fidelity with respect to codes of the original dimension.
 
 \begin{figure}[h]
@@ -262,37 +237,7 @@ algorithms, such as autoencoders.
 \section{System Model}
 \label{sec:sysmodel}
 
-Lorem Ipsum Query Interface
-Lorem Ipsum Query Interface
-Lorem Ipsum Query Interface
-Lorem Ipsum Query Interface
-Lorem Ipsum Query Interface
-Lorem Ipsum Query Interface
-Lorem Ipsum Query Interface
-Lorem Ipsum Query Interface
-Lorem Ipsum Query Interface
-
 %TODO: remember to change figure numbers
-
-%FIGURE: Standard flow for this library implementation
-\begin{figure}[H]
-	\begin{center}
-		\includegraphics[width=1\linewidth]{queryint}
-	\end{center}
-	\vspace{-12pt}
-	\caption{Query Interface of Library}
-	\label{fig:queryint}
-\end{figure}
-
-Lorem Ipsum Query Interface
-Lorem Ipsum Query Interface
-Lorem Ipsum Query Interface
-Lorem Ipsum Query Interface
-Lorem Ipsum Query Interface
-Lorem Ipsum Query Interface
-Lorem Ipsum Query Interface
-Lorem Ipsum Query Interface
-Lorem Ipsum Query Interface
 
 %FIGURE: Standard flow for this library implementation
 \begin{figure}[H]
@@ -346,7 +291,18 @@ In terms of the query interface, it currently contains all the functionality nee
 This includes the basic ``wildcard" and ``constant" queries, as well as support for ``pair" and ``either"
 queries. This was created using the standard OCaml interface setup. In the future, extra queries
 will be needed to deal with structured data, but the interface will be easily extensible due to
-the flexible type system of OCaml.
+the flexible type system of OCaml. The interface also has the ability to use different types
+of underlying mechanisms as a memory (Figure \ref{fig:queryint}).
+
+%FIGURE: Standard flow for this library implementation
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[width=1\linewidth]{queryint}
+	\end{center}
+	\vspace{-12pt}
+	\caption{Query Interface of Library}
+	\label{fig:queryint}
+\end{figure}
 
 We have created one possible type of memory using the autoencoders discussed in the related work
 section. An autoencoder uses hidden layers (matrices) to perform transformations on input vectors,
@@ -359,13 +315,6 @@ as the input. To create useful representations even in these situations, the aut
 by intentionally corrupting the input, passing it through the autoencoder, and doing a gradient
 descent on the error between the output and the original input. This trains the autoencoder
 to be able to reconstruct partially missing input, as is the goal of our query interface.
-
-\subsection{Current Progress}
-\label{sec:current prog}
-
-Currently, a simple probabilistic memory with a histogram-based memory backend that handles basic 
-types, such as integers, booleans, pairs, and other simple types has been implemented. To expand 
-upon this basic framework...
 
 \section{System Performance}
 \label{sec:sysperformance}
@@ -439,113 +388,6 @@ of library support for the methods that will be implemented. Thus, we forsee tha
 library will be able to accomplish its goals, it may not be as performant as existing 
 libraries. However, even existing libraries are few in number, so this library will hopefully
 be impactful regardless. 
-
-%The first step is to create a programming language interface for probabilistic
-%associative memories. This involves implementing a domain specific language: 
-%defining a type system as well as a syntax for programming with an underlying memory.
-%A major component of this syntax will be the grammar of memory storage, 
-%as well as the different types of queries that can be made to the memory. The complexity allowed
-%within our query interface is of particular importance, as it directly
-%interfaces with the probability model. Thus, we must carefully consider 
-%how additional complexity may be implemented within models. 
-%
-%On a basic level, there are certain required operations that need to be 
-%supported, such as creation of a memory and storage of values. Moreover,
-%there must be some form of querying, with at least basic support for querying
-%for a literal equality match. A diagram of the interface can be shown in Figure 1.
-%
-%Additional complexity can be added with support for OCaml's pairs and the 
-%ability to query for a match of the left, right, or both parts of the pair. Functions that transform
-%queries using logical operations may be added as well. 
-%
-%%\begin{figure}[H]
-%%	\begin{center}
-%%		\includegraphics[width=1\linewidth]{pammodel}
-%%	\end{center}
-%%	\vspace{-12pt}
-%%	\caption{Model of Probabilistic Associative Memory Mechanism}
-%%	\label{fig:pammodel}
-%%\end{figure}
-%
-%Perhaps a very significant source of complexity would come from evaluating
-%queries, which raises the question
-%of how they may be implemented. 
-%As a simple example, queries for matching strings can be implemented in varying 
-%degrees of complexity - from simple literal matching, to edit distance matching, 
-%to even meaning analysis. For generic datatypes, as supported in this presented
-%library, the issue becomes much more difficult. We anticipate requiring user
-%input in order to determine how to calculate similarity, much like how 
-%supervised machine learning algorithms require features to be decided. 
-%While this does
-%introduce an extra requirement for use, it will allow easy integration with
-%structured data such as lists or trees. Alternatively, a form of feature
-%selection may be useful, although usefulness may be limited without knowledge
-%of the data type. 
-%
-%After the design stage, we will implement various types of probabilistic associative memories.
-%An initial example implementation of the interface may be a deterministic version that
-%ensures fidelity and keep track of every value that
-%was stored in it. Later implementations will try to conserve memory space,
-%and compress the stored values. We will work on several different data representation methods,
-%including those related to neural networks. 
-%
-%By creating this interface, users of this programming language will be able to
-%choose the type of memory and probabilistic model that most suits the needs of their particular
-%application. Moreover, it will allow users to implement the interface with their own models as necessary, 
-%as well as provide easy usage of the provided probabilistic models (Figure 2).
-
-%\begin{figure}[H]
-%	\begin{center}
-%		\includegraphics[width=1\linewidth]{block2}
-%	\end{center}
-%	\vspace{-12pt}
-%	\caption{Programming Pipeline of our Library}
-%	\label{fig:block2}
-%\end{figure}
-
-%The foremost technical challenges in our project involve creating the programming interface,
-%the logistics of incorporating probabilistic models into the memory mechanism, and
-%the mathematics involved in these models.
-%
-%Regarding the interface that the end user (programmer) sees, she should not have to be aware of 
-%the inner workings of each probabilistic model, but expect reasonable and intuitive return values
-%to each query into the probabilistic memory. For instance, if she is prioritizing accuracy 
-%in her use of the library, she would expect a return value that was previously inserted and that 
-%returns the highest probability for the given query.
-%
-%However, it is also necessary to give the programmer enough power and flexibility with our library for 
-%whatever probabilistic applications she will be using it for. This involves enabling 
-%her to create query combinations and queries of different types. Still, flexibility may 
-%come at the cost of complexity - implementing features to accommodate arbitrary data, queries,
-%and probabilistic models quickly increases the complexity of this project. 
-%
-%Regarding mathematics, it is necessary to further research mathematical 
-%and probabilistic methods that would be implemented in this library. After implementing these methods,
-%we will need to verify that mathematical or probabilistic models behave as expected. 
-%For instance, if the previous values inserted into a high-fidelity probabilistic memory were ``cat, dog, mouse, horse", and we queried for an entry that best
-%matches ``mousse", 
-%then the expected return value would be ``mouse", since ``mouse" is the word most
-%similar to our input. 
-%Of course, in our actual implementation, we will have more complicated mechanisms than the one above. Perhaps the correct answer should not be ``mouse" depending
-%on how the user defines similarity. 
-%Thus, another challenge involves testing that our return values achieve a certain standard of accuracy or fidelity.
-%
-%\subsection{Evaluation Criteria}
-%\label{subsec:eval_criteria}
-%There are two main criteria which, combined, makes this library novel and effective. 
-%The first criterion is that it provides comparable results to other associative memory techniques. 
-%For instance, an autocomplete program (of sentences) can be written with this library and compared against an existing implementation of autocompletion. 
-%Evaluating the correctness and results of these autocompletion programs may involve taking a collection of existing sentences and truncating them
-%at certain places. First, a set of training data along with the truncated sentences will be passed into both autocompletion programs. 
-%Then, the percentage of words that each program autocompleted correctly will be returned as the evaluation metric. 
-%
-%The second criterion, which is the main focus of the library, involves simplifying the programming interface for associative memory techniques.
-%To evaluate this criterion, we will analyze how generic our code is. That is, given an autocompletion program, suppose one wanted to adapt this 
-%program for recognizing a melody based only on a musical fragment or phrase. Ideally, the library would facillitate minimal changes to the existing 
-%autocompletion program. The user would only need to provide different functions for evaluating the data, and the rest of the framework can remain as it is. 
-%
-%The utility of this library lies in its generality in implementing associative memory techniques. While this project does not attempt to improve 
-%existing associative memory algorithms, it seeks to provide a simple, flexible interface for implementing associative memory applications.
 
 
 % We next move onto the bibliography.
