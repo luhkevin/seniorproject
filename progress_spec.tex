@@ -111,8 +111,9 @@ applied to a classification problem in machine learning.
 \end{figure}
 
 The autoencoder and kernel methods are specific methods in machine learning that aid with feature
-extraction.  Autoencoders are neural networks that take in a set of data and return a reduced, 
-compressed representation of that data. That is, it returns an encoding. This is akin to feature 
+extraction. Autoencoders are neural networks that take in a set of data and return a reduced, 
+compressed representation of that data. That is, it returns an encoding that represents the qualities of
+the original data as faithfully as possible. This is akin to feature 
 extraction, since the whole concept of feature extraction is finding the essential features 
 of a set of data. As shown in Figure \ref{fig:kernelmeth}, kernel methods are a way of projecting
 a set of data in one space to another space, with the intention that it may
@@ -120,7 +121,9 @@ be easier to extract and separate essential data in the latter space. As shown i
 points on the $xy-$plane are not separable with a hyperplane, but when projected into three 
 dimensions, they are more easily separated, and thus easier to classify into ``red" and ``blue" 
 categories. If ``red" and ``blue" are thought of as separate features, then it is apparent to see
-how kernel methods aid in classifying features of a dataset.
+how kernel methods aid in classifying features of a dataset. Notably though, kernel methods can
+also increase the dimensionality of the data, in the hopes that the new feature space is more 
+descriptive than the old. 
 
 \begin{figure}[h]
 	\begin{center}
@@ -140,15 +143,20 @@ project will have the biggest impact.
 \section{Introduction}
 \label{sec:intro}
 
-In machine learning, the process of feature extraction is dependent upon
-the type and structure of the data. Whether the input data set is 
-represented as lists, pairs, trees, or another type of data structure will 
-have a huge impact on how feature extraction will occur. 
+In machine learning, the process of obtaining features from data is dependent upon
+the type and structure of the data. While for certain things like strings or images
+will have features such as word count or pixel value, structured data such as lists, pairs, 
+trees, or other types of data structure can potentially be much more complicated due to the
+recursive nature of lists and trees.
 
 Handling this issue with structured data of any generic type is an important feature of the 
-programming language library, and various methods of this genericized feature extraction have been 
-investigated. Since these extraction methods are intended to be applied on top of the probabilistic
+programming language library, and various methods of this genericized feature projection have been 
+investigated. Since these methods are intended to be applied on top of the probabilistic
 associative memory, work on the memory backend of the library interface has also been accomplished.
+
+Moreover, after features are obtained, feature extraction to reduce the set of descriptive
+features is generally necessary. This is especially necessary for structured data 
+inputs, as features are created to describe not only the content, but the structure of the data.
 
 What must still be done is integrating these extraction methods with the library interface.
 As will be detailed later, there has been research done on linear autoencoders
@@ -192,7 +200,11 @@ stochastic processes -- heralding a probabilistic approach to this associative m
 Hinton's issue of search efficiency is related to the size of the data sets that
 one would feed into a neural network.  To address the issue of increasingly large data sets, 
 resulting in larger and larger feature vectors, much research has been made to decrease 
-dimensionality of feature vectors. One such modern technique is the autoencoder. Researchers Hinton 
+dimensionality of feature vectors. An early but effective technique is principle component
+analysis, or PCA, which utilizes matrix operations and covariance of features to ensure
+that the reduced dimensionality feature space is as representative as possible of the original
+feature space. A more modern technique introduced earlier is the autoencoder, which performs a
+similar dimensionality mapping, but using neural network techniques. Researchers Hinton 
 and Salakhutdinov~\cite{autoencoder} describe a method of creating deep autoencoders to learn low 
 dimensionality codes that maintain high fidelity with respect to codes of the original dimension.
 
@@ -214,7 +226,8 @@ which manages to capture small regions of the input image as "features".
 
 An extension of classic autoencoders called a denoising autoencoder has the ability to reconstruct 
 partially missing or corrupt inputs. This property of denoising autoencoders make them extremely 
-promising for use in a memory system. Denoising autoencoders work by passing input through a hidden 
+promising for use in a memory system. Like classic autoencoders, 
+denoising autoencoders work by passing input through a hidden 
 layer, a matrix that represents a transformation, to encode it in a lower dimension. The original 
 input is then ``retrieved" by doing a reverse transformation on the encoded version.~\cite{denoise}
 
@@ -225,8 +238,7 @@ extremely useful to represent data in a structured form, rather
 than converting it to feature vectors. In relation to this, Alessandro Sperduti~\cite{sperduti}
 found a way to create linear autoencoder networks for structured data, specifically
 arbitrary sequences and trees. The idea is that linear autoencoder networks are actually
-closely linked to Principal Component Analysis, a different technique for reducing
-dimensionality of inputs. By using this connection and modeling the structured data via
+closely linked to PCA. By using this connection and modeling the structured data via
 linear dynamical systems, Sperduti was able to create a way to store structured data
 in an autoencoder network.
 
