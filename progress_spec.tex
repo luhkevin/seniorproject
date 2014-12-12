@@ -194,15 +194,36 @@ stochastic processes -- heralding a probabilistic approach to this associative m
 
 To address the issue of increasingly large data sets, resulting in larger and larger feature vectors,
 much research has been made to decrease dimensionality of feature vectors. One such modern technique
-is the autoencoder. Researchers Hinton and Salakhutdinov %cite
+is the autoencoder. Researchers Hinton and Salakhutdinov~\cite{autoencoder}
 describe a method of creating deep autoencoders to learn low dimensionality codes that maintain
 high fidelity with respect to codes of the original dimension.
 
+%TODO cite the deeplearning website
 An extension of classic autoencoders called a denoising autoencoder has the ability to reconstruct partially missing or
 corrupt inputs. This property of denoising autoencoders make them extremely promising for use
 in a memory system. Denoising autoencoders work by passing input through a hidden layer, a matrix
 that represents a transformation, to encode it in a lower dimension. The original input is then
 ``retrieved" by doing a reverse transformation on the encoded version. 
+
+While a denoising autoencoder acts as an effective probabilistic associative memory, it is
+limited by the fact that it works only on vectors as input. There are many cases in machine
+learning, in fields such as bioinformatics and natural language processing where it would be 
+extremely useful to represent data in a structured form, rather
+than converting it to feature vectors. In relation to this, Alessandro Sperduti %cite
+found a way to create linear autoencoder networks for structured data, specifically
+arbitrary sequences and trees. The idea is that linear autoencoder networks are actually
+closely linked to Principal Component Analysis, a different technique for reducing
+dimensionality of inputs. By using this connection and modeling the structured data via
+linear dynamical systems, Sperduti was able to create a way to store structured data
+in an autoencoder network.
+
+A comlementary technique to that of Sperduti is kernel methods. Kernel methods refers to the
+use of a kernel function to preprocess input to make it easier for certain algorithms to run. 
+While kernel methods exist for a vast array of problems and data sets, Collins and Duffy %cite
+created a method called convolution kernels for natural language processing. In natural
+language processing, one often deals with parse trees as input data, and this kernel technique
+represents another way for structured data to be used with other standard machine learning
+algorithms, such as autoencoders.
 
 %TODO: structured data and convolution kernels
 
