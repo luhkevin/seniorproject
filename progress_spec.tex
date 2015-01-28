@@ -55,10 +55,11 @@
 % executive summary of the motivation and contributions of the work.
 \begin{abstract}
     Our goal is to create a programming language library that provides an interface
-    for programming with a probabilistic associative memory.
-    A probabilistic associative memory receives an input and returns a value associated with
-    or similar to the input. This project provides an intuitive interface to this probabilistic
-    associative memory to facilliate programming efficiency for the end user. It will primarily
+    for programming with an autoassociative memory. Common data structures such as 
+    arrays or hashmaps use memory addresses or exact key lookups for retrieving entries.
+    This is very different from human memory, which essentially functions as a less exact, heuristic
+    based memory. Similarly, an autoassociative memory receives an input and returns a value similar to the input. Like human memory, the input does not have to exactly match existing entries
+    for values to be returned. This project provides an intuitive interface to this autoassociative memory to facilitate programming efficiency for the end user. It will primarily
     accomplish this by providing an easier way to handle structured input data for the user, as well
     as automatically managing user-defined types in memory.
 \end{abstract}
@@ -401,6 +402,7 @@ reference implementation error.
 		\includegraphics[width=1\linewidth]{error.png}
 	\end{center}
 	\vspace{-12pt}
+    
 	\caption{Cross-entropy error of target implementation}
 	\label{fig:error}
 \end{figure}
