@@ -249,16 +249,11 @@ language processing, one often deals with parse trees as input data, and this ke
 represents another way for structured data to be used with other standard machine learning
 algorithms, such as autoencoders.
 
-\section{System Model}
-\label{sec:sysmodel}
+\section{System Model}\label{sec:sysmodel}
 
 %TODO: talk more about the memory?
 %Figure \ref{fig:ourworkflow} shows a model of the workflow of using this programming library, as 
-%used for machine learning. 
-In similar fashion to standard machine learning applications, the user 
-will start with a set of training data which can take various structures such as trees or lists. The 
-user will then need to specify the type and structure of the data he is inputting to the library, so 
-the library will know how to process it appropriately. 
+%used for machine learning.
 
 %FIGURE: Standard flow for this library implementation
 %\begin{figure}[h]
@@ -269,20 +264,46 @@ the library will know how to process it appropriately.
 %	\caption{Library Interface Workflow as Applied to Machine Learning}
 %	\label{fig:ourworkflow}
 %\end{figure}
+%\vspace{10pt}
 
-\vspace{10pt}
+The two core components of the library are the query interface and the autoassociative memory that
+can automatically handle structured data such as trees or lists.
 
-Regarding this data specification, the user will do this implicitly when he processes 
-his sample data and loads it into custom types defined by the library or by OCaml itself. 
-Next, the library will use an algorithm or model to actually perform this feature extraction. In 
-comparison to the standard machine learning workflow in Figure \ref{fig:mlworkflow}, the workflow 
-when using this library will provide automatic feature extraction, as opposed to requiring the 
-programmer to manually extract the feature through his own custom code.  The rest of the library 
-after feature extraction will more or less proceed according to standard machine learning methods.
-That is, the library will run the vectors through classification algorithms and models 
-and return the classification results or decisions to be used on actual, untrained data.
+The query interface must support the \textit{wildcard} and \textit{constant} queries. The wildcard
+query represents a missing value in the data that should be filled out by the memory, and the constant
+query represents a value that should exist in the output of the memory. Using these two queries,
+other queries can be made as a convience for the user. The \textit{pair} query simultaneously
+passes two values through the memory, which can be very helpful in shortening code length for the user.
 
-For instance, consider an input vector $x$, for a machine learning problem. As shown in Equation 1, $x$ can be transformed to a lower dimension 
+The autoassociative memory will accept queries, which are structures composed of constant and wildcard queries,
+and convert these structures into vectors that can be handled by an implementation of an autoencoder
+network. There is no conventional way to do this conversion as it is a relatively new field, but
+Sperduti's~\cite{sperduti} approach is one possible solution.
+
+%In similar fashion to standard machine learning applications, the user
+%will start with a set of training data which can take various structures such as trees or lists. The
+%user will then need to specify the type and structure of the data he is inputting to the library, so
+%the library will know how to process it appropriately.
+
+%Regarding this data specification, the user will do this implicitly when he processes
+%his sample data and loads it into custom types defined by the library or by OCaml itself.
+%Next, the library will use an algorithm or model to actually perform this feature extraction. 
+
+In comparison to the standard machine learning workflow in Figure \ref{fig:mlworkflow}, the workflow
+when using this library will provide automatic feature extraction for these data structures, as opposed to
+requiring the programmer to manually extract the features through custom code.
+
+%The rest of the library
+%after feature extraction will more or less proceed according to standard machine learning methods.
+%That is, the library will run the vectors through classification algorithms and models
+%and return the classification results or decisions to be used on actual, untrained data.
+
+Lastly, these vectors can be passed into a denoising autoencoder to reconstruct the missing values
+in the original structure, where the wildcard queries were. The resulting vector can then be restored
+to the original form. The basic theory behind denoising autoencoders is detailed next.
+
+Consider an input vector $x$, for a machine learning problem.
+As shown in Equation 1, $x$ can be transformed to a lower dimension
 vector $y$ by applying a transformation matrix $W$ and adding a bias value $b$, then applying a non-
 linear transformation $s$, such as the sigmoid function
 
@@ -290,21 +311,21 @@ linear transformation $s$, such as the sigmoid function
 y = s(Wx + b).
 \end{gather}
 
-Then the original value can be ``retreived" by applying reverse transformations to $y$, using
-a different matrix $W'$ and bias factor $b'$, as shown in Equation 2.
+Then the original value can be retrieved, with some amount of error, by applying reverse transformations to $y$,
+using a different matrix $W'$ and bias factor $b'$, as shown in Equation 2
 
 \begin{gather}
-z = s(W' y  + b')
+z = s(W' y  + b').
 \end{gather}
 
 Finally, the correct matrices can be learned by comparing the input value $x$ to the retrieved value $z$ 
 using the cross-entropy error rate $L(x,z)$, as shown in Equation 3. The $W$ matrix and $b$ vector
 are updated using gradient descent. That is, the error is differentiated
 with respect to the weight matrix $W$ and the bias value $b$, and $W$ and $b$ are then updated in the
-direction of decreasing error. 
+direction of decreasing error
 
 \begin{gather}
-L(x,z) = -\sum_{k=1}^d [x_k \log z_k + (1-x_k) \log( 1-z_k)]
+L(x,z) = -\sum_{k=1}^d [x_k \log z_k + (1-x_k) \log(1-z_k)].
 \end{gather}
 
 Notice that as the dimensionality
@@ -321,7 +342,6 @@ linear autoencoder networks could accomplish this extraction over various struct
 methods have been tested and applied to NLP applications and classification problems involving data 
 stored in trees and sequences.  Thus, the approach of this library should at least work for any sort 
 of tree-like or list-like structure.
-
 
 \section{System Implementation}
 \label{sec:sysimp}
