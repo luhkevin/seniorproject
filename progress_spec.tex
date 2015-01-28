@@ -27,7 +27,7 @@
 % We setup the parameters to our title header before 'making' it. Note
 % that your proposals should have actual titles, not the generic one
 % we have here.
-\title{Programming Language Support for Probabilistic Associative Memory}
+\title{Programming Language Support for Autoassociate Memory}
 \subtitle{Dept. of CIS - Senior Design 2014-2015\thanks{Advisor: Steve A. Zdancewic (stevez@cis.upenn.edu).}}
 %\thanks{ Do not list your advisors amongst the authors as that may cause Google Scholar to add this work to their list of publications. Your advisor must also sign a hard-copy of your proposal.}}
 %\thanks{ }}
@@ -231,15 +231,16 @@ dimensionality codes that maintain high fidelity with respect to codes of the or
 	\label{fig:features}
 \end{figure}
 
-As an example - figure \ref{fig:features} is a set of features for pictures of handwritten single 
-numerical digits (0-9) from the MNIST dataset, a dataset with 60,000 training examples
-and 10,000 test examples~\cite{denoise}. All of the examples have been normalized in size and position, as well as 
-color. Due to the preprocessing, it is commonly used in machine learning for testing out learning 
+As an example - Figure \ref{fig:features} is a set of features for pictures of handwritten single 
+numerical digits (0-9) from the MNIST (Mixed National Institute of Standards and Technology) dataset, 
+a dataset with 60,000 training examples and 10,000 test examples~\cite{denoise}. 
+All of the examples have been normalized in size and position, as well as 
+color. Because of this the preprocessing, this data is commonly used in machine learning for testing out learning 
 techniques on real world data.  These features were extracted from a simple one-layer autoencoder, 
-which manages to capture small regions of the input image as "features". 
+which manages to capture small regions of the input image as ``features". 
 
 An extension of classic autoencoders called a denoising autoencoder has the ability to reconstruct 
-partially missing or corrupt inputs. This property of denoising autoencoders make them extremely 
+partially missing or corrupt inputs. This property of denoising autoencoders makes them extremely 
 promising for use in a memory system. Like classic autoencoders, 
 denoising autoencoders work by passing input through a hidden 
 layer, a matrix that represents a transformation, to encode it in a lower dimension. The original 
@@ -248,7 +249,7 @@ input is then ``retrieved" by doing a reverse transformation on the encoded vers
 While a denoising autoencoder acts as an effective probabilistic associative memory, it is
 limited by the fact that it works only on vectors as input. There are many cases in machine
 learning, in fields such as bioinformatics and natural language processing where it would be 
-extremely useful to represent data in a structured form, rather
+useful to represent data in a structured form, rather
 than converting it to feature vectors. In relation to this, Alessandro Sperduti~\cite{sperduti}
 found a way to create linear autoencoder networks for structured data, specifically
 arbitrary sequences and trees. The idea is that linear autoencoder networks are actually
@@ -267,24 +268,23 @@ algorithms, such as autoencoders.
 \section{System Model}
 \label{sec:sysmodel}
 
-
 %TODO: talk more about the memory?
-Figure \ref{fig:ourworkflow} shows a model of the workflow of using this programming library, as 
-used for machine learning. In similar fashion to standard machine learning applications, the user 
+%Figure \ref{fig:ourworkflow} shows a model of the workflow of using this programming library, as 
+%used for machine learning. 
+In similar fashion to standard machine learning applications, the user 
 will start with a set of training data which can take various structures such as trees or lists. The 
 user will then need to specify the type and structure of the data he is inputting to the library, so 
 the library will know how to process it appropriately. 
 
-
 %FIGURE: Standard flow for this library implementation
-\begin{figure}[h]
-	\begin{center}
-		\includegraphics[width=0.70\linewidth]{ourworkflow}
-	\end{center}
-	\vspace{-12pt}
-	\caption{Library Interface Workflow as Applied to Machine Learning}
-	\label{fig:ourworkflow}
-\end{figure}
+%\begin{figure}[h]
+%	\begin{center}
+%		\includegraphics[width=0.70\linewidth]{ourworkflow}
+%	\end{center}
+%	\vspace{-12pt}
+%	\caption{Library Interface Workflow as Applied to Machine Learning}
+%	\label{fig:ourworkflow}
+%\end{figure}
 
 \vspace{10pt}
 
@@ -298,12 +298,46 @@ after feature extraction will more or less proceed according to standard machine
 That is, the library will run the vectors through classification algorithms and models 
 and return the classification results or decisions to be used on actual, untrained data.
 
+For instance, consider an input vector $x$, for a machine learning problem. As shown in Equation 1, $x$ can be transformed to a lower dimension 
+vector $y$ by applying a transformation matrix $W$ and adding a bias value $b$, then applying a non-
+linear transformation $s$, such as the sigmoid function
+
+\begin{gather}
+y = s(Wx + b).
+\end{gather}
+
+Then the original value can be ``retreived" by applying reverse transformations to $y$, using
+a different matrix $W'$ and bias factor $b'$, as shown in Equation 2.
+
+\begin{gather}
+z = s(W' y  + b')
+\end{gather}
+
+Finally, the correct matrices can be learned by comparing the input value $x$ to the retrieved value $z$ 
+using the cross-entropy error rate $L(x,z)$, as shown in Equation 3. The $W$ matrix and $b$ vector
+are updated using gradient descent. That is, the error is differentiated
+with respect to the weight matrix $W$ and the bias value $b$, and $W$ and $b$ are then updated in the
+direction of decreasing error. 
+
+\begin{gather}
+L(x,z) = -\sum_{k=1}^d [x_k \log z_k + (1-x_k) \log( 1-z_k)]
+\end{gather}
+
+Notice that as the dimensionality
+of the hidden layer increases, the optimal transformation matrix approaches the identity, since
+the identity matrix is the best possible representation if the hidden layer had the same dimension
+as the input. To create useful representations even in these situations, the autoencoder is trained
+by intentionally corrupting the input, passing it through the autoencoder, and doing a gradient
+descent on the error between the output and the original input. This trains the autoencoder
+to be able to reconstruct partially missing input, as is the goal of the query interface.
+
 As stated before, there is literature on machine learning methods that handle ``automatic" feature 
 extraction, given the type or structure of the data. Recall that convolution kernel methods and 
 linear autoencoder networks could accomplish this extraction over various structures of data. These 
 methods have been tested and applied to NLP applications and classification problems involving data 
 stored in trees and sequences.  Thus, the approach of this library should at least work for any sort 
 of tree-like or list-like structure.
+
 
 \section{System Implementation}
 \label{sec:sysimp}
@@ -344,38 +378,6 @@ structured data and the query interface. An autoencoder uses hidden layers (matr
 transformations on input vectors, compressing them to a lower dimension and doing a reverse 
 transformation to retrieve them. 
 
-Let $x$ be the input vector. As shown in Equation 1, $x$ can be transformed to a lower dimension 
-vector $y$ by applying a transformation matrix $W$ and adding a bias value $b$, then applying a non-
-linear transformation $s$, such as the sigmoid function.
-
-\begin{gather}
-y = s(Wx + b)
-\end{gather}
-
-It can then ``retrieve" the original value by applying reverse transformations to $y$, using
-a different matrix $W'$ and bias factor $b'$, as shown in Equation 2.
-
-\begin{gather}
-z = s(W' y  + b')
-\end{gather}
-
-Finally, it learns the correct matrices by comparing the input value $x$ to the retrieved value $z$ 
-using the cross-entropy error rate $L(x,z)$, as shown in Equation 3. The $W$ matrix and $b$ vector
-are updated using gradient descent. That is, the error is differentiated
-with respect to the weight matrix $W$ and the bias value $b$, and $W$ and $b$ are then updated in the
-direction of decreasing error. 
-
-\begin{gather}
-L(x,z) = -\sum_{k=1}^d [x_k \log z_k + (1-x_k) \log( 1-z_k)]
-\end{gather}
-
-Notice that as the dimensionality
-of the hidden layer increases, the optimal transformation matrix approaches the identity, since
-the identity matrix is the best possible representation if the hidden layer had the same dimension
-as the input. To create useful representations even in these situations, the autoencoder is trained
-by intentionally corrupting the input, passing it through the autoencoder, and doing a gradient
-descent on the error between the output and the original input. This trains the autoencoder
-to be able to reconstruct partially missing input, as is the goal of the query interface.
 
 \section{System Performance}
 \label{sec:sysperformance}
