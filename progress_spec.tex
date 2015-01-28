@@ -27,7 +27,7 @@
 % We setup the parameters to our title header before 'making' it. Note
 % that your proposals should have actual titles, not the generic one
 % we have here.
-\title{Programming Language Support for Autoassociate Memory}
+\title{Programming Language Support for Autoassociative Memory}
 \subtitle{Dept. of CIS - Senior Design 2014-2015\thanks{Advisor: Steve A. Zdancewic (stevez@cis.upenn.edu).}}
 %\thanks{ Do not list your advisors amongst the authors as that may cause Google Scholar to add this work to their list of publications. Your advisor must also sign a hard-copy of your proposal.}}
 %\thanks{ }}
@@ -58,7 +58,7 @@
     for programming with an autoassociative memory. Common data structures such as 
     arrays or hashmaps use memory addresses or exact key lookups for retrieving entries.
     This is very different from human memory, which essentially functions as a less exact, heuristic
-    based memory. Similarly, an autoassociative memory receives an input and returns a value similar to the input. Like human memory, the input does not have to exactly match existing entries
+    based memory. Analagously, an autoassociative memory receives an input and returns a value similar to the input. Like human memory, the input does not have to exactly match existing entries
     for values to be returned. This project provides an intuitive interface to this autoassociative memory to facilitate programming efficiency for the end user. It will primarily
     accomplish this by providing an easier way to handle structured input data for the user, as well
     as automatically managing user-defined types in memory.
@@ -72,23 +72,27 @@ This involves finding the physical position of that address in memory
 and returning the stored value. Meanwhile, associative memory allows
 searching for values based on the stored content. An analogous structure
 in programming languages is the hashtable, which returns an output value
-based on an input key. 
+based on an input key. 	
 
-Standard associative memories are useful for when one needs to query memory based 
+Associative memories are useful for when one needs to query memory based 
 on some input data or tag. For instance, router firmware often employs associative 
 memories to store tables of Internet Protocol (IP) addresses, which serve as the ``next hop" for incoming 
 packets. Since routers looking for the ``next hop" have a specific, standard query 
 format -- e.g. an IP address of the form www.xxx.yyy.zzz -- it makes sense to store the 
 routing tables based around this input string.
 
-Probabilistic associative memories retain the content-based characteristics of associative memories.
-However, they stop maintaining the one-to-one relationship between input and output.
-A modern day realization of probabilistic associative memories is the neural network. A neural network
-consists of a series of functions acting on ``features" or characteristics of given input values. Using
-these functions, it can find relationships or make predictions on its inputs. It also
+Autoassociative memories retain the content-based characteristics of associative memories, except
+they output data that match inputs of potentially incomplete or noisy versions of that data.
+Frequently, autoassociative memories are implemented via neural networks. 
+A neural network consists of a series of functions acting on ``features" or characteristics of given input values. 
+Using these functions, it can find relationships or make predictions on its inputs. It also
 reacts and changes whenever it sees new input to enhance accuracy for future input.
+In modern neural network implementations of autoassociative memories, they stop maintaining the one-to-one relationship between inputs and 
+stored entries. Outputs are constructed based on knowledge obtained from all of the stored entries.
+This mirrors the memory of human minds, which use heuristics to interpret new observations using
+previously experienced observations. 
 
-Neural networks are a small part of the much broader topic of \textbf{machine learning}. Machine learning
+Neural networks are a small part of the much broader topic of \textit{machine learning}. Machine learning
 is widely used today to solve problems that lack easily definable patterns (i.e. natural language processing,
 computer vision, classification). A common feature of these problems is that they usually have a large amount
 of sample data available. The goal of machine learning algorithms is to build models based on an
@@ -110,6 +114,12 @@ applied to a classification problem in machine learning.
 	\caption{Model of Standard Machine Learning Workflow}
 	\label{fig:mlworkflow}
 \end{figure}
+
+In essence, feature extraction is implicitly done in human cognition. Since most humans do not have
+photographic memories, it is important to commit the specific features of observations to memory. 
+For example, a dog can be visually described by its size, fur length, color, etc. Using those
+features, one could vaguely reconstruct what the original dog looked like. Autoencoders can essentially
+provide this form of memory, along with the ability to figure out how to define features.
 
 The autoencoder and kernel methods are specific methods in machine learning that aid with feature
 extraction. Autoencoders are neural networks that take in a set of data and return a reduced, 
@@ -141,28 +151,33 @@ project will have the biggest impact.
 
 \section{Introduction}
 \label{sec:intro}
+Autoassociative memories are a model that are frequently used in machine learning applications. In 
+order to faciliate dealing with these autoassociative memories, this project attempts to ameliorate 
+dealing with structured data in the machine learning pipeline. Machine learning deals 
+with extracting features from these structured data, but these data can become quite
+complicated and cumbersome to process. While strings or images may just store data as 
+word count or pixel value, other data such lists or trees can become more complicated due to their 
+recursive nature. This programming library interface will handle extracting features from structured 
+data of any generic type, making it easier to handle data with more complex structures. 
+As will be detailed later, the linear autoencoder and kernel methods provide feature extraction 
+methods for generic types. These methods will be investigated further and they may eventually be 
+implemented in the library as a solution for the structured data problem.
 
-In machine learning, the process of obtaining features from data is dependent upon
-the type and structure of the data. While for certain things like strings or images
-will have features such as word count or pixel value, structured data such as lists, pairs, 
-trees, or other types of data structure can potentially be much more complicated due to the
-recursive nature of lists and trees.
+%programming language library, and various methods of this genericized feature projection have been 
+%investigated.
+%Since these methods are intended to be applied on top of the probabilistic
+%associative memory, work on the memory backend of the library interface has also been accomplished.
 
-Handling this issue with structured data of any generic type is an important feature of the 
-programming language library, and various methods of this genericized feature projection have been 
-investigated. Since these methods are intended to be applied on top of the probabilistic
-associative memory, work on the memory backend of the library interface has also been accomplished.
+%Moreover, after features are obtained, feature extraction to reduce the set of descriptive
+%features is generally necessary. This is especially necessary for structured data 
+%inputs, as features are created to describe not only the content, but the structure of the data.
 
-Moreover, after features are obtained, feature extraction to reduce the set of descriptive
-features is generally necessary. This is especially necessary for structured data 
-inputs, as features are created to describe not only the content, but the structure of the data.
+%What must still be done is integrating these extraction methods with the library interface.
+%As will be detailed later, there has been research done on linear autoencoders
+%for structured data, and there has also been previous work on convolution 
+%kernels for natural language processing -- a field that processes a lot of 
+%data in the form of structured trees. 
 
-What must still be done is integrating these extraction methods with the library interface.
-As will be detailed later, there has been research done on linear autoencoders
-for structured data, and there has also been previous work on convolution 
-kernels for natural language processing -- a field that processes a lot of 
-data in the form of structured trees. The mathematical machinery behind autoencoders and kernel 
-methods will thus be investigated further and they must eventually be implemented in the library.
 
 In the next section, the paper will proceed by delineating works related to 
 associative memories and will go more in-depth about autoencoders 
@@ -170,7 +185,7 @@ and convolution kernels. Then, it will establish a model or workflow of the
 library interface, and the process of using this interface for machine
 learning applications. After that, it will go into some details of the library
 implementation, discuss the choice of language and present some third-
-party libraies that were used. Finally, the performance of the current
+party libraries that were used. Finally, the performance of the current
 implementation will be discussed, as well as more details regarding the remaining work.
 
 \section{Related Work}
@@ -205,7 +220,7 @@ that the reduced dimensionality feature space is as representative as possible o
 feature space. A more modern technique introduced earlier is the autoencoder, which performs a
 similar dimensionality mapping, but using neural network techniques. Researchers Hinton 
 and Salakhutdinov~\cite{autoencoder} describe a method of creating deep autoencoders to learn low 
-dimensionality codes that maintain high fidelity with respect to codes of the original dimension.
+dimensionality data that maintain high fidelity with respect to data of the original dimension.
 
 \begin{figure}[h]
 	\begin{center}
@@ -216,24 +231,25 @@ dimensionality codes that maintain high fidelity with respect to codes of the or
 	\label{fig:features}
 \end{figure}
 
-As an example - figure \ref{fig:features} is a set of features for pictures of handwritten single 
-numerical digits (0-9) from the MNIST dataset, a dataset with 60,000 training examples
-and 10,000 test examples~\cite{denoise}. All of the examples have been normalized in size and position, as well as 
-color. Due to the preprocessing, it is commonly used in machine learning for testing out learning 
+As an example - Figure \ref{fig:features} is a set of features for pictures of handwritten single 
+numerical digits (0-9) from the MNIST (Mixed National Institute of Standards and Technology) dataset, 
+a dataset with 60,000 training examples and 10,000 test examples~\cite{denoise}. 
+All of the examples have been normalized in size and position, as well as 
+color. Because of this preprocessing, this data is commonly used in machine learning for testing learning 
 techniques on real world data.  These features were extracted from a simple one-layer autoencoder, 
-which manages to capture small regions of the input image as "features". 
+which manages to capture small regions of the input image as ``features". 
 
 An extension of classic autoencoders called a denoising autoencoder has the ability to reconstruct 
-partially missing or corrupt inputs. This property of denoising autoencoders make them extremely 
+partially missing or corrupt inputs. This property of denoising autoencoders makes them extremely 
 promising for use in a memory system. Like classic autoencoders, 
 denoising autoencoders work by passing input through a hidden 
 layer, a matrix that represents a transformation, to encode it in a lower dimension. The original 
 input is then ``retrieved" by doing a reverse transformation on the encoded version.~\cite{denoise}
 
-While a denoising autoencoder acts as an effective probabilistic associative memory, it is
+While a denoising autoencoder acts as an effective autoassociative memory, it is
 limited by the fact that it works only on vectors as input. There are many cases in machine
 learning, in fields such as bioinformatics and natural language processing where it would be 
-extremely useful to represent data in a structured form, rather
+useful to represent data in a structured form, rather
 than converting it to feature vectors. In relation to this, Alessandro Sperduti~\cite{sperduti}
 found a way to create linear autoencoder networks for structured data, specifically
 arbitrary sequences and trees. The idea is that linear autoencoder networks are actually
@@ -241,7 +257,7 @@ closely linked to PCA. By using this connection and modeling the structured data
 linear dynamical systems, Sperduti was able to create a way to store structured data
 in an autoencoder network.
 
-A comlementary technique to that of Sperduti is kernel methods. Kernel methods refers to the
+A complementary technique to that of Sperduti is kernel methods. Kernel methods refers to the
 use of a kernel function to preprocess input to make it easier for certain algorithms to run. 
 While kernel methods exist for a vast array of problems and data sets, Collins and Duffy~\cite{kernels}
 created a method called convolution kernels for natural language processing. In natural
@@ -348,11 +364,11 @@ of tree-like or list-like structure.
 
 In order to implement a generalized process for handling structured data, the programming language 
 library has been written in OCaml. OCaml is a functional language, so it will be more fluid to use 
-when handling structured data. In addition, OCaml has procedural elements that facillitates the ease 
+when handling structured data. In addition, OCaml has procedural elements that facilitates the ease 
 of implementing and prototyping the various algorithms and models that have been encountered so far. 
-Regarding third-party libraries, there is a linear algebra for OCaml called Lacaml that uses BLAS 
-(Basic Linear Algebra Subprograms)
-and LAPACK (Linear Algebra PACKage)
+Regarding third-party libraries, there is a linear algebra for OCaml called Lacaml~\cite{lacaml} that uses BLAS 
+(Basic Linear Algebra Subprograms)~\cite{blas}
+and LAPACK (Linear Algebra PACKage)~\cite{lapack}
 as its backend, which are two well-established, robust and performant linear algebra 
 libraries. Notably, the low-level BLAS is widely used in scientific computation in many more complicated
 higher level packages, such as MATLAB or R. This allows decent performance with matrix operations
@@ -378,7 +394,7 @@ different types of underlying mechanisms as a memory (Figure \ref{fig:queryint})
 
 One possible type of memory using the autoencoders discussed in the related work
 section has already been implemented, though it has not yet been integrated with
-structured data and the query interface. An autoencoder uses hidden layers (matrices) to perform 
+structured data and the query interface. A neural network autoencoder uses layers of nodes to perform 
 transformations on input vectors, compressing them to a lower dimension and doing a reverse 
 transformation to retrieve them. 
 
@@ -392,12 +408,16 @@ implementations can be compared. Due to randomization inherent in the algorithm,
 performance must be standardized by either choosing the same random initialization parameters, or 
 averaging across multiple runs. 
 
+Tests are run on the MNIST dataset, by essentially corrupting inputs and 
+attempting to reconstruct them. 
+The reconstruction error is based on the cross-entropy error in Equation 3. 
 At the moment, substantial tests are not possible due to performance issues in the current 
-implementation. Initial manual tests with set parameters and tiny data points seem to heavily favor 
-the existing implementation with respect to performance. This is likely due to the gradient descent
+implementation. Initial manual tests with set parameters and small data sets seem to heavily favor 
+the reference implementation with respect to performance. This is likely due to the gradient descent
 method used. While concrete tests of actual data sets have not 
 been run, test runs of the reference implementation have been run locally. A chart of runtime
-performance for those runs is provided, as well as estimated performance of our current 
+performance for those runs is provided, as well as estimated performance (extrapolated from
+small data set tests) of our current 
 implementation given the small manual tests run(Figure \ref{fig:performance}). 
 
 \begin{figure}[h]
@@ -409,13 +429,16 @@ implementation given the small manual tests run(Figure \ref{fig:performance}).
 	\label{fig:performance}
 \end{figure}
 
-This reference implementation is run on the MNIST dataset.
 Regarding accuracy, it seems that our current implementation suffers from a bit of inaccuracy
 when compared to the reference implementation. This is likely due to the symbolic math
 package used in the Python-based reference implementation, which can defer calculations
 and perform symbolic differentiation, resulting in higher accuracy. Since only
 small manual tests have been run, the following chart (Figure \ref{fig:error}) of cross-entropy error is with just the
-reference implementation error. 
+reference implementation error. It shows the cross-entropy error as each batch of additional
+training data is introduced into the autoencoder. Two curves are shown - one with no input noise, 
+and one with input noise. This shows that even with non-corrupted inputs, the memory does not perform
+perfectly due to how it constructs outputs. However, it does not perform much more poorly with 
+corrupted inputs. 
 
 \begin{figure}[h]
 	\begin{center}
