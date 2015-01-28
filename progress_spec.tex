@@ -216,15 +216,16 @@ dimensionality codes that maintain high fidelity with respect to codes of the or
 	\label{fig:features}
 \end{figure}
 
-As an example - figure \ref{fig:features} is a set of features for pictures of handwritten single 
-numerical digits (0-9) from the MNIST dataset, a dataset with 60,000 training examples
-and 10,000 test examples~\cite{denoise}. All of the examples have been normalized in size and position, as well as 
-color. Due to the preprocessing, it is commonly used in machine learning for testing out learning 
+As an example - Figure \ref{fig:features} is a set of features for pictures of handwritten single 
+numerical digits (0-9) from the MNIST (Mixed National Institute of Standards and Technology) dataset, 
+a dataset with 60,000 training examples and 10,000 test examples~\cite{denoise}. 
+All of the examples have been normalized in size and position, as well as 
+color. Because of this the preprocessing, this data is commonly used in machine learning for testing out learning 
 techniques on real world data.  These features were extracted from a simple one-layer autoencoder, 
-which manages to capture small regions of the input image as "features". 
+which manages to capture small regions of the input image as ``features". 
 
 An extension of classic autoencoders called a denoising autoencoder has the ability to reconstruct 
-partially missing or corrupt inputs. This property of denoising autoencoders make them extremely 
+partially missing or corrupt inputs. This property of denoising autoencoders makes them extremely 
 promising for use in a memory system. Like classic autoencoders, 
 denoising autoencoders work by passing input through a hidden 
 layer, a matrix that represents a transformation, to encode it in a lower dimension. The original 
@@ -233,7 +234,7 @@ input is then ``retrieved" by doing a reverse transformation on the encoded vers
 While a denoising autoencoder acts as an effective probabilistic associative memory, it is
 limited by the fact that it works only on vectors as input. There are many cases in machine
 learning, in fields such as bioinformatics and natural language processing where it would be 
-extremely useful to represent data in a structured form, rather
+useful to represent data in a structured form, rather
 than converting it to feature vectors. In relation to this, Alessandro Sperduti~\cite{sperduti}
 found a way to create linear autoencoder networks for structured data, specifically
 arbitrary sequences and trees. The idea is that linear autoencoder networks are actually
