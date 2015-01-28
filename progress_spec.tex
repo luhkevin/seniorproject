@@ -220,7 +220,7 @@ that the reduced dimensionality feature space is as representative as possible o
 feature space. A more modern technique introduced earlier is the autoencoder, which performs a
 similar dimensionality mapping, but using neural network techniques. Researchers Hinton 
 and Salakhutdinov~\cite{autoencoder} describe a method of creating deep autoencoders to learn low 
-dimensionality codes that maintain high fidelity with respect to codes of the original dimension.
+dimensionality data that maintain high fidelity with respect to data of the original dimension.
 
 \begin{figure}[h]
 	\begin{center}
@@ -235,7 +235,7 @@ As an example - Figure \ref{fig:features} is a set of features for pictures of h
 numerical digits (0-9) from the MNIST (Mixed National Institute of Standards and Technology) dataset, 
 a dataset with 60,000 training examples and 10,000 test examples~\cite{denoise}. 
 All of the examples have been normalized in size and position, as well as 
-color. Because of this the preprocessing, this data is commonly used in machine learning for testing out learning 
+color. Because of this preprocessing, this data is commonly used in machine learning for testing learning 
 techniques on real world data.  These features were extracted from a simple one-layer autoencoder, 
 which manages to capture small regions of the input image as ``features". 
 
@@ -246,7 +246,7 @@ denoising autoencoders work by passing input through a hidden
 layer, a matrix that represents a transformation, to encode it in a lower dimension. The original 
 input is then ``retrieved" by doing a reverse transformation on the encoded version.~\cite{denoise}
 
-While a denoising autoencoder acts as an effective probabilistic associative memory, it is
+While a denoising autoencoder acts as an effective autoassociative memory, it is
 limited by the fact that it works only on vectors as input. There are many cases in machine
 learning, in fields such as bioinformatics and natural language processing where it would be 
 useful to represent data in a structured form, rather
@@ -306,7 +306,7 @@ linear transformation $s$, such as the sigmoid function
 y = s(Wx + b).
 \end{gather}
 
-Then the original value can be ``retreived" by applying reverse transformations to $y$, using
+Then the original value can be ``retrieved" by applying reverse transformations to $y$, using
 a different matrix $W'$ and bias factor $b'$, as shown in Equation 2.
 
 \begin{gather}
@@ -346,9 +346,9 @@ In order to implement a generalized process for handling structured data, the pr
 library has been written in OCaml. OCaml is a functional language, so it will be more fluid to use 
 when handling structured data. In addition, OCaml has procedural elements that facilitates the ease 
 of implementing and prototyping the various algorithms and models that have been encountered so far. 
-Regarding third-party libraries, there is a linear algebra for OCaml called Lacaml that uses BLAS 
-(Basic Linear Algebra Subprograms)
-and LAPACK (Linear Algebra PACKage)
+Regarding third-party libraries, there is a linear algebra for OCaml called Lacaml~\cite{lacaml} that uses BLAS 
+(Basic Linear Algebra Subprograms)~\cite{blas}
+and LAPACK (Linear Algebra PACKage)~\cite{lapack}
 as its backend, which are two well-established, robust and performant linear algebra 
 libraries. Notably, the low-level BLAS is widely used in scientific computation in many more complicated
 higher level packages, such as MATLAB or R. This allows decent performance with matrix operations
@@ -374,7 +374,7 @@ different types of underlying mechanisms as a memory (Figure \ref{fig:queryint})
 
 One possible type of memory using the autoencoders discussed in the related work
 section has already been implemented, though it has not yet been integrated with
-structured data and the query interface. An autoencoder uses hidden layers (matrices) to perform 
+structured data and the query interface. A neural network autoencoder uses layers of nodes to perform 
 transformations on input vectors, compressing them to a lower dimension and doing a reverse 
 transformation to retrieve them. 
 
@@ -388,12 +388,16 @@ implementations can be compared. Due to randomization inherent in the algorithm,
 performance must be standardized by either choosing the same random initialization parameters, or 
 averaging across multiple runs. 
 
+Tests are run on the MNIST dataset, by essentially corrupting inputs and 
+attempting to reconstruct them. 
+The reconstruction error is based on the cross-entropy error in Equation 3. 
 At the moment, substantial tests are not possible due to performance issues in the current 
-implementation. Initial manual tests with set parameters and tiny data points seem to heavily favor 
-the existing implementation with respect to performance. This is likely due to the gradient descent
+implementation. Initial manual tests with set parameters and small data sets seem to heavily favor 
+the reference implementation with respect to performance. This is likely due to the gradient descent
 method used. While concrete tests of actual data sets have not 
 been run, test runs of the reference implementation have been run locally. A chart of runtime
-performance for those runs is provided, as well as estimated performance of our current 
+performance for those runs is provided, as well as estimated performance (extrapolated from
+small data set tests) of our current 
 implementation given the small manual tests run(Figure \ref{fig:performance}). 
 
 \begin{figure}[h]
@@ -405,13 +409,16 @@ implementation given the small manual tests run(Figure \ref{fig:performance}).
 	\label{fig:performance}
 \end{figure}
 
-This reference implementation is run on the MNIST dataset.
 Regarding accuracy, it seems that our current implementation suffers from a bit of inaccuracy
 when compared to the reference implementation. This is likely due to the symbolic math
 package used in the Python-based reference implementation, which can defer calculations
 and perform symbolic differentiation, resulting in higher accuracy. Since only
 small manual tests have been run, the following chart (Figure \ref{fig:error}) of cross-entropy error is with just the
-reference implementation error. 
+reference implementation error. It shows the cross-entropy error as each batch of additional
+training data is introduced into the autoencoder. Two curves are shown - one with no input noise, 
+and one with input noise. This shows that even with non-corrupted inputs, the memory does not perform
+perfectly due to how it constructs outputs. However, it does not perform much more poorly with 
+corrupted inputs. 
 
 \begin{figure}[h]
 	\begin{center}
