@@ -112,19 +112,19 @@ This involves finding the physical position of that address in memory
 and returning the stored value. Meanwhile, associative memory allows
 searching for values based on the stored content. An analogous structure
 in programming languages is the hashtable, which returns an output value
-based on an input key. 	
+based on an input key.
 
 Associative memories are useful for when one needs to query memory based 
 on some input data or tag. For instance, router firmware often employs associative 
-memories to store tables of Internet Protocol (IP) addresses, which serve as the ``next hop" for incoming 
-packets. Since routers looking for the ``next hop" have a specific, standard query 
+memories to store tables of Internet Protocol (IP) addresses, which serve as the next hop for incoming 
+packets. Since routers looking for the next hop have a specific, standard query 
 format -- e.g. an IP address of the form www.xxx.yyy.zzz -- it makes sense to store the 
 routing tables based around this input string.
 
-Autoassociative memories retain the content-based characteristics of associative memories, except
-they output data that match inputs of potentially incomplete or noisy versions of that data.
+Autoassociative memories retain the content-based characteristics of associative memories, except they can often 
+accept potentially incomplete or noisy input data, and outputs data that closely matches the input.
 Frequently, autoassociative memories are implemented via neural networks. 
-A neural network consists of a series of functions acting on ``features" or characteristics of given input values. 
+A neural network consists of a series of functions acting on \textit{features} or characteristics of given input values. 
 Using these functions, it can find relationships or make predictions on its inputs. It also
 reacts and changes whenever it sees new input to enhance accuracy for future input.
 In modern neural network implementations of autoassociative memories, they stop maintaining the one-to-one relationship between inputs and 
@@ -136,9 +136,9 @@ Neural networks are a small part of the much broader topic of \textit{machine le
 is widely used today to solve problems that lack easily definable patterns (i.e. natural language processing,
 computer vision, classification). A common feature of these problems is that they usually have a large amount
 of sample data available. The goal of machine learning algorithms is to build models based on an
-abundant amount of ``training data". Since the types of data vary wildly from one problem to the next,
+abundant amount of \textit{training data}. Since the types of data vary wildly from one problem to the next,
 from sentences in several languages to video data from a camera, a way to reconcile the data with
-mathematical models is required. In this respect, ``feature extraction" is essentially the de facto
+mathematical models is required. In this respect, \textit{feature extraction} is essentially the de facto
 standard for a majority of machine learning algorithms. Feature extraction involves transforming the
 input data into a vector of real numbers, while trying to encapsulate as much of the information
 in the original data as possible. These vectors are then run through the model to improve accuracy,
@@ -222,7 +222,7 @@ that the reduced dimensionality feature space is as representative as possible o
 feature space. A more modern technique introduced earlier is the autoencoder, which performs a
 similar dimensionality mapping, but using neural network techniques. Researchers Hinton 
 and Salakhutdinov~\cite{autoencoder} describe a method of creating deep autoencoders to learn low 
-dimensionality data that maintain high fidelity with respect to data of the original dimension.
+dimensionality representations of data that maintain high fidelity with respect to data of the original dimension.
 
 \begin{figure}[h]
 	\begin{center}
@@ -237,16 +237,15 @@ As an example - Figure \ref{fig:features} is a set of features for pictures of h
 numerical digits (0-9) from the MNIST (Mixed National Institute of Standards and Technology) dataset, 
 a dataset with 60,000 training examples and 10,000 test examples~\cite{denoise}. 
 All of the examples have been normalized in size and position, as well as 
-color. Because of this preprocessing, this data is commonly used in machine learning for testing learning 
-techniques on real world data.  These features were extracted from a simple one-layer autoencoder, 
-which manages to capture small regions of the input image as ``features". 
+color. Since it has been preprocessed, this data is commonly used to test machine learning 
+techniques on real world data.  A simple one-layer autoencoder can capture small regions of the input image as features. 
 
 An extension of classic autoencoders called a denoising autoencoder has the ability to reconstruct 
 partially missing or corrupt inputs. This property of denoising autoencoders makes them extremely 
 promising for use in a memory system. Like classic autoencoders, 
 denoising autoencoders work by passing input through a hidden 
 layer, a matrix that represents a transformation, to encode it in a lower dimension. The original 
-input is then ``retrieved" by doing a reverse transformation on the encoded version.~\cite{denoise}
+input is then retrieved by doing a reverse transformation on the encoded version.~\cite{denoise}
 
 While a denoising autoencoder acts as an effective autoassociative memory, it is
 limited because it works only on vectors as input. There are many cases in machine
