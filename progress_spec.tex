@@ -322,7 +322,7 @@ requiring the programmer to manually extract the features through custom code.
 
 Lastly, these vectors can be passed into a denoising autoencoder to reconstruct the missing values
 in the original structure, where the wildcard queries were. The resulting vector can then be restored
-to the original form. The basic theory behind denoising autoencoders is detailed next.
+to the original structure. The basic theory behind denoising autoencoders is detailed next.
 
 Consider an input vector $x$, for a machine learning problem.
 As shown in Equation 1, $x$ can be transformed to a lower dimension
@@ -350,13 +350,20 @@ direction of decreasing error
 L(x,z) = -\sum_{k=1}^d [x_k \log z_k + (1-x_k) \log(1-z_k)].
 \end{gather}
 
-Notice that as the dimensionality
-of the hidden layer increases, the optimal transformation matrix approaches the identity, since
-the identity matrix is the best possible representation if the hidden layer had the same dimension
-as the input. To create useful representations even in these situations, the autoencoder is trained
-by intentionally corrupting the input, passing it through the autoencoder, and doing a gradient
-descent on the error between the output and the original input. This trains the autoencoder
-to be able to reconstruct partially missing input, as is the goal of the query interface.
+The above equations show a basic implementation of a single layer autoencoder. To train this
+autoencoder to be good at denoising, that is, to fill in missing values of the input, the input
+is intentionally corrupted by removing a random subset of its values. The resulting corrupted
+vector $x'$ is then passed through the autoencoder, and the output $z$ is compared with the
+non-corrupted input $x$ using the error rate calculation in Equation 3. Changes are then made
+to the matrices inside the autoencoder to provide better accuracy on future input.
+
+%Notice that as the dimensionality
+%of the hidden layer increases, the optimal transformation matrix approaches the identity, since
+%the identity matrix is the best possible representation if the hidden layer had the same dimension
+%as the input. To create useful representations even in these situations, the autoencoder is trained
+%by intentionally corrupting the input, passing it through the autoencoder, and doing a gradient
+%descent on the error between the output and the original input. This trains the autoencoder
+%to be able to reconstruct partially missing input, as is the goal of the query interface.
 
 \section{System Implementation}
 \label{sec:sysimp}
