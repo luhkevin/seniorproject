@@ -222,7 +222,7 @@ that the reduced dimensionality feature space is as representative as possible o
 feature space. A more modern technique introduced earlier is the autoencoder, which performs a
 similar dimensionality mapping, but using neural network techniques. Researchers Hinton 
 and Salakhutdinov~\cite{autoencoder} describe a method of creating deep autoencoders to learn low 
-dimensionality data that maintain high fidelity with respect to data of the original dimension.
+dimensionality representations of data that maintain high fidelity with respect to data of the original dimension.
 
 \begin{figure}[h]
 	\begin{center}
@@ -237,9 +237,8 @@ As an example - Figure \ref{fig:features} is a set of features for pictures of h
 numerical digits (0-9) from the MNIST (Mixed National Institute of Standards and Technology) dataset, 
 a dataset with 60,000 training examples and 10,000 test examples~\cite{denoise}. 
 All of the examples have been normalized in size and position, as well as 
-color. Because of this preprocessing, this data is commonly used in machine learning for testing learning 
-techniques on real world data.  These features were extracted from a simple one-layer autoencoder, 
-which manages to capture small regions of the input image as ``features". 
+color. Since it has been preprocessed, this data is commonly used to test machine learning 
+techniques on real world data.  A simple one-layer autoencoder can capture small regions of the input image as features. 
 
 An extension of classic autoencoders called a denoising autoencoder has the ability to reconstruct 
 partially missing or corrupt inputs. This property of denoising autoencoders makes them extremely 
