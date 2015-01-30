@@ -293,13 +293,12 @@ passes two values through the memory, which can be very helpful in shortening co
 
 The autoassociative memory will accept queries, which are structures composed of constant and wildcard queries,
 and convert these structures into vectors that can be handled by an implementation of an autoencoder
-network. There is no conventional way to do this conversion as it is a relatively new field, but
-Sperduti's~\cite{sperduti} approach is one possible solution.
-As stated before, there is literature on machine learning methods that handle ``automatic" feature 
-extraction, given the type or structure of the data. Recall that convolution kernel methods and 
-linear autoencoder networks could accomplish this extraction over various structures of data. These 
-methods have been tested and applied to NLP applications and classification problems involving data 
-stored in trees and sequences.  Thus, the approach of this library should at least work for any sort 
+network. While there exists some literature on machine learning methods that handle ``automatic" feature 
+extraction, given the type or structure of the data, it is still a relatively unexplored topic. Thus, there is no conventional way to do this conversion on structured data, but
+Sperduti's~\cite{sperduti} approach is one possible solution for trees.
+Recall that convolution kernel methods and 
+linear autoencoder networks have been tested and applied to NLP applications and classification problems involving data 
+stored in trees and sequences. Thus, the approach of this library will be adapted from these methods, and should work for any sort 
 of tree-like or list-like structure.
 
 %In similar fashion to standard machine learning applications, the user
