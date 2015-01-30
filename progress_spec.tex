@@ -295,6 +295,12 @@ The autoassociative memory will accept queries, which are structures composed of
 and convert these structures into vectors that can be handled by an implementation of an autoencoder
 network. There is no conventional way to do this conversion as it is a relatively new field, but
 Sperduti's~\cite{sperduti} approach is one possible solution.
+As stated before, there is literature on machine learning methods that handle ``automatic" feature 
+extraction, given the type or structure of the data. Recall that convolution kernel methods and 
+linear autoencoder networks could accomplish this extraction over various structures of data. These 
+methods have been tested and applied to NLP applications and classification problems involving data 
+stored in trees and sequences.  Thus, the approach of this library should at least work for any sort 
+of tree-like or list-like structure.
 
 %In similar fashion to standard machine learning applications, the user
 %will start with a set of training data which can take various structures such as trees or lists. The
@@ -351,13 +357,6 @@ as the input. To create useful representations even in these situations, the aut
 by intentionally corrupting the input, passing it through the autoencoder, and doing a gradient
 descent on the error between the output and the original input. This trains the autoencoder
 to be able to reconstruct partially missing input, as is the goal of the query interface.
-
-As stated before, there is literature on machine learning methods that handle ``automatic" feature 
-extraction, given the type or structure of the data. Recall that convolution kernel methods and 
-linear autoencoder networks could accomplish this extraction over various structures of data. These 
-methods have been tested and applied to NLP applications and classification problems involving data 
-stored in trees and sequences.  Thus, the approach of this library should at least work for any sort 
-of tree-like or list-like structure.
 
 \section{System Implementation}
 \label{sec:sysimp}
