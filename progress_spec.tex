@@ -294,7 +294,7 @@ passes two values through the memory, which can be very helpful in shortening co
 
 The autoassociative memory will accept queries, which are structures composed of constant and wildcard queries,
 and convert these structures into vectors that can be handled by an implementation of an autoencoder
-network. While there exists some literature on machine learning methods that handle ``automatic" feature 
+network. While there exists some literature on machine learning methods that handle automatic feature 
 extraction for structured data, it is still a relatively unexplored topic. Thus, there is no conventional way to do this conversion on structured data, but
 Sperduti's~\cite{sperduti} approach is one possible solution for trees.
 Moreover, recall that convolution kernel methods and 
@@ -320,7 +320,7 @@ requiring the programmer to manually extract the features through custom code.
 %That is, the library will run the vectors through classification algorithms and models
 %and return the classification results or decisions to be used on actual, untrained data.
 
-Lastly, these vectors can be passed into a denoising autoencoder to reconstruct the missing values
+Lastly, these feature vectors can be passed into a denoising autoencoder to reconstruct the missing values
 in the original structure, where the wildcard queries were. The resulting vector can then be restored
 to the original structure. The basic theory behind denoising autoencoders is detailed next.
 
@@ -351,11 +351,11 @@ L(x,z) = -\sum_{k=1}^d [x_k \log z_k + (1-x_k) \log(1-z_k)].
 \end{gather}
 
 The above equations show a basic implementation of a single layer autoencoder. To train this
-autoencoder to be good at denoising, that is, to fill in missing values of the input, the input
+autoencoder to be proficient at denoising, that is, to fill in missing values of the input, the input
 is intentionally corrupted by removing a random subset of its values. The resulting corrupted
 vector $x'$ is then passed through the autoencoder, and the output $z$ is compared with the
 non-corrupted input $x$ using the error rate calculation in Equation 3. Changes are then made
-to the matrices inside the autoencoder to provide better accuracy on future input.
+to the matrices used in the autoencoder to provide better accuracy on future input.
 
 %Notice that as the dimensionality
 %of the hidden layer increases, the optimal transformation matrix approaches the identity, since
@@ -381,11 +381,11 @@ higher level languages, such as MATLAB or R. This allows decent performance with
 and mathematical operations, while also allowing
 much of the higher-level logic to remain within within OCaml.
 
-In terms of the query interface, it currently contains all the functionality needed for basic 
-queries.  This includes the basic ``wildcard" and ``constant" queries, as well as support for 
-``pair" and ``either" queries. This was created using the standard OCaml interface setup. In the 
-future, extra queries will be needed to deal with structured data, but the interface will be easily 
-extensible due to the flexible type system of OCaml. The interface also has the ability to use 
+In terms of the query interface, it currently contains all the functionality needed for basic
+queries.  This includes the basic wildcard and constant queries, as well as support for the
+pair query. This was created using the standard OCaml interface setup. In the
+future, extra queries will be needed to deal with structured data, but the interface will be easily
+extensible due to the flexible type system of OCaml. The interface also has the ability to use
 different types of underlying mechanisms as a memory (Figure \ref{fig:queryint}).
 
 %FIGURE: Standard flow for this library implementation
@@ -398,12 +398,9 @@ different types of underlying mechanisms as a memory (Figure \ref{fig:queryint})
 	\label{fig:queryint}
 \end{figure}
 
-One possible type of memory using the autoencoders discussed in the related work
-section has already been implemented, though it has not yet been integrated with
-structured data and the query interface. A neural network autoencoder uses layers of nodes to perform 
-transformations on input vectors, compressing them to a lower dimension and doing a reverse 
-transformation to retrieve them. 
-
+A memory using the denoising autoencoder discussed in the previous section 
+has already been implemented, though it has not yet been integrated with
+structured data and the query interface.
 
 \section{System Performance}
 \label{sec:sysperformance}
