@@ -64,6 +64,46 @@
     as automatically managing user-defined types in memory.
 \end{abstract}
 
+\section{Introduction}
+\label{sec:intro}
+Autoassociative memories are frequently used in machine learning applications, and they are closely
+related to highly structured, rich representations of data. Specifically structured data is used as input
+to autoassociative memory networks, but this data can become quite cumbersome and complex to parse and 
+process as the amount of data scales. Structures such as lists and trees can become quite complicated due 
+to their recursive nature, and difficult to deal with. Thus, this project attempts to ameliorate dealing 
+with structured data regarding its use in autoassociative memories.
+
+This programming library interface will attempt to handle extracting features from structured 
+data of any generic type, making it easier to handle data with more complex structures. 
+As will be detailed later, the linear autoencoder and kernel methods provide feature extraction 
+methods for generic types. These methods will be investigated further and they may eventually be 
+implemented in the library as a solution for the structured data problem.
+
+%programming language library, and various methods of this genericized feature projection have been 
+%investigated.
+%Since these methods are intended to be applied on top of the probabilistic
+%associative memory, work on the memory backend of the library interface has also been accomplished.
+
+%Moreover, after features are obtained, feature extraction to reduce the set of descriptive
+%features is generally necessary. This is especially necessary for structured data 
+%inputs, as features are created to describe not only the content, but the structure of the data.
+
+%What must still be done is integrating these extraction methods with the library interface.
+%As will be detailed later, there has been research done on linear autoencoders
+%for structured data, and there has also been previous work on convolution 
+%kernels for natural language processing -- a field that processes a lot of 
+%data in the form of structured trees. 
+
+In the next section, the paper will proceed by delineating works related to 
+associative memories and will go more in-depth about autoencoders 
+and convolution kernels. Then, it will establish a model or workflow of the 
+library interface, and the process of using this interface for machine
+learning applications. After that, it will go into some details of the library
+implementation, discuss the choice of language and present some third-
+party libraries that were used. Finally, the performance of the current
+implementation will be discussed, as well as more details regarding the remaining work.
+
+
 \section{Background}
 \label{sec:background}
 
@@ -149,44 +189,6 @@ Machine learning ideas and techniques will be crucial to this project.
 They will be used as the foundation of the memory system. It will also be the field where this 
 project will have the biggest impact.
 
-\section{Introduction}
-\label{sec:intro}
-Autoassociative memories are frequently used in machine learning applications, and they are closely
-related to highly structured, rich representations of data. Specifically structured data is used as input
-to autoassociative memory networks, but this data can become quite cumbersome and complex to parse and 
-process as the amount of data scales. Structures such as lists and trees can become quite complicated due 
-to their recursive nature, and difficult to deal with. Thus, this project attempts to ameliorate dealing 
-with structured data regarding its use in autoassociative memories.
-
-This programming library interface will attempt to handle extracting features from structured 
-data of any generic type, making it easier to handle data with more complex structures. 
-As will be detailed later, the linear autoencoder and kernel methods provide feature extraction 
-methods for generic types. These methods will be investigated further and they may eventually be 
-implemented in the library as a solution for the structured data problem.
-
-%programming language library, and various methods of this genericized feature projection have been 
-%investigated.
-%Since these methods are intended to be applied on top of the probabilistic
-%associative memory, work on the memory backend of the library interface has also been accomplished.
-
-%Moreover, after features are obtained, feature extraction to reduce the set of descriptive
-%features is generally necessary. This is especially necessary for structured data 
-%inputs, as features are created to describe not only the content, but the structure of the data.
-
-%What must still be done is integrating these extraction methods with the library interface.
-%As will be detailed later, there has been research done on linear autoencoders
-%for structured data, and there has also been previous work on convolution 
-%kernels for natural language processing -- a field that processes a lot of 
-%data in the form of structured trees. 
-
-In the next section, the paper will proceed by delineating works related to 
-associative memories and will go more in-depth about autoencoders 
-and convolution kernels. Then, it will establish a model or workflow of the 
-library interface, and the process of using this interface for machine
-learning applications. After that, it will go into some details of the library
-implementation, discuss the choice of language and present some third-
-party libraries that were used. Finally, the performance of the current
-implementation will be discussed, as well as more details regarding the remaining work.
 
 \section{Related Work}
 \label{sec:related_work}
