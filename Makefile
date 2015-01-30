@@ -15,6 +15,10 @@ all:$(TEX) $(BIB)
 	$(BB) $(MAIN)
 	$(CC) $(TEX)
 	$(CC) $(TEX)
-	
+
+	rm -rf *.log *.aux *.bbl *.blg
+	rm -rf *eps-converted-to.pdf
+
+clean:
 	rm -rf *.log *.aux *.bbl *.blg
 	rm -rf *eps-converted-to.pdf
