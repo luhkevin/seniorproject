@@ -249,11 +249,11 @@ layer, a matrix that represents a transformation, to encode it in a lower dimens
 input is then ``retrieved" by doing a reverse transformation on the encoded version.~\cite{denoise}
 
 While a denoising autoencoder acts as an effective autoassociative memory, it is
-limited by the fact that it works only on vectors as input. There are many cases in machine
-learning, in fields such as bioinformatics and natural language processing where it would be 
-useful to represent data in a structured form, rather
+limited because it works only on vectors as input. There are many cases in machine
+learning, in fields such as bioinformatics and natural language processing, where it would be 
+useful to represent data in a structured form rather
 than converting it to feature vectors. In relation to this, Alessandro Sperduti~\cite{sperduti}
-found a way to create linear autoencoder networks for structured data, specifically
+discovered how to create linear autoencoder networks for structured data, specifically
 arbitrary sequences and trees. The idea is that linear autoencoder networks are actually
 closely linked to PCA. By using this connection and modeling the structured data via
 linear dynamical systems, Sperduti was able to create a way to store structured data
