@@ -151,13 +151,14 @@ project will have the biggest impact.
 
 \section{Introduction}
 \label{sec:intro}
-Autoassociative memories are a model that are frequently used in machine learning applications. In 
-order to faciliate dealing with these autoassociative memories, this project attempts to ameliorate 
-dealing with structured data in the machine learning pipeline. Machine learning deals 
-with extracting features from these structured data, but these data can become quite
-complicated and cumbersome to process. While strings or images may just store data as 
-word count or pixel value, other data such lists or trees can become more complicated due to their 
-recursive nature. This programming library interface will handle extracting features from structured 
+Autoassociative memories are frequently used in machine learning applications, and they are closely
+related to highly structured, rich representations of data. Specifically structured data is used as input
+to autoassociative memory networks, but this data can become quite cumbersome and complex to parse and 
+process as the amount of data scales. Structures such as lists and trees can become quite complicated due 
+to their recursive nature, and difficult to deal with. Thus, this project attempts to ameliorate dealing 
+with structured data regarding its use in autoassociative memories.
+
+This programming library interface will attempt to handle extracting features from structured 
 data of any generic type, making it easier to handle data with more complex structures. 
 As will be detailed later, the linear autoencoder and kernel methods provide feature extraction 
 methods for generic types. These methods will be investigated further and they may eventually be 
@@ -177,7 +178,6 @@ implemented in the library as a solution for the structured data problem.
 %for structured data, and there has also been previous work on convolution 
 %kernels for natural language processing -- a field that processes a lot of 
 %data in the form of structured trees. 
-
 
 In the next section, the paper will proceed by delineating works related to 
 associative memories and will go more in-depth about autoencoders 
