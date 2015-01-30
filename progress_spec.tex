@@ -289,15 +289,15 @@ can automatically handle structured data such as trees or lists.
 The query interface must support the \textit{wildcard} and \textit{constant} queries. The wildcard
 query represents a missing value in the data that should be filled out by the memory, and the constant
 query represents a value that should exist in the output of the memory. Using these two queries,
-other queries can be made as a convience for the user. The \textit{pair} query simultaneously
+other queries can be made as a convenience for the user. The \textit{pair} query simultaneously
 passes two values through the memory, which can be very helpful in shortening code length for the user.
 
 The autoassociative memory will accept queries, which are structures composed of constant and wildcard queries,
 and convert these structures into vectors that can be handled by an implementation of an autoencoder
 network. While there exists some literature on machine learning methods that handle ``automatic" feature 
-extraction, given the type or structure of the data, it is still a relatively unexplored topic. Thus, there is no conventional way to do this conversion on structured data, but
+extraction for structured data, it is still a relatively unexplored topic. Thus, there is no conventional way to do this conversion on structured data, but
 Sperduti's~\cite{sperduti} approach is one possible solution for trees.
-Recall that convolution kernel methods and 
+Moreover, recall that convolution kernel methods and 
 linear autoencoder networks have been tested and applied to NLP applications and classification problems involving data 
 stored in trees and sequences. Thus, the approach of this library will be adapted from these methods, and should work for any sort 
 of tree-like or list-like structure.
@@ -340,11 +340,11 @@ using a different matrix $W'$ and bias factor $b'$, as shown in Equation 2
 z = s(W' y  + b').
 \end{gather}
 
-Finally, the correct matrices can be learned by comparing the input value $x$ to the retrieved value $z$ 
+Finally, more accurate values for the transformation matrix $W$, inverse transformation matrix $W'$, the bias value $b$, and the bias factor $b'$ will be calculated. This is done by comparing the input value $x$ to the retrieved value $z$ 
 using the cross-entropy error rate $L(x,z)$, as shown in Equation 3. The $W$ matrix and $b$ vector
 are updated using gradient descent. That is, the error is differentiated
 with respect to the weight matrix $W$ and the bias value $b$, and $W$ and $b$ are then updated in the
-direction of decreasing error
+direction of decreasing error. This offers a greedy approach to finding a local minimum
 
 \begin{gather}
 L(x,z) = -\sum_{k=1}^d [x_k \log z_k + (1-x_k) \log(1-z_k)].
@@ -377,7 +377,7 @@ Regarding third-party libraries, there is a linear algebra for OCaml called Laca
 and LAPACK (Linear Algebra PACKage)~\cite{lapack}
 as its backend, which are two well-established, robust and performant linear algebra 
 libraries. Notably, the low-level BLAS is widely used in scientific computation in many more complicated
-higher level packages, such as MATLAB or R. This allows decent performance with matrix operations
+higher level languages, such as MATLAB or R. This allows decent performance with matrix operations
 and mathematical operations, while also allowing
 much of the higher-level logic to remain within within OCaml.
 
@@ -409,7 +409,7 @@ transformation to retrieve them.
 \label{sec:sysperformance}
 
 The portion of the library that can be measured so far is the basic autoencoder model. 
-Since it is based on a reference implementation, performance statistics of both
+Since it is based on a reference implementation~\cite{denoise}, performance statistics of both
 implementations can be compared. Due to randomization inherent in the algorithm, however, 
 performance must be standardized by either choosing the same random initialization parameters, or 
 averaging across multiple runs. 
@@ -424,7 +424,9 @@ method used. While concrete tests of actual data sets have not
 been run, test runs of the reference implementation have been run locally. A chart of runtime
 performance for those runs is provided, as well as estimated performance (extrapolated from
 small data set tests) of our current 
-implementation given the small manual tests run(Figure \ref{fig:performance}). 
+implementation (Figure \ref{fig:performance}). Due to the size
+of the training set, a full run takes a substantial amount
+of time. 
 
 \begin{figure}[h]
 	\begin{center}
